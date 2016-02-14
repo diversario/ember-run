@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="HomeViewController" customModule="Ember_Run" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
+                        <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
+                    </layoutGuides>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main screen bg" translatesAutoresizingMaskIntoConstraints="NO" id="lVD-WS-25i">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lVD-WS-25i" secondAttribute="height" multiplier="311:552" id="apA-yj-gzb"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="apA-yj-gzb"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Main title" translatesAutoresizingMaskIntoConstraints="NO" id="rUr-Uh-3u9">
+                                <rect key="frame" x="90" y="60" width="420" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rUr-Uh-3u9" secondAttribute="height" multiplier="37:5" id="CfK-TA-rWy"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEE-1D-dzv">
+                                <rect key="frame" x="150" y="478.5" width="300" height="61.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fEE-1D-dzv" secondAttribute="height" multiplier="269:55" id="Ytj-aZ-X31"/>
+                                </constraints>
+                                <state key="normal" image="button-start"/>
+                                <connections>
+                                    <action selector="onStartButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="vFh-7Z-s82"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29U-9k-r0N">
+                                <rect key="frame" x="151" y="387.5" width="298" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="29U-9k-r0N" secondAttribute="height" multiplier="269:55" id="LJO-QH-K9N"/>
+                                </constraints>
+                                <state key="normal" image="button-settings"/>
+                                <connections>
+                                    <action selector="onSettingsButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="TSJ-4w-uWe"/>
+                                    <action selector="onStartButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="8tn-9q-gGP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.1853122468" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lVD-WS-25i" secondAttribute="trailing" id="2Ox-PD-u5m"/>
+                            <constraint firstItem="fEE-1D-dzv" firstAttribute="width" secondItem="lVD-WS-25i" secondAttribute="width" multiplier="0.5" id="2Zj-GZ-Z2t"/>
+                            <constraint firstItem="fEE-1D-dzv" firstAttribute="top" secondItem="29U-9k-r0N" secondAttribute="bottom" constant="30" id="3vc-v5-Fsd"/>
+                            <constraint firstItem="lVD-WS-25i" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="63g-jC-C3g"/>
+                            <constraint firstItem="fEE-1D-dzv" firstAttribute="height" secondItem="29U-9k-r0N" secondAttribute="height" id="9F4-y7-wml"/>
+                            <constraint firstItem="lVD-WS-25i" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" id="9X0-bD-qea"/>
+                            <constraint firstItem="rUr-Uh-3u9" firstAttribute="width" secondItem="lVD-WS-25i" secondAttribute="width" multiplier="0.7" id="Iuc-ip-RqK"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="fEE-1D-dzv" secondAttribute="bottom" constant="60" id="URh-6C-cH8"/>
+                            <constraint firstItem="fEE-1D-dzv" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="aH0-Fb-hSN"/>
+                            <constraint firstItem="29U-9k-r0N" firstAttribute="width" secondItem="fEE-1D-dzv" secondAttribute="width" priority="750" id="dLZ-Sd-Xnd"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="lVD-WS-25i" secondAttribute="bottom" id="f3B-N5-xBg"/>
+                            <constraint firstItem="lVD-WS-25i" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="gEB-bo-yu4"/>
+                            <constraint firstItem="rUr-Uh-3u9" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="uNs-4J-YeH"/>
+                            <constraint firstItem="29U-9k-r0N" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="uSa-Yy-DmT"/>
+                            <constraint firstItem="lVD-WS-25i" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="uUY-BZ-5bf"/>
+                            <constraint firstItem="rUr-Uh-3u9" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="topMargin" constant="60" id="yRd-TP-bgf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gEB-bo-yu4"/>
+                                <exclude reference="uUY-BZ-5bf"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <segue destination="ga0-Ub-ZsL" kind="showDetail" identifier="GameVC" animates="NO" id="Bl0-PF-4gC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="jN5-QU-ksC">
+            <objects>
+                <viewController id="ga0-Ub-ZsL" customClass="GameViewController" customModule="Ember_Run" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2lC-n3-f3g"/>
+                        <viewControllerLayoutGuide type="bottom" id="oHw-eP-wm7"/>
+                    </layoutGuides>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="uTW-xD-HPp" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Pv-ba-WEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1377" y="453"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Main title" width="222" height="30"/>
+        <image name="button-settings" width="269" height="55"/>
+        <image name="button-start" width="269" height="55"/>
+        <image name="main screen bg" width="311" height="552"/>
+    </resources>
+</document>
