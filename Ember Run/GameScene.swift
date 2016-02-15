@@ -25,7 +25,7 @@ class GameScene: SKScene {
         wallBuilder = WallBuilder(scene: self)
         wheelPlacer = WheelPlacer(scene: self)
         
-        wheelPlacer.update()
+        //wheelPlacer.update()
         /* Setup your scene here */
 //        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
 //        myLabel.text = "Hello, World!"
@@ -41,16 +41,18 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             
-            wheelPlacer.wheels[1].position = location
+//            wheelPlacer.wheels[1].position = location
+//            
+//            print("LOCATION", location)
+//            
+//            let dist = wheelPlacer.spaceBetweenCircles(
+//                wheelPlacer.wheels[0],
+//                wheelPlacer.wheels[1]
+//            )
+//
+//            print("DISTANCE BETWEEN EDGES", dist)
             
-            print("LOCATION", location)
-            
-            let dist = wheelPlacer.spaceBetweenCircles(
-                wheelPlacer.wheels[0],
-                wheelPlacer.wheels[1]
-            )
-
-            print("DISTANCE BETWEEN EDGES", dist)
+            print("NEW WHEEL", wheelPlacer.placeWheel().position)
             
             //self.camera!.position = location
             

@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
 class WheelPlacer {
     let scene: SKScene
@@ -27,35 +28,76 @@ class WheelPlacer {
     }
     
     func update() {
-        let s1 = SKShapeNode(circleOfRadius: 50)
-        s1.position = CGPoint(x: CGRectGetMidX(scene.camera!.frame), y: CGRectGetMidY(scene.camera!.frame))
-        s1.fillColor = SKColor.clearColor()
-        s1.strokeColor = SKColor.greenColor()
-        
-        scene.addChild(s1)
-        
-        let s2 = SKShapeNode(circleOfRadius: 20)
-        s2.position = CGPoint(x: CGRectGetMidX(scene.camera!.frame), y: CGRectGetMidY(scene.camera!.frame) + 80)
-        s2.fillColor = SKColor.redColor()
-        scene.addChild(s2)
-        
-        wheels.append(s1)
-        wheels.append(s2)
     }
     
-    func placeWheels() {
-        let last_wheel: SKNode?
+    func placeWheel() -> SKNode {
+        var last_wheel: SKNode?
         
         if let _last_wheel = wheels.last {
             last_wheel = _last_wheel
         }
         
+        let wheel = SKShapeNode(circleOfRadius: getRandomRadius())
+
         
+        let position = CGPoint(
+            x: getRandomX(wheel),
+            y: last_wheel != nil ? last_wheel!.position.y : frame_size.height / -2
+        )
+        
+        wheel.position = position
+        
+        if last_wheel == nil {
+            wheels.append(wheel)
+            scene.addChild(wheel)
+        } else {
+            adjustWheelPosition(wheel)
+            wheels.append(wheel)
+            scene.addChild(wheel)
+        }
+        
+        return wheel
+    }
+    
+    func adjustWheelPosition (wheel: SKNode) {
+        var ok = true
+        
+        wheels.forEach { w in
+            if spaceBetweenCircles(wheel, w) < MIN_DISTANCE {
+                ok = false
+            }
+        }
+        
+        if !ok {
+            wheel.position.y += 1
+            adjustWheelPosition(wheel)
+        } else {
+            wheel.position.y = getRandomY(wheel)
+        }
     }
     
     func getRandomRadius () -> CGFloat {
         return CGFloat(arc4random_uniform(UInt32(MAX_RADIUS - MIN_RADIUS)) + 25)
     }
+    
+    func getRandomX(wheel: SKNode) -> CGFloat {
+        let min = Int(UIImage(named: "wall tile")!.size.width + wheel.frame.width / 2 - frame_size.width / 2)
+        let max = Int(frame_size.width / 2 - UIImage(named: "wall tile")!.size.width - wheel.frame.width / 2)
+        
+        let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
+        
+        return CGFloat(rand.nextInt())
+    }
+
+    func getRandomY(wheel: SKNode) -> CGFloat {
+        let min = Int(wheel.position.y)
+        let max = min + Int(MAX_DISTANCE - MIN_DISTANCE)
+        
+        let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
+        
+        return CGFloat(rand.nextInt())
+    }
+
     
     func distanceBetweenPoints(a: CGPoint, _ b: CGPoint) -> CGFloat {
         let val = pow(b.x - a.x, 2) + pow(b.y - a.y, 2)
@@ -71,26 +113,5 @@ class WheelPlacer {
         
         return dist - lhs.frame.width/2 - rhs.frame.width/2
     }
-    
-//    // also not used
-//    func angleBetweenPoints(a: CGPoint, _ b: CGPoint) -> CGFloat {
-//        let dx = b.x - a.x
-//        let dy = b.y - a.y
-//        
-//        return atan2(dy, dx)
-//    }
-//    
-//    // written because I'm an idiot. Unused
-//    func pointOnCircle(angle : CGFloat, circle: SKNode) -> CGPoint {
-//        let ox = circle.position.x + circle.frame.width / 2
-//        let oy = circle.position.y
-//        
-//        let point = CGPoint(
-//            x: ox * cos(angle) + oy * sin(angle),
-//            y: ox * sin(angle) + oy * cos(angle)
-//        )
-//        
-//        return point
-//    }
 }
     
