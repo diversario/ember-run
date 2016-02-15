@@ -22,6 +22,8 @@ class WallBuilder {
         WALL_SIDE.LEFT: [SKSpriteNode](),
         WALL_SIDE.RIGHT: [SKSpriteNode]()
     ]
+
+    let tile_size = UIImage(named: "wall tile")!.size
     
     init(scene: SKScene) {
         self.scene = scene
@@ -32,18 +34,17 @@ class WallBuilder {
         populateTiles(.LEFT)
         populateTiles(.RIGHT)
     }
-
     
     func populateTiles (side: WALL_SIDE) {
         let frame_position = scene.camera!.position
-        let tile_size = UIImage(named: "wall tile")!.size
+
         
         let x: CGFloat
         
         if side == .LEFT {
             x = frame_size.width / -2
         } else {
-            x = frame_size.width / 2 - tile_size.width
+            x = frame_size.width / 2 - WALL_WIDTH
         }
         
         let start_point = CGPoint(
@@ -56,7 +57,7 @@ class WallBuilder {
             y: frame_position.y + frame_size.height / 2
         )
         
-        var placement = CGPoint(x: start_point.x + tile_size.width/2, y: start_point.y  + tile_size.height/2)
+        var placement = CGPoint(x: start_point.x + WALL_WIDTH/2, y: start_point.y  + tile_size.height/2)
         
         if let last_tile = tiles[side]!.last {
             if last_tile.position.y > end_point.y {
@@ -67,7 +68,7 @@ class WallBuilder {
         }
         
         let tile = SKSpriteNode.init(imageNamed: "wall tile")
-        tile.size = UIImage(named: "wall tile")!.size
+        tile.size = tile_size
         tile.position = placement
         
         self.scene.addChild(tile)

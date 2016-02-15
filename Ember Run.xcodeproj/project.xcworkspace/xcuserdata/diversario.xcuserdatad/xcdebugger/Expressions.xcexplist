@@ -3,7 +3,26 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "GameScene.didMoveToView(SKView) -&gt; ():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "WallBuilder.update() -&gt; ():WallBuilder.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WheelPlacer.update() -&gt; ():WheelPlacer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scene.camera!.frame">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "WheelPlacer.placeWheel() -&gt; SKNode:WheelPlacer.swift">
@@ -19,14 +38,6 @@
             </PersistentString>
             <PersistentString
                value = "self.scene.anchorPoint">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GameScene.didMoveToView(SKView) -&gt; ():GameScene.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

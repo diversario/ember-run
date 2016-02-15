@@ -15,19 +15,23 @@ class WheelPlacer {
     let frame_size: CGSize
     var wheels = [SKNode]()
     
-    let MIN_RADIUS: CGFloat = 25
-    let MAX_RADIUS: CGFloat
+    let MIN_RADIUS: Int = 25
+    let MAX_RADIUS: Int
     let MIN_DISTANCE: CGFloat = 20
     let MAX_DISTANCE: CGFloat = 200
     
     init(scene: SKScene) {
         self.scene = scene
         frame_size = scene.size
-        MAX_RADIUS = (scene.size.width - UIImage(named: "wall tile")!.size.width * 2) * 0.8 / 2 // 80% of available space
-        
+        MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
     }
     
     func update() {
+        let max_y = scene.camera!.position.y + frame_size.height/2
+
+        while wheels.last?.position.y <= max_y {
+            placeWheel()
+        }
     }
     
     func placeWheel() -> SKNode {
@@ -38,7 +42,9 @@ class WheelPlacer {
         }
         
         let wheel = SKShapeNode(circleOfRadius: getRandomRadius())
-
+        wheel.lineWidth = 0
+        wheel.fillColor = SKColor.blueColor()
+        wheel.fillTexture = SKTexture(imageNamed: "wheel-red")
         
         let position = CGPoint(
             x: getRandomX(wheel),
@@ -77,12 +83,14 @@ class WheelPlacer {
     }
     
     func getRandomRadius () -> CGFloat {
-        return CGFloat(arc4random_uniform(UInt32(MAX_RADIUS - MIN_RADIUS)) + 25)
+        let rand = GKRandomDistribution(lowestValue: MIN_RADIUS, highestValue: MAX_RADIUS)
+        
+        return CGFloat(rand.nextInt())
     }
     
     func getRandomX(wheel: SKNode) -> CGFloat {
-        let min = Int(UIImage(named: "wall tile")!.size.width + wheel.frame.width / 2 - frame_size.width / 2)
-        let max = Int(frame_size.width / 2 - UIImage(named: "wall tile")!.size.width - wheel.frame.width / 2)
+        let min = Int(WALL_WIDTH + wheel.frame.width / 2 + MIN_DISTANCE - frame_size.width / 2)
+        let max = Int(frame_size.width / 2 - WALL_WIDTH - MIN_DISTANCE - wheel.frame.width / 2)
         
         let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
         

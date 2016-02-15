@@ -6,4 +6,6 @@
 //  Copyright © 2016 Ilya Shaisultanov. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+let WALL_WIDTH = UIImage(named: "wall tile")!.size.width

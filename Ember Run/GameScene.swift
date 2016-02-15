@@ -24,15 +24,6 @@ class GameScene: SKScene {
         
         wallBuilder = WallBuilder(scene: self)
         wheelPlacer = WheelPlacer(scene: self)
-        
-        //wheelPlacer.update()
-        /* Setup your scene here */
-//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        myLabel.text = "Hello, World!"
-//        myLabel.fontSize = 45
-//        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-//        
-//        self.addChild(myLabel)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -41,20 +32,7 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             
-//            wheelPlacer.wheels[1].position = location
-//            
-//            print("LOCATION", location)
-//            
-//            let dist = wheelPlacer.spaceBetweenCircles(
-//                wheelPlacer.wheels[0],
-//                wheelPlacer.wheels[1]
-//            )
-//
-//            print("DISTANCE BETWEEN EDGES", dist)
-            
-            print("NEW WHEEL", wheelPlacer.placeWheel().position)
-            
-            //self.camera!.position = location
+            self.camera!.position = location
             
 //            let sprite = SKSpriteNode(imageNamed:"Spaceship")
 //            
@@ -71,6 +49,11 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
+
+    }
+    
+    override func didApplyConstraints() {
         wallBuilder.update()
+        wheelPlacer.update()
     }
 }
