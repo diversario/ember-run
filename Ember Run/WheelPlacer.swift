@@ -20,6 +20,8 @@ class WheelPlacer {
     let MIN_DISTANCE: CGFloat = 20
     let MAX_DISTANCE: CGFloat = 200
     
+    let randomBool = GKRandomDistribution()
+    
     init(scene: SKScene) {
         self.scene = scene
         frame_size = scene.size
@@ -34,6 +36,25 @@ class WheelPlacer {
         }
     }
     
+    func makeWheel () -> SKNode {
+        let radius = getRandomRadius()
+        let wheel = SKSpriteNode(imageNamed: "wheel")
+
+        wheel.size = CGSize(width: radius * 2, height: radius * 2)
+        
+        wheel.physicsBody = SKPhysicsBody(circleOfRadius: radius)
+        wheel.physicsBody!.affectedByGravity = false
+        wheel.physicsBody!.dynamic = false
+        wheel.physicsBody!.contactTestBitMask = PhysicsManager.bodies.wheel | PhysicsManager.bodies.player
+        
+        wheel.name = "wheel\(wheels.count)"
+        
+        let rotate = getRandomRotationAction()
+        wheel.runAction(SKAction.repeatActionForever(rotate))
+        
+        return wheel
+    }
+    
     func placeWheel() -> SKNode {
         var last_wheel: SKNode?
         
@@ -41,10 +62,7 @@ class WheelPlacer {
             last_wheel = _last_wheel
         }
         
-        let wheel = SKShapeNode(circleOfRadius: getRandomRadius())
-        wheel.lineWidth = 0
-        wheel.fillColor = SKColor.blueColor()
-        wheel.fillTexture = SKTexture(imageNamed: "wheel-red")
+        let wheel = makeWheel()
         
         let position = CGPoint(
             x: getRandomX(wheel),
@@ -82,6 +100,16 @@ class WheelPlacer {
         }
     }
     
+    func getRandomAngularSpeed() -> CGFloat {
+        let rand = GKRandomDistribution(lowestValue: 1, highestValue: 3)
+        return CGFloat(rand.nextUniform())
+    }
+
+    func getRandomRotationAction() -> SKAction {
+        let angle = getRandomAngularSpeed() * (randomBool.nextBool() ? 1 : -1)
+        return SKAction.rotateByAngle(angle, duration: 1)
+    }
+
     func getRandomRadius () -> CGFloat {
         let rand = GKRandomDistribution(lowestValue: MIN_RADIUS, highestValue: MAX_RADIUS)
         

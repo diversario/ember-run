@@ -11,8 +11,12 @@ import SpriteKit
 class GameScene: SKScene {
     var wallBuilder: WallBuilder!
     var wheelPlacer: WheelPlacer!
+    var physicsMgr: PhysicsManager!
+    var player: Player!
     
     override func didMoveToView(view: SKView) {
+        physicsMgr = PhysicsManager(scene: self)
+        
         let cam = SKCameraNode()
         self.addChild(cam)
         self.camera = cam
@@ -24,27 +28,19 @@ class GameScene: SKScene {
         
         wallBuilder = WallBuilder(scene: self)
         wheelPlacer = WheelPlacer(scene: self)
+        
+        //wallBuilder.setEdges()
+        
+        player = Player(scene: self, physicsManager: physicsMgr)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
-        
+        player.onTap()
         for touch in touches {
             let location = touch.locationInNode(self)
-            
+            player.positionPlayer(location)
             self.camera!.position = location
-            
-//            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-//            
-//            sprite.xScale = 0.5
-//            sprite.yScale = 0.5
-//            sprite.position = location
-//            
-//            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-//            
-//            sprite.runAction(SKAction.repeatActionForever(action))
-//            
-//            self.addChild(sprite)
         }
     }
    

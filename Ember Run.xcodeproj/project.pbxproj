@@ -20,6 +20,8 @@
 		200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A281C6EF0D600A24A49 /* WallBuilder.swift */; };
 		200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */; };
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
+		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
+		200F4A311C727D5C00A24A49 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A301C727D5C00A24A49 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		200F4A281C6EF0D600A24A49 /* WallBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallBuilder.swift; sourceTree = "<group>"; };
 		200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPlacer.swift; sourceTree = "<group>"; };
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
+		200F4A301C727D5C00A24A49 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				200F4A281C6EF0D600A24A49 /* WallBuilder.swift */,
 				200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */,
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
+				200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */,
+				200F4A301C727D5C00A24A49 /* Player.swift */,
 			);
 			path = "Ember Run";
 			sourceTree = "<group>";
@@ -283,7 +289,9 @@
 				200F49D91C6ED8C400A24A49 /* HomeViewController.swift in Sources */,
 				200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */,
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
+				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
 				200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */,
+				200F4A311C727D5C00A24A49 /* Player.swift in Sources */,
 				200F4A051C6EE41100A24A49 /* GameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +519,7 @@
 				200F49FD1C6ED8C400A24A49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		200F49FE1C6ED8C400A24A49 /* Build configuration list for PBXNativeTarget "Ember RunTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +528,7 @@
 				200F4A001C6ED8C400A24A49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		200F4A011C6ED8C400A24A49 /* Build configuration list for PBXNativeTarget "Ember RunUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +537,7 @@
 				200F4A031C6ED8C400A24A49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

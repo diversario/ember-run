@@ -25,6 +25,9 @@ class WallBuilder {
 
     let tile_size = UIImage(named: "wall tile")!.size
     
+    var left_edge: SKPhysicsBody!
+    var right_edge: SKPhysicsBody!
+    
     init(scene: SKScene) {
         self.scene = scene
         frame_size = scene.size
@@ -38,7 +41,6 @@ class WallBuilder {
     func populateTiles (side: WALL_SIDE) {
         let frame_position = scene.camera!.position
 
-        
         let x: CGFloat
         
         if side == .LEFT {
@@ -78,5 +80,22 @@ class WallBuilder {
         if tile.position.y <= end_point.y {
             populateTiles(side)
         }
+    }
+    
+    func setEdges() {
+        let frame_position = scene.camera!.position
+        
+        let left_x = frame_position.x - frame_size.width / 2 + WALL_WIDTH
+        let right_x = frame_position.x + frame_size.width / 2 - WALL_WIDTH
+        
+        let top_y = frame_position.y + frame_size.height
+        let bottom_y = frame_position.y - frame_size.height
+        
+        let rect = CGRect(x: left_x, y: bottom_y, width: right_x - left_x, height: top_y - bottom_y)
+        
+        scene.physicsBody = SKPhysicsBody(edgeLoopFromRect: rect)
+        scene.physicsBody!.affectedByGravity = false
+        scene.physicsBody!.dynamic = false
+        scene.physicsBody!.contactTestBitMask = PhysicsManager.bodies.walls | PhysicsManager.bodies.player
     }
 }
