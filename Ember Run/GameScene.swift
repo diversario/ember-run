@@ -40,7 +40,7 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             player.positionPlayer(location)
-            self.camera!.position = location
+            //self.camera!.position = location
         }
     }
    

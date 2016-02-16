@@ -26,8 +26,12 @@ class Player {
     
     func initPlayerNode() {
         node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width/2)
-        node.physicsBody!.contactTestBitMask = PhysicsManager.bodies.wheel | PhysicsManager.bodies.player
+        node.physicsBody!.contactTestBitMask = PhysicsManager.bodies.wheel |
+            PhysicsManager.bodies.player |
+            PhysicsManager.bodies.walls
+        
         node.physicsBody!.usesPreciseCollisionDetection = true
+        node.physicsBody!.restitution = 1
         
         node.name = "player"
     }
@@ -41,26 +45,43 @@ class Player {
     }
     
     func onTap () {
-        if physicsManager.joint != nil {
-            let impulse = getJumpVector()
+        let impulse = getJumpVector()
+        
+        if impulse != nil {
+            if physicsManager.joint != nil {
+                scene.physicsWorld.removeJoint(physicsManager.joint)
+                physicsManager.joint = nil
+            }
             
-            scene.physicsWorld.removeJoint(physicsManager.joint)
-            physicsManager.joint = nil
-            
-            node.physicsBody?.applyImpulse(impulse)
-            return
+            node.physicsBody?.applyImpulse(impulse!)
         }
     }
     
-    func getJumpVector () -> CGVector {
+    func getJumpVector () -> CGVector? {
         let playerCoords = node.position
-        let wheelCoords = physicsManager.joint.bodyB.node!.position
         
-        var vector = CGVectorMake(playerCoords.x - wheelCoords.x, playerCoords.y - wheelCoords.y)
+        var vector: CGVector?
         
-        vector.dx /= 50
-        vector.dy /= 50
-        print(vector)
+        if physicsManager.joint != nil {
+            let attachedBody = physicsManager.joint.bodyB
+            
+            vector = CGVectorMake(playerCoords.x - attachedBody.node!.position.x, playerCoords.y - attachedBody.node!.position.y)
+            
+            vector!.dx /= 50
+            vector!.dy /= 50
+        } else if physicsManager.constraint != nil {
+            print(playerCoords)
+            if playerCoords.x < 0 { // it's on the left wall
+                vector = CGVectorMake(2, 2)
+            } else {
+                vector = CGVectorMake(-2, 2)
+            }
+        
+            physicsManager.constraint.enabled = false
+            physicsManager.constraint = nil
+            node.constraints = [SKConstraint]()
+        }
+        
         return vector
     }
 }

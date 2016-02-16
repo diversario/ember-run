@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "WheelPlacer.update() -&gt; ():WheelPlacer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scene.camera!.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "GameScene.didMoveToView(SKView) -&gt; ():GameScene.swift">
          <PersistentStrings>
             <PersistentString
@@ -17,10 +25,13 @@
          contextName = "WallBuilder.update() -&gt; ():WallBuilder.swift">
       </ContextState>
       <ContextState
-         contextName = "WheelPlacer.update() -&gt; ():WheelPlacer.swift">
+         contextName = "Player.getJumpVector() -&gt; CGVector:Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "scene.camera!.frame">
+               value = "p.node!.constraints">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -40,6 +51,9 @@
                value = "self.scene.anchorPoint">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Player.onTap() -&gt; ():Player.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

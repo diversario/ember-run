@@ -70,8 +70,15 @@ class WallBuilder {
         }
         
         let tile = SKSpriteNode.init(imageNamed: "wall tile")
+        
         tile.size = tile_size
         tile.position = placement
+        
+        tile.physicsBody = SKPhysicsBody(rectangleOfSize: tile.frame.size)
+        tile.physicsBody!.affectedByGravity = false
+        tile.physicsBody!.dynamic = false
+        tile.physicsBody!.contactTestBitMask = PhysicsManager.bodies.walls | PhysicsManager.bodies.player
+        tile.physicsBody!.restitution = 1
         
         self.scene.addChild(tile)
         
