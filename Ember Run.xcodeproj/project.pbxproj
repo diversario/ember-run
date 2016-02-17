@@ -113,20 +113,13 @@
 		200F49D11C6ED8C400A24A49 /* Ember Run */ = {
 			isa = PBXGroup;
 			children = (
+				20B66E2F1C7401670062AA16 /* View */,
+				20B66E2E1C7401530062AA16 /* Model */,
+				20B66E2D1C7401370062AA16 /* Controller */,
 				200F49D21C6ED8C400A24A49 /* AppDelegate.swift */,
-				200F49D41C6ED8C400A24A49 /* GameScene.sks */,
-				200F49D61C6ED8C400A24A49 /* GameScene.swift */,
-				200F49D81C6ED8C400A24A49 /* HomeViewController.swift */,
-				200F4A041C6EE41100A24A49 /* GameViewController.swift */,
-				200F49DA1C6ED8C400A24A49 /* Main.storyboard */,
 				200F49DD1C6ED8C400A24A49 /* Assets.xcassets */,
-				200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */,
 				200F49E21C6ED8C400A24A49 /* Info.plist */,
-				200F4A281C6EF0D600A24A49 /* WallBuilder.swift */,
-				200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */,
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
-				200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */,
-				200F4A301C727D5C00A24A49 /* Player.swift */,
 			);
 			path = "Ember Run";
 			sourceTree = "<group>";
@@ -147,6 +140,37 @@
 				200F49F81C6ED8C400A24A49 /* Info.plist */,
 			);
 			path = "Ember RunUITests";
+			sourceTree = "<group>";
+		};
+		20B66E2D1C7401370062AA16 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				200F49D81C6ED8C400A24A49 /* HomeViewController.swift */,
+				200F4A041C6EE41100A24A49 /* GameViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		20B66E2E1C7401530062AA16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				200F49D61C6ED8C400A24A49 /* GameScene.swift */,
+				200F4A281C6EF0D600A24A49 /* WallBuilder.swift */,
+				200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */,
+				200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */,
+				200F4A301C727D5C00A24A49 /* Player.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		20B66E2F1C7401670062AA16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				200F49D41C6ED8C400A24A49 /* GameScene.sks */,
+				200F49DA1C6ED8C400A24A49 /* Main.storyboard */,
+				200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

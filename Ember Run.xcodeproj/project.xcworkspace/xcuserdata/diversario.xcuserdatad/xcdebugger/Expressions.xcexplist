@@ -31,6 +31,9 @@
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
+               value = "contact.bodyA.node?.name">
+            </PersistentString>
+            <PersistentString
                value = "p.node!.constraints">
             </PersistentString>
          </PersistentStrings>
@@ -53,7 +56,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Player.getJumpVector() -&gt; CGVector?:Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "physicsManager.joint">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Player.onTap() -&gt; ():Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "node.physicsBody!.velocity">
+            </PersistentString>
+            <PersistentString
+               value = "node.position">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

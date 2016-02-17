@@ -19,7 +19,6 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
     let scene: SKScene
     
     var joint: SKPhysicsJoint!
-    var constraint: SKConstraint!
     
     init(scene: SKScene) {
         self.scene = scene
@@ -32,9 +31,8 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         let a = contact.bodyA
         let b = contact.bodyB
-        print("1111111111111111")
+        
         if a.contactTestBitMask & b.contactTestBitMask == bodies.wheel | bodies.player {
-            print("22222222222")
             let p: SKPhysicsBody!
             let w: SKPhysicsBody!
             
@@ -45,26 +43,22 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 p = contact.bodyB
                 w = contact.bodyA
             }
+let c = SKShapeNode(circleOfRadius: 1)
+            c.fillColor = SKColor.blackColor()
+            c.position = contact.contactPoint
+            c.zPosition = 100
+            scene.addChild(c)
+            
+            if joint != nil {
+                scene.physicsWorld.removeJoint(joint)
+            }
+            
+            p.node!.position = contact.contactPoint
             
             joint = SKPhysicsJointFixed.jointWithBodyA(p, bodyB: w, anchor: contact.contactPoint)
             scene.physicsWorld.addJoint(joint)
-        } else if a.contactTestBitMask & b.contactTestBitMask == bodies.walls | bodies.player {
-            print("3333333333")
             
-            let p: SKPhysicsBody!
-            let w: SKPhysicsBody!
-            
-            if contact.bodyA.node?.name == "player" {
-                p = contact.bodyA
-                w = contact.bodyB
-            } else {
-                p = contact.bodyB
-                w = contact.bodyA
-            }
-
-            constraint = SKConstraint.positionX(SKRange(constantValue: p.node!.position.x))
-            
-            p.node!.constraints = [constraint]
+            p.node!.constraints!.first!.enabled = true
         }
     }
 }

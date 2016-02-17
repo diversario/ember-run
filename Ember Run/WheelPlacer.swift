@@ -42,10 +42,12 @@ class WheelPlacer {
 
         wheel.size = CGSize(width: radius * 2, height: radius * 2)
         
-        wheel.physicsBody = SKPhysicsBody(circleOfRadius: radius)
+        wheel.physicsBody = SKPhysicsBody(circleOfRadius: radius - 1)
         wheel.physicsBody!.affectedByGravity = false
         wheel.physicsBody!.dynamic = false
-        wheel.physicsBody!.contactTestBitMask = PhysicsManager.bodies.wheel | PhysicsManager.bodies.player
+        wheel.physicsBody!.contactTestBitMask = PhysicsManager.bodies.player | PhysicsManager.bodies.wheel
+        wheel.physicsBody!.usesPreciseCollisionDetection = true
+        wheel.physicsBody!.restitution = 0
         
         wheel.name = "wheel\(wheels.count)"
         
@@ -101,8 +103,8 @@ class WheelPlacer {
     }
     
     func getRandomAngularSpeed() -> CGFloat {
-        let rand = GKRandomDistribution(lowestValue: 1, highestValue: 3)
-        return CGFloat(rand.nextUniform())
+        let rand = GKRandomDistribution(lowestValue: 20, highestValue: 40)
+        return CGFloat(CGFloat(rand.nextInt()) / 10.0)
     }
 
     func getRandomRotationAction() -> SKAction {

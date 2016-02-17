@@ -10,13 +10,13 @@ import Foundation
 import SpriteKit
 
 class Player {
-    let scene: SKScene
+    let scene: GameScene
     let node: SKSpriteNode
     let physicsManager: PhysicsManager
     
     private var _positioned = false
     
-    init(scene: SKScene, physicsManager: PhysicsManager) {
+    init(scene: GameScene, physicsManager: PhysicsManager) {
         self.scene = scene
         self.physicsManager = physicsManager
         node = SKSpriteNode(imageNamed: "player")
@@ -25,15 +25,20 @@ class Player {
     }
     
     func initPlayerNode() {
-        node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width/2)
-        node.physicsBody!.contactTestBitMask = PhysicsManager.bodies.wheel |
-            PhysicsManager.bodies.player |
-            PhysicsManager.bodies.walls
-        
-        node.physicsBody!.usesPreciseCollisionDetection = true
-        node.physicsBody!.restitution = 1
+        setPhysicsBody()
         
         node.name = "player"
+        
+        let constr = SKConstraint.positionX(SKRange(lowerLimit: self.scene.LEFT_EDGE + node.size.width / 2, upperLimit: scene.RIGHT_EDGE - node.size.width / 2))
+        node.constraints = [constr]
+    }
+    
+    func setPhysicsBody() {
+        node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width/2)
+        node.physicsBody!.contactTestBitMask = PhysicsManager.bodies.player | PhysicsManager.bodies.wheel
+        
+        node.physicsBody!.usesPreciseCollisionDetection = true
+        node.physicsBody!.restitution = 0
     }
     
     func positionPlayer(pos: CGPoint) {
@@ -51,6 +56,9 @@ class Player {
             if physicsManager.joint != nil {
                 scene.physicsWorld.removeJoint(physicsManager.joint)
                 physicsManager.joint = nil
+            } else {
+                //node.constraints!.first!.enabled = false
+                setPhysicsBody()
             }
             
             node.physicsBody?.applyImpulse(impulse!)
@@ -66,22 +74,33 @@ class Player {
             let attachedBody = physicsManager.joint.bodyB
             
             vector = CGVectorMake(playerCoords.x - attachedBody.node!.position.x, playerCoords.y - attachedBody.node!.position.y)
-            
-            vector!.dx /= 50
-            vector!.dy /= 50
-        } else if physicsManager.constraint != nil {
-            print(playerCoords)
+            vector = normalizeVector(vector!)
+            vector!.dx *= 3
+            vector!.dy *= 3
+        } else if isOnTheWall() {
             if playerCoords.x < 0 { // it's on the left wall
-                vector = CGVectorMake(2, 2)
+                vector = CGVectorMake(5, 5)
             } else {
-                vector = CGVectorMake(-2, 2)
+                vector = CGVectorMake(-5, 5)
             }
-        
-            physicsManager.constraint.enabled = false
-            physicsManager.constraint = nil
-            node.constraints = [SKConstraint]()
+            
+            vector = normalizeVector(vector!)
+            
+            vector!.dx *= 3
+            vector!.dy *= 3
         }
         
         return vector
+    }
+    
+    func isOnTheWall () -> Bool {
+        return node.position.x <= (scene.LEFT_EDGE + node.size.width / 2) ||
+               node.position.x >= (scene.RIGHT_EDGE - node.size.width / 2)
+    }
+    
+    func normalizeVector (v: CGVector) -> CGVector {
+        let length = sqrt(pow(v.dx, 2) + pow(v.dy, 2))
+        
+        return CGVector(dx: v.dx/length, dy: v.dy/length)
     }
 }

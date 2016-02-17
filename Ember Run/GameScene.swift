@@ -14,12 +14,18 @@ class GameScene: SKScene {
     var physicsMgr: PhysicsManager!
     var player: Player!
     
+    var LEFT_EDGE: CGFloat!
+    var RIGHT_EDGE: CGFloat!
+    
     override func didMoveToView(view: SKView) {
         physicsMgr = PhysicsManager(scene: self)
         
         let cam = SKCameraNode()
         self.addChild(cam)
         self.camera = cam
+        
+        LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
+        RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
         
         let camConstraint = SKConstraint.positionX(SKRange(constantValue: 0))
         camConstraint.referenceNode = self
@@ -28,8 +34,6 @@ class GameScene: SKScene {
         
         wallBuilder = WallBuilder(scene: self)
         wheelPlacer = WheelPlacer(scene: self)
-        
-        //wallBuilder.setEdges()
         
         player = Player(scene: self, physicsManager: physicsMgr)
     }
@@ -40,12 +44,11 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             player.positionPlayer(location)
-            //self.camera!.position = location
         }
     }
    
     override func update(currentTime: CFTimeInterval) {
-
+        self.camera!.position = player.node.position
     }
     
     override func didApplyConstraints() {
