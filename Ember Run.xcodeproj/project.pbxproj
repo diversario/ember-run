@@ -122,7 +122,6 @@
 				200F49D21C6ED8C400A24A49 /* AppDelegate.swift */,
 				200F49DD1C6ED8C400A24A49 /* Assets.xcassets */,
 				200F49E21C6ED8C400A24A49 /* Info.plist */,
-				200F4A2C1C70048600A24A49 /* Constants.swift */,
 			);
 			path = "Ember Run";
 			sourceTree = "<group>";
@@ -179,6 +178,7 @@
 		20B66E301C7553F90062AA16 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				200F4A2C1C70048600A24A49 /* Constants.swift */,
 				20B66E311C75540C0062AA16 /* Util.swift */,
 			);
 			name = Util;

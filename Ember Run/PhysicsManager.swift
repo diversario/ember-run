@@ -68,25 +68,4 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             p.node!.constraints!.first!.enabled = true
         }
     }
-    
-    // also not used
-    func angleBetweenPoints(a: CGPoint, _ b: CGPoint) -> CGFloat {
-        let dx = b.x - a.x
-        let dy = b.y - a.y
-        
-        return atan2(dy, dx)
-    }
-    
-    // written because I'm an idiot. Unused
-    func pointOnCircle(angle : CGFloat, circle: SKNode) -> CGPoint {
-        let ox = circle.position.x + circle.frame.width / 2
-        let oy = circle.position.y
-        
-        let point = CGPoint(
-            x: ox * cos(angle) + oy * sin(angle),
-            y: ox * sin(angle) + oy * cos(angle)
-        )
-        
-        return point
-    }
 }

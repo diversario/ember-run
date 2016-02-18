@@ -15,17 +15,19 @@ class WheelPlacer {
     let frame_size: CGSize
     var wheels = [SKNode]()
     
+    let rand: GKRandomDistribution!
+    
     let MIN_RADIUS: Int = 25
     let MAX_RADIUS: Int
     let MIN_DISTANCE: CGFloat = 20
     let MAX_DISTANCE: CGFloat = 200
-    
-    let randomBool = GKRandomDistribution()
-    
+
     init(scene: SKScene) {
         self.scene = scene
         frame_size = scene.size
         MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
+        
+        rand = GKRandomDistribution(lowestValue: MIN_RADIUS, highestValue: MAX_RADIUS)
     }
     
     func update() {
@@ -102,22 +104,6 @@ class WheelPlacer {
         }
     }
     
-    func getRandomAngularSpeed() -> CGFloat {
-        let rand = GKRandomDistribution(lowestValue: 20, highestValue: 40)
-        return CGFloat(CGFloat(rand.nextInt()) / 10.0)
-    }
-
-    func getRandomRotationAction() -> SKAction {
-        let angle = getRandomAngularSpeed() * (randomBool.nextBool() ? 1 : -1)
-        return SKAction.rotateByAngle(angle, duration: 1)
-    }
-
-    func getRandomRadius () -> CGFloat {
-        let rand = GKRandomDistribution(lowestValue: MIN_RADIUS, highestValue: MAX_RADIUS)
-        
-        return CGFloat(rand.nextInt())
-    }
-    
     func getRandomX(wheel: SKNode) -> CGFloat {
         let min = Int(WALL_WIDTH + wheel.frame.width / 2 + MIN_DISTANCE - frame_size.width / 2)
         let max = Int(frame_size.width / 2 - WALL_WIDTH - MIN_DISTANCE - wheel.frame.width / 2)
@@ -137,10 +123,21 @@ class WheelPlacer {
     }
 
     
-    func distanceBetweenPoints(a: CGPoint, _ b: CGPoint) -> CGFloat {
-        let val = pow(b.x - a.x, 2) + pow(b.y - a.y, 2)
-        return sqrt(val)
+    func getRandomRadius () -> CGFloat {
+        return CGFloat(rand.nextInt())
     }
+
+    
+    func getRandomAngularSpeed() -> CGFloat {
+        let rand = GKRandomDistribution(lowestValue: 20, highestValue: 40)
+        return CGFloat(CGFloat(rand.nextInt()) / 10.0)
+    }
+    
+    func getRandomRotationAction() -> SKAction {
+        let angle = getRandomAngularSpeed() * (randomBool.nextBool() ? 1 : -1)
+        return SKAction.rotateByAngle(angle, duration: 1)
+    }
+
     
     /**
     Calculates distance between edges of two circles on a line
