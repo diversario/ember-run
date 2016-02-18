@@ -43,22 +43,50 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 p = contact.bodyB
                 w = contact.bodyA
             }
-let c = SKShapeNode(circleOfRadius: 1)
-            c.fillColor = SKColor.blackColor()
-            c.position = contact.contactPoint
-            c.zPosition = 100
-            scene.addChild(c)
             
             if joint != nil {
                 scene.physicsWorld.removeJoint(joint)
             }
             
-            p.node!.position = contact.contactPoint
+            let vectorToContactPoint = CGVector(
+                dx: contact.contactPoint.x - w.node!.position.x,
+                dy: contact.contactPoint.y - w.node!.position.y
+            )
+            
+            let normalizedVTCP = normalizeVector(vectorToContactPoint)
+            
+            let adjustedContactPoint = CGPoint(
+                x: contact.contactPoint.x + 8*normalizedVTCP.dx,
+                y: contact.contactPoint.y + 8*normalizedVTCP.dy
+            )
+            
+            p.node!.position = adjustedContactPoint
             
             joint = SKPhysicsJointFixed.jointWithBodyA(p, bodyB: w, anchor: contact.contactPoint)
             scene.physicsWorld.addJoint(joint)
             
             p.node!.constraints!.first!.enabled = true
         }
+    }
+    
+    // also not used
+    func angleBetweenPoints(a: CGPoint, _ b: CGPoint) -> CGFloat {
+        let dx = b.x - a.x
+        let dy = b.y - a.y
+        
+        return atan2(dy, dx)
+    }
+    
+    // written because I'm an idiot. Unused
+    func pointOnCircle(angle : CGFloat, circle: SKNode) -> CGPoint {
+        let ox = circle.position.x + circle.frame.width / 2
+        let oy = circle.position.y
+        
+        let point = CGPoint(
+            x: ox * cos(angle) + oy * sin(angle),
+            y: ox * sin(angle) + oy * cos(angle)
+        )
+        
+        return point
     }
 }

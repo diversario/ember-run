@@ -39,6 +39,7 @@ class Player {
         
         node.physicsBody!.usesPreciseCollisionDetection = true
         node.physicsBody!.restitution = 0
+        node.physicsBody!.linearDamping = 0.3
     }
     
     func positionPlayer(pos: CGPoint) {
@@ -57,7 +58,6 @@ class Player {
                 scene.physicsWorld.removeJoint(physicsManager.joint)
                 physicsManager.joint = nil
             } else {
-                //node.constraints!.first!.enabled = false
                 setPhysicsBody()
             }
             
@@ -96,11 +96,5 @@ class Player {
     func isOnTheWall () -> Bool {
         return node.position.x <= (scene.LEFT_EDGE + node.size.width / 2) ||
                node.position.x >= (scene.RIGHT_EDGE - node.size.width / 2)
-    }
-    
-    func normalizeVector (v: CGVector) -> CGVector {
-        let length = sqrt(pow(v.dx, 2) + pow(v.dy, 2))
-        
-        return CGVector(dx: v.dx/length, dy: v.dy/length)
     }
 }

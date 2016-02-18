@@ -22,6 +22,7 @@
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		200F4A311C727D5C00A24A49 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A301C727D5C00A24A49 /* Player.swift */; };
+		20B66E321C75540C0062AA16 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B66E311C75540C0062AA16 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		200F4A301C727D5C00A24A49 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		20B66E311C75540C0062AA16 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		200F49D11C6ED8C400A24A49 /* Ember Run */ = {
 			isa = PBXGroup;
 			children = (
+				20B66E301C7553F90062AA16 /* Util */,
 				20B66E2F1C7401670062AA16 /* View */,
 				20B66E2E1C7401530062AA16 /* Model */,
 				20B66E2D1C7401370062AA16 /* Controller */,
@@ -171,6 +174,14 @@
 				200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		20B66E301C7553F90062AA16 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				20B66E311C75540C0062AA16 /* Util.swift */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +326,7 @@
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
 				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
 				200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */,
+				20B66E321C75540C0062AA16 /* Util.swift in Sources */,
 				200F4A311C727D5C00A24A49 /* Player.swift in Sources */,
 				200F4A051C6EE41100A24A49 /* GameViewController.swift in Sources */,
 			);
