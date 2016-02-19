@@ -33,31 +33,30 @@ class WallBuilder {
         frame_size = scene.size
     }
     
-    func update () {
+    func populateTiles () {
         populateTiles(.LEFT)
         populateTiles(.RIGHT)
     }
     
-    func populateTiles (side: WALL_SIDE) {
-        let frame_position = scene.camera!.position
-
-        let x: CGFloat
-        
-        if side == .LEFT {
-            x = frame_size.width / -2
-        } else {
-            x = frame_size.width / 2 - WALL_WIDTH
+    func update () {
+        for side in [WALL_SIDE.LEFT, .RIGHT] {
+            let (start_point, end_point) = getBounds(side)
+            
+            if tiles[side]!.first!.position.y > start_point.y {
+                let tile = tiles[side]!.removeLast()
+                tile.position.y = tiles[side]!.first!.position.y - tile_size.height
+                tiles[side]?.insert(tile, atIndex: 0)
+            } else if tiles[side]!.last!.position.y < end_point.y {
+                // assuming here there cannot be a situation where both of these are true
+                let tile = tiles[side]!.removeFirst()
+                tile.position.y = tiles[side]!.last!.position.y + tile_size.height
+                tiles[side]?.append(tile)
+            }
         }
-        
-        let start_point = CGPoint(
-            x: frame_position.x + x,
-            y: frame_position.y - frame_size.height / 2
-        )
-
-        let end_point = CGPoint(
-            x: start_point.x,
-            y: frame_position.y + frame_size.height / 2
-        )
+    }
+    
+    func populateTiles (side: WALL_SIDE) {
+        let (start_point, end_point) = getBounds(side)
         
         var placement = CGPoint(x: start_point.x + WALL_WIDTH/2, y: start_point.y  + tile_size.height/2)
         
@@ -81,5 +80,29 @@ class WallBuilder {
         if tile.position.y <= end_point.y {
             populateTiles(side)
         }
+    }
+    
+    func getBounds (side: WALL_SIDE) -> (CGPoint, CGPoint) {
+        let frame_position = scene.camera!.position
+        
+        let x: CGFloat
+        
+        if side == .LEFT {
+            x = frame_size.width / -2
+        } else {
+            x = frame_size.width / 2 - WALL_WIDTH
+        }
+        
+        let start_point = CGPoint(
+            x: frame_position.x + x,
+            y: frame_position.y - frame_size.height / 2 - tile_size.height * 2
+        )
+        
+        let end_point = CGPoint(
+            x: start_point.x,
+            y: frame_position.y + frame_size.height / 2 + tile_size.height * 2
+        )
+        
+        return (start_point, end_point)
     }
 }

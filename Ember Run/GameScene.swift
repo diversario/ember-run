@@ -33,6 +33,8 @@ class GameScene: SKScene {
         self.camera!.constraints = [camConstraint]
         
         wallBuilder = WallBuilder(scene: self)
+        wallBuilder.populateTiles()
+        
         wheelPlacer = WheelPlacer(scene: self)
         
         player = Player(scene: self, physicsManager: physicsMgr)
