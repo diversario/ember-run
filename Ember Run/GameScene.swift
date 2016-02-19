@@ -11,6 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     private var _wallBuilder: WallBuilder!
     private var _wheelPlacer: WheelPlacer!
+    private var _water: Water!
     private var _physicsMgr: PhysicsManager!
     private var _player: Player!
     
@@ -38,6 +39,9 @@ class GameScene: SKScene {
         _wheelPlacer = WheelPlacer(scene: self)
         
         _player = Player(scene: self, physicsManager: _physicsMgr)
+        
+        _water = Water(scene: self)
+        _water.addToScene()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -50,11 +54,28 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        self.camera!.position = _player.position
+        _followPlayer()
     }
     
     override func didApplyConstraints() {
         _wallBuilder.update()
         _wheelPlacer.update()
+    }
+    
+    private func _followPlayer() {
+        camera!.position = _player.position
+        return
+        
+        let bottom_edge = camera!.position.y - scene!.frame.size.height / 2
+        let top_edge = camera!.position.y + scene!.frame.size.height / 2
+        
+        let bottom_threshold = bottom_edge + (camera!.position.y - bottom_edge)/2
+        let top_threshold = top_edge - (top_edge - camera!.position.y)/2
+        
+        if _player.position.y < bottom_threshold {
+            camera!.position.y -= 5
+        } else if _player.position.y > top_threshold {
+            camera!.position.y += 5
+        }
     }
 }

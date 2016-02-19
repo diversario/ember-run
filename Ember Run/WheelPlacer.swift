@@ -44,11 +44,12 @@ class WheelPlacer {
         let wheel = SKSpriteNode(imageNamed: "wheel")
 
         wheel.size = CGSize(width: radius * 2, height: radius * 2)
+        wheel.zPosition = Z.WHEEL
         
         wheel.physicsBody = SKPhysicsBody(circleOfRadius: radius - 1)
         wheel.physicsBody!.affectedByGravity = false
         wheel.physicsBody!.dynamic = false
-        wheel.physicsBody!.contactTestBitMask = PhysicsManager.bodies.player | PhysicsManager.bodies.wheel
+        wheel.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL
         wheel.physicsBody!.usesPreciseCollisionDetection = true
         wheel.physicsBody!.restitution = 0
         

@@ -10,12 +10,6 @@ import Foundation
 import SpriteKit
 
 class PhysicsManager: NSObject, SKPhysicsContactDelegate {
-    struct bodies {
-        static let wheel: UInt32 = 0x1 << 0
-        static let player: UInt32 = 0x1 << 1
-        static let walls: UInt32 = 0x1 << 2
-    }
-    
     private let _scene: SKScene
     private var _joint: SKPhysicsJoint!
     
@@ -39,7 +33,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         let a = contact.bodyA
         let b = contact.bodyB
         
-        if a.contactTestBitMask & b.contactTestBitMask == bodies.wheel | bodies.player {
+        if a.contactTestBitMask & b.contactTestBitMask == BODY.WHEEL | BODY.PLAYER {
             let p: SKPhysicsBody!
             let w: SKPhysicsBody!
             

@@ -19,10 +19,16 @@ class Player {
         return _node.position
     }
     
+    var velocity: CGVector {
+        return _node.physicsBody!.velocity
+    }
+    
     init(scene: GameScene, physicsManager: PhysicsManager) {
         self._scene = scene
         self._physicsManager = physicsManager
+        
         _node = SKSpriteNode(imageNamed: "player")
+        _node.zPosition = Z.PLAYER
         
         _initPlayerNode()
     }
@@ -65,7 +71,7 @@ class Player {
     
     private func _setPhysicsBody() {
         _node.physicsBody = SKPhysicsBody(circleOfRadius: _node.size.width/2)
-        _node.physicsBody!.contactTestBitMask = PhysicsManager.bodies.player | PhysicsManager.bodies.wheel
+        _node.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL
         
         _node.physicsBody!.usesPreciseCollisionDetection = true
         _node.physicsBody!.restitution = 0
