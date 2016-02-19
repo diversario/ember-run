@@ -16,16 +16,23 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         static let walls: UInt32 = 0x1 << 2
     }
     
-    let scene: SKScene
+    private let _scene: SKScene
+    private var _joint: SKPhysicsJoint!
     
-    var joint: SKPhysicsJoint!
+    var isPlayerOnWheel: Bool {
+        return _joint != nil
+    }
+    
+    var wheel: SKSpriteNode? {
+        return _joint?.bodyB.node as? SKSpriteNode
+    }
     
     init(scene: SKScene) {
-        self.scene = scene
+        self._scene = scene
         super.init()
 
-        self.scene.physicsWorld.contactDelegate = self
-        self.scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2)
+        self._scene.physicsWorld.contactDelegate = self
+        self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -44,8 +51,8 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 w = contact.bodyA
             }
             
-            if joint != nil {
-                scene.physicsWorld.removeJoint(joint)
+            if _joint != nil {
+                _scene.physicsWorld.removeJoint(_joint)
             }
             
             let vectorToContactPoint = CGVector(
@@ -62,10 +69,15 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             
             p.node!.position = adjustedContactPoint
             
-            joint = SKPhysicsJointFixed.jointWithBodyA(p, bodyB: w, anchor: contact.contactPoint)
-            scene.physicsWorld.addJoint(joint)
+            _joint = SKPhysicsJointFixed.jointWithBodyA(p, bodyB: w, anchor: contact.contactPoint)
+            _scene.physicsWorld.addJoint(_joint)
             
             p.node!.constraints!.first!.enabled = true
         }
+    }
+    
+    func detachPlayerFromWheel() {
+        _scene.physicsWorld.removeJoint(_joint)
+        _joint = nil
     }
 }

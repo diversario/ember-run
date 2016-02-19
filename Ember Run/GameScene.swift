@@ -9,16 +9,16 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    var wallBuilder: WallBuilder!
-    var wheelPlacer: WheelPlacer!
-    var physicsMgr: PhysicsManager!
-    var player: Player!
+    private var _wallBuilder: WallBuilder!
+    private var _wheelPlacer: WheelPlacer!
+    private var _physicsMgr: PhysicsManager!
+    private var _player: Player!
     
     var LEFT_EDGE: CGFloat!
     var RIGHT_EDGE: CGFloat!
     
     override func didMoveToView(view: SKView) {
-        physicsMgr = PhysicsManager(scene: self)
+        _physicsMgr = PhysicsManager(scene: self)
         
         let cam = SKCameraNode()
         self.addChild(cam)
@@ -32,29 +32,29 @@ class GameScene: SKScene {
         
         self.camera!.constraints = [camConstraint]
         
-        wallBuilder = WallBuilder(scene: self)
-        wallBuilder.populateTiles()
+        _wallBuilder = WallBuilder(scene: self)
+        _wallBuilder.buildWalls()
         
-        wheelPlacer = WheelPlacer(scene: self)
+        _wheelPlacer = WheelPlacer(scene: self)
         
-        player = Player(scene: self, physicsManager: physicsMgr)
+        _player = Player(scene: self, physicsManager: _physicsMgr)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        player.onTap()
+        _player.onTap()
         
         for touch in touches {
             let location = touch.locationInNode(self)
-            player.positionPlayer(location)
+            _player.positionPlayer(location)
         }
     }
    
     override func update(currentTime: CFTimeInterval) {
-        self.camera!.position = player.node.position
+        self.camera!.position = _player.position
     }
     
     override func didApplyConstraints() {
-        wallBuilder.update()
-        wheelPlacer.update()
+        _wallBuilder.update()
+        _wheelPlacer.update()
     }
 }
