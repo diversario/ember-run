@@ -15,7 +15,7 @@ class WallBuilder {
         case RIGHT
     }
     
-    private let _scene: SKScene
+    private unowned let _scene: SKScene
     private let _frame_size: CGSize
     
     private var _tiles = [
@@ -31,6 +31,10 @@ class WallBuilder {
     init(scene: SKScene) {
         self._scene = scene
         _frame_size = scene.size
+    }
+    
+    deinit {
+        print("DEINIT WALLBUILDER")
     }
     
     func buildWalls () {

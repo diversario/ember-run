@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 
 class WheelPlacer {
-    private let _scene: SKScene
+    private unowned let _scene: SKScene
     private let _frame_size: CGSize
     private var _wheels = [SKNode]()
     
@@ -29,6 +29,10 @@ class WheelPlacer {
         _MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
         
         _randomRadius = GKRandomDistribution(lowestValue: _MIN_RADIUS, highestValue: _MAX_RADIUS)
+    }
+    
+    deinit {
+        print("DEINIT WHEELPLACER")
     }
     
     func update() {

@@ -16,7 +16,6 @@
 		200F49E11C6ED8C400A24A49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */; };
 		200F49EC1C6ED8C400A24A49 /* Ember_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49EB1C6ED8C400A24A49 /* Ember_RunTests.swift */; };
 		200F49F71C6ED8C400A24A49 /* Ember_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */; };
-		200F4A051C6EE41100A24A49 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A041C6EE41100A24A49 /* GameViewController.swift */; };
 		200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A281C6EF0D600A24A49 /* WallBuilder.swift */; };
 		200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */; };
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
@@ -60,7 +59,6 @@
 		200F49F21C6ED8C400A24A49 /* Ember RunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ember RunUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ember_RunUITests.swift; sourceTree = "<group>"; };
 		200F49F81C6ED8C400A24A49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		200F4A041C6EE41100A24A49 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		200F4A281C6EF0D600A24A49 /* WallBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallBuilder.swift; sourceTree = "<group>"; };
 		200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPlacer.swift; sourceTree = "<group>"; };
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				200F49D81C6ED8C400A24A49 /* HomeViewController.swift */,
-				200F4A041C6EE41100A24A49 /* GameViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 				200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */,
 				20B66E321C75540C0062AA16 /* Util.swift in Sources */,
 				200F4A311C727D5C00A24A49 /* Player.swift in Sources */,
-				200F4A051C6EE41100A24A49 /* GameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,23 @@ import SpriteKit
 
 class HomeViewController: UIViewController {
     @IBAction func onStartButton(sender: UIButton) {
-        performSegueWithIdentifier("GameVC", sender: nil) // fix this to make pretty transition
+        if let scene = GameScene(fileNamed:"GameScene") {
+            let skView = SKView(frame: self.view.frame)
+            
+            skView.showsFPS = true
+            skView.showsNodeCount = true
+            skView.showsPhysics = false
+            
+            /* Sprite Kit applies additional optimizations to improve rendering performance */
+            skView.ignoresSiblingOrder = true
+            
+            /* Set the scale mode to scale to fit the window */
+            scene.scaleMode = .AspectFill
+            scene.size = skView.frame.size
+            
+            self.view.addSubview(skView)
+            skView.presentScene(scene)
+        }
     }
 
     @IBAction func onSettingsButton(sender: UIButton) {
@@ -19,8 +35,13 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("DID LOAD")
     }
 
+    override func viewWillAppear(animated: Bool) {
+        print("WILL APPEAR")
+    }    
+    
     override func shouldAutorotate() -> Bool {
         return true
     }

@@ -11,14 +11,18 @@ import SpriteKit
 
 class Water {
     private var _node: SKSpriteNode!
-    private var _scene: GameScene!
+    private unowned var _scene: GameScene
     
     init (scene: GameScene) {
         _scene = scene
         
         _initNode()
     }
-
+    
+    deinit {
+        print("DEINIT WATER")
+    }
+    
     private func _initNode () {
         _node = SKSpriteNode(imageNamed: "water1")
         _node.zPosition = Z.WATER

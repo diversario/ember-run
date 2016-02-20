@@ -16,11 +16,11 @@
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
                     </layoutGuides>
-                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main screen bg" translatesAutoresizingMaskIntoConstraints="NO" id="lVD-WS-25i">
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main screen bg" translatesAutoresizingMaskIntoConstraints="NO" id="lVD-WS-25i">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lVD-WS-25i" secondAttribute="height" multiplier="311:552" id="apA-yj-gzb"/>

@@ -10,9 +10,9 @@ import Foundation
 import SpriteKit
 
 class Player {
-    private let _scene: GameScene
+    private unowned let _scene: GameScene
     private let _node: SKSpriteNode
-    private let _physicsManager: PhysicsManager
+    private unowned let _physicsManager: PhysicsManager
     private var _positioned = false
     private var _health = 100
     private var _isDying = false
@@ -36,6 +36,10 @@ class Player {
         _node = SKSpriteNode(imageNamed: "player")
         _node.zPosition = Z.PLAYER
 
+    }
+    
+    deinit {
+        print("DEINIT PLAYER")
     }
     
     func positionPlayer(pos: CGPoint) {
@@ -148,6 +152,10 @@ class Player {
     }
     
     private func _startDecreasingHealth() {
+        if _health <= 0 {
+            return
+        }
+        
         let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000)
         let time = dispatch_time(DISPATCH_TIME_NOW, delta)
         

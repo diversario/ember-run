@@ -72,6 +72,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HomeViewController.viewDidLoad() -&gt; ():HomeViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "Player.onTap() -&gt; ():Player.swift">
          <PersistentStrings>
             <PersistentString

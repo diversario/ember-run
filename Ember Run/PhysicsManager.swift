@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class PhysicsManager: NSObject, SKPhysicsContactDelegate {
-    private let _scene: GameScene!
+    private unowned let _scene: GameScene
     private var _joint: SKPhysicsJoint!
     
     var isPlayerOnWheel: Bool {
@@ -28,6 +28,10 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
 
         self._scene.physicsWorld.contactDelegate = self
         self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2)
+    }
+    
+    deinit {
+        print("DEINIT PHYSICS MANAGER")
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -61,7 +65,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
 
             player.node!.constraints!.first!.enabled = true
         } else if mask == BODY.WATER | BODY.PLAYER {
-            _scene.player.startDying()
+            _scene.player?.startDying()
         }
     }
     
@@ -69,7 +73,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         let mask = contact.bodyA.contactTestBitMask & contact.bodyB.contactTestBitMask
         
         if mask == BODY.WATER | BODY.PLAYER {
-            _scene.player.stopDying()
+            _scene.player?.stopDying()
         }
     }
     
