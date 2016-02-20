@@ -10,18 +10,19 @@ import Foundation
 import SpriteKit
 
 class PhysicsManager: NSObject, SKPhysicsContactDelegate {
-    private let _scene: SKScene
+    private let _scene: GameScene!
     private var _joint: SKPhysicsJoint!
     
     var isPlayerOnWheel: Bool {
         return _joint != nil
     }
     
+    
     var wheel: SKSpriteNode? {
         return _joint?.bodyB.node as? SKSpriteNode
     }
     
-    init(scene: SKScene) {
+    init(scene: GameScene) {
         self._scene = scene
         super.init()
 
@@ -30,48 +31,65 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        let a = contact.bodyA
-        let b = contact.bodyB
+        let (player, other) = _getBodies(contact)
         
-        if a.contactTestBitMask & b.contactTestBitMask == BODY.WHEEL | BODY.PLAYER {
-            let p: SKPhysicsBody!
-            let w: SKPhysicsBody!
-            
-            if contact.bodyA.node?.name == "player" {
-                p = contact.bodyA
-                w = contact.bodyB
-            } else {
-                p = contact.bodyB
-                w = contact.bodyA
-            }
+        let mask = player.contactTestBitMask & other.contactTestBitMask
+        
+        if mask == BODY.WHEEL | BODY.PLAYER {
+            let wheel = other
             
             if _joint != nil {
                 _scene.physicsWorld.removeJoint(_joint)
             }
             
             let vectorToContactPoint = CGVector(
-                dx: contact.contactPoint.x - w.node!.position.x,
-                dy: contact.contactPoint.y - w.node!.position.y
+                dx: contact.contactPoint.x - wheel.node!.position.x,
+                dy: contact.contactPoint.y - wheel.node!.position.y
             )
             
             let normalizedVTCP = normalizeVector(vectorToContactPoint)
-            
+        
             let adjustedContactPoint = CGPoint(
                 x: contact.contactPoint.x + 8*normalizedVTCP.dx,
                 y: contact.contactPoint.y + 8*normalizedVTCP.dy
             )
             
-            p.node!.position = adjustedContactPoint
+            player.node!.position = adjustedContactPoint
             
-            _joint = SKPhysicsJointFixed.jointWithBodyA(p, bodyB: w, anchor: contact.contactPoint)
+            _joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheel, anchor: contact.contactPoint)
             _scene.physicsWorld.addJoint(_joint)
-            
-            p.node!.constraints!.first!.enabled = true
+
+            player.node!.constraints!.first!.enabled = true
+        } else if mask == BODY.WATER | BODY.PLAYER {
+            _scene.player.startDying()
+        }
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        let mask = contact.bodyA.contactTestBitMask & contact.bodyB.contactTestBitMask
+        
+        if mask == BODY.WATER | BODY.PLAYER {
+            _scene.player.stopDying()
         }
     }
     
     func detachPlayerFromWheel() {
         _scene.physicsWorld.removeJoint(_joint)
         _joint = nil
+    }
+    
+    private func _getBodies (contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {
+        let p: SKPhysicsBody!
+        let w: SKPhysicsBody!
+        
+        if contact.bodyA.node?.name == "player" {
+            p = contact.bodyA
+            w = contact.bodyB
+        } else {
+            p = contact.bodyB
+            w = contact.bodyA
+        }
+        
+        return (p, w)
     }
 }

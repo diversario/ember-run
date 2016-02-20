@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class Water {
-    private var _node: SKNode!
+    private var _node: SKSpriteNode!
     private var _scene: GameScene!
     
     init (scene: GameScene) {
@@ -23,13 +23,23 @@ class Water {
         _node = SKSpriteNode(imageNamed: "water1")
         _node.zPosition = Z.WATER
         
-        _node.position.x = _scene.LEFT_EDGE + _node.frame.width / 2
+        _node.position.x = _scene.LEFT_EDGE + _node.frame.width / 2 + 20
         _node.position.y = _scene.camera!.position.y - _scene.size.height/2
         
         _node.alpha = 0.5
         
         _node.physicsBody = SKPhysicsBody(rectangleOfSize: _node.frame.size)
         _node.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WATER
+        _node.physicsBody!.collisionBitMask = 0
+        _node.physicsBody!.categoryBitMask = CAT.WATER
+        _node.physicsBody!.dynamic = false
+        
+//        let shader = SKShader(fileNamed: "shader_water.fsh")
+//        shader.uniforms = [
+//            SKUniform(name: "size", floatVector3: GLKVector3Make(Float(_scene.frame.size.width), Float(_scene.frame.size.height), 0))
+//        ]
+//        
+//        _node.shader = shader
     }
     
     func addToScene () {

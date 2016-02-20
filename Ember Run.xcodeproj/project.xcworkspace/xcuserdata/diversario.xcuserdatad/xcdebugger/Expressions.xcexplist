@@ -31,10 +31,10 @@
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "contact.bodyA.node?.name">
+               value = "p.node!.constraints">
             </PersistentString>
             <PersistentString
-               value = "p.node!.constraints">
+               value = "contact.bodyA.node?.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -64,6 +64,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Water.(_initNode in _2F5DD9E5F6B9A6D7D871EEF6B7C6471D)() -&gt; ():Water.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "0b1000">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Player.onTap() -&gt; ():Player.swift">
          <PersistentStrings>
             <PersistentString
@@ -71,6 +79,14 @@
             </PersistentString>
             <PersistentString
                value = "node.position">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Player.(getJumpVector in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; CGVector?:Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_node.parent!.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

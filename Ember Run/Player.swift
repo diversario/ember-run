@@ -14,6 +14,8 @@ class Player {
     private let _node: SKSpriteNode
     private let _physicsManager: PhysicsManager
     private var _positioned = false
+    private var _health = 100
+    private var _isDying = false
     
     var position: CGPoint {
         return _node.position
@@ -23,19 +25,25 @@ class Player {
         return _node.physicsBody!.velocity
     }
     
+    var health: Int {
+        return _health
+    }
+    
     init(scene: GameScene, physicsManager: PhysicsManager) {
         self._scene = scene
         self._physicsManager = physicsManager
         
         _node = SKSpriteNode(imageNamed: "player")
         _node.zPosition = Z.PLAYER
-        
-        _initPlayerNode()
+
     }
     
     func positionPlayer(pos: CGPoint) {
         if !_positioned {
             _node.position = pos
+            
+            _initPlayerNode()
+            
             _scene.addChild(_node)
             _positioned = true
         }
@@ -71,11 +79,11 @@ class Player {
     
     private func _setPhysicsBody() {
         _node.physicsBody = SKPhysicsBody(circleOfRadius: _node.size.width/2)
-        _node.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL
+        _node.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL | BODY.WATER
+        _node.physicsBody!.collisionBitMask = BODY.PLAYER | BODY.WHEEL
+        _node.physicsBody!.categoryBitMask = CAT.PLAYER
         
         _node.physicsBody!.usesPreciseCollisionDetection = true
-        _node.physicsBody!.restitution = 0
-        _node.physicsBody!.linearDamping = 0.3
     }
     
     private func getJumpVector () -> CGVector? {
@@ -109,5 +117,47 @@ class Player {
     private func _isOnTheWall () -> Bool {
         return _node.position.x <= (_scene.LEFT_EDGE + _node.size.width / 2) ||
                _node.position.x >= (_scene.RIGHT_EDGE - _node.size.width / 2)
+    }
+    
+    private func _isOnWheel () -> Bool {
+        if let name = _node.parent?.name {
+            return name.containsString("wheel")
+        }
+        
+        return false
+    }
+    
+    func startDying () {
+        _node.runAction(_getDecreaseHealthAction())
+    }
+    
+    func stopDying () {
+        _node.removeAllActions()
+        _isDying = false
+    }
+    
+    private func _getDecreaseHealthAction () -> SKAction {
+        let wait = SKAction.waitForDuration(0.7)
+        
+        let decreaseHealth = SKAction.runBlock { _ in
+            self._isDying = true
+            self._startDecreasingHealth()
+        }
+        
+        return SKAction.sequence([wait, decreaseHealth])
+    }
+    
+    private func _startDecreasingHealth() {
+        let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000)
+        let time = dispatch_time(DISPATCH_TIME_NOW, delta)
+        
+        dispatch_after(time, dispatch_get_main_queue(), {
+            self._health--
+            print("DIE!!!!!!!", self.health)
+            
+            if self._isDying {
+                self._startDecreasingHealth()
+            }
+        });
     }
 }

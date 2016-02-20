@@ -50,8 +50,9 @@ class WheelPlacer {
         wheel.physicsBody!.affectedByGravity = false
         wheel.physicsBody!.dynamic = false
         wheel.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL
+        wheel.physicsBody!.collisionBitMask = BODY.PLAYER | BODY.WHEEL
+        wheel.physicsBody!.categoryBitMask = CAT.WHEEL
         wheel.physicsBody!.usesPreciseCollisionDetection = true
-        wheel.physicsBody!.restitution = 0
         
         wheel.name = "wheel\(_wheels.count)"
         

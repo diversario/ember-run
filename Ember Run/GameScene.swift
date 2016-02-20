@@ -18,6 +18,10 @@ class GameScene: SKScene {
     var LEFT_EDGE: CGFloat!
     var RIGHT_EDGE: CGFloat!
     
+    var player: Player {
+        return _player
+    }
+    
     override func didMoveToView(view: SKView) {
         _physicsMgr = PhysicsManager(scene: self)
         
@@ -55,6 +59,10 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         _followPlayer()
+        
+        if _isPlayerDead() {
+            
+        }
     }
     
     override func didApplyConstraints() {
@@ -77,5 +85,9 @@ class GameScene: SKScene {
         } else if _player.position.y > top_threshold {
             camera!.position.y += 5
         }
+    }
+    
+    private func _isPlayerDead () -> Bool {
+        return _player.health <= 0
     }
 }

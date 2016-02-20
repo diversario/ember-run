@@ -23,6 +23,7 @@
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		200F4A311C727D5C00A24A49 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A301C727D5C00A24A49 /* Player.swift */; };
 		209C60471C76F794002816C3 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209C60461C76F794002816C3 /* Water.swift */; };
+		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
 		20B66E321C75540C0062AA16 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B66E311C75540C0062AA16 /* Util.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		200F4A301C727D5C00A24A49 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		209C60461C76F794002816C3 /* Water.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
+		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
 		20B66E311C75540C0062AA16 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +185,7 @@
 			children = (
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
 				20B66E311C75540C0062AA16 /* Util.swift */,
+				209C60481C77C163002816C3 /* shader_water.fsh */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				200F49E11C6ED8C400A24A49 /* LaunchScreen.storyboard in Resources */,
 				200F49DE1C6ED8C400A24A49 /* Assets.xcassets in Resources */,
 				200F49DC1C6ED8C400A24A49 /* Main.storyboard in Resources */,
+				209C60491C77C163002816C3 /* shader_water.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

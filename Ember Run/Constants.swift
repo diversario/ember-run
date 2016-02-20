@@ -22,3 +22,9 @@ struct BODY {
     static let PLAYER: UInt32 = 0x1 << 1
     static let WATER: UInt32 = 0x1 << 2
 }
+
+struct CAT {
+    static let WHEEL: UInt32 = 0x1 << 0
+    static let PLAYER: UInt32 = 0x1 << 1
+    static let WATER: UInt32 = 0x1 << 2
+}
