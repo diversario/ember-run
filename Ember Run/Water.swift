@@ -38,6 +38,15 @@ class Water {
         _node.physicsBody!.categoryBitMask = CAT.WATER
         _node.physicsBody!.dynamic = false
         
+        let textures = [
+            SKTexture(imageNamed: "water1"),
+            SKTexture(imageNamed: "water2")
+        ]
+        
+        let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.3)
+        
+        _node.runAction(SKAction.repeatActionForever(animation))
+        
 //        let shader = SKShader(fileNamed: "shader_water.fsh")
 //        shader.uniforms = [
 //            SKUniform(name: "size", floatVector3: GLKVector3Make(Float(_scene.frame.size.width), Float(_scene.frame.size.height), 0))

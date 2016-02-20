@@ -23,6 +23,8 @@
 		200F4A311C727D5C00A24A49 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A301C727D5C00A24A49 /* Player.swift */; };
 		209C60471C76F794002816C3 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209C60461C76F794002816C3 /* Water.swift */; };
 		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
+		209C606D1C7849DD002816C3 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 209C606C1C7849DD002816C3 /* GameOver.sks */; };
+		209C606F1C784AAE002816C3 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209C606E1C784AAE002816C3 /* GameOver.swift */; };
 		20B66E321C75540C0062AA16 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B66E311C75540C0062AA16 /* Util.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		200F4A301C727D5C00A24A49 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		209C60461C76F794002816C3 /* Water.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
 		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
+		209C606C1C7849DD002816C3 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		209C606E1C784AAE002816C3 /* GameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
 		20B66E311C75540C0062AA16 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				200F49D61C6ED8C400A24A49 /* GameScene.swift */,
+				209C606E1C784AAE002816C3 /* GameOver.swift */,
 				200F4A281C6EF0D600A24A49 /* WallBuilder.swift */,
 				200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */,
 				200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */,
@@ -171,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				200F49D41C6ED8C400A24A49 /* GameScene.sks */,
+				209C606C1C7849DD002816C3 /* GameOver.sks */,
 				200F49DA1C6ED8C400A24A49 /* Main.storyboard */,
 				200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */,
 			);
@@ -295,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				200F49D51C6ED8C400A24A49 /* GameScene.sks in Resources */,
+				209C606D1C7849DD002816C3 /* GameOver.sks in Resources */,
 				200F49E11C6ED8C400A24A49 /* LaunchScreen.storyboard in Resources */,
 				200F49DE1C6ED8C400A24A49 /* Assets.xcassets in Resources */,
 				200F49DC1C6ED8C400A24A49 /* Main.storyboard in Resources */,
@@ -330,6 +337,7 @@
 				200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */,
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
 				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
+				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,
 				200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */,
 				20B66E321C75540C0062AA16 /* Util.swift in Sources */,
 				200F4A311C727D5C00A24A49 /* Player.swift in Sources */,

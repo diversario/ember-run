@@ -85,30 +85,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <connections>
-                        <segue destination="ga0-Ub-ZsL" kind="showDetail" identifier="GameVC" animates="NO" id="Bl0-PF-4gC"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-        </scene>
-        <!--Game View Controller-->
-        <scene sceneID="jN5-QU-ksC">
-            <objects>
-                <viewController id="ga0-Ub-ZsL" customClass="GameViewController" customModule="Ember_Run" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2lC-n3-f3g"/>
-                        <viewControllerLayoutGuide type="bottom" id="oHw-eP-wm7"/>
-                    </layoutGuides>
-                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="uTW-xD-HPp" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Pv-ba-WEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1430" y="400"/>
         </scene>
     </scenes>
     <resources>

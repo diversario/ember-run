@@ -15,6 +15,8 @@ class GameScene: SKScene {
     private var _physicsMgr: PhysicsManager?
     private var _player: Player?
     
+    private var _gameOverCalled = false
+    
     var LEFT_EDGE: CGFloat!
     var RIGHT_EDGE: CGFloat!
     
@@ -60,7 +62,7 @@ class GameScene: SKScene {
         _physicsMgr = nil
         _player = nil
         
-        view.removeFromSuperview()
+        //view.removeFromSuperview()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -76,8 +78,7 @@ class GameScene: SKScene {
         _followPlayer()
         
         if _isPlayerDead() {
-            //view!.removeFromSuperview()
-            view!.presentScene(nil)
+            _gameOver()
         }
     }
     
@@ -108,5 +109,26 @@ class GameScene: SKScene {
     
     private func _isPlayerDead () -> Bool {
         return _player?.health <= 0
+    }
+    
+    private func _gameOver () {
+        if _gameOverCalled {
+            return
+        }
+        
+        _gameOverCalled = true
+        
+        if let gameOver = GameOver(fileNamed: "GameOver") {
+            gameOver.scaleMode = .AspectFill
+            gameOver.size = self.view!.frame.size
+            
+            // broken in 9.2
+//            let transition = SKTransition.crossFadeWithDuration(1)
+//            view!.presentScene(gameOver, transition: transition)
+            
+            self.runAction(SKAction.fadeOutWithDuration(0.5)) {
+                self.view!.presentScene(gameOver)
+            }
+        }
     }
 }
