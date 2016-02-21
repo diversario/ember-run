@@ -61,8 +61,6 @@ class GameScene: SKScene {
         _water = nil
         _physicsMgr = nil
         _player = nil
-        
-        //view.removeFromSuperview()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

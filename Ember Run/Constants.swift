@@ -28,3 +28,5 @@ struct CAT {
     static let PLAYER: UInt32 = 0x1 << 1
     static let WATER: UInt32 = 0x1 << 2
 }
+
+let SCREEN_SCALE = UIScreen.mainScreen().scale

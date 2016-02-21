@@ -88,6 +88,11 @@ class Player {
         _node.physicsBody!.categoryBitMask = CAT.PLAYER
         
         _node.physicsBody!.usesPreciseCollisionDetection = true
+        
+        _node.physicsBody!.mass = 0.007854
+        
+        _node.physicsBody!.linearDamping = 0.2
+        _node.physicsBody!.angularDamping = 0.2
     }
     
     private func getJumpVector () -> CGVector? {
@@ -119,8 +124,11 @@ class Player {
     }
     
     private func _isOnTheWall () -> Bool {
-        return _node.position.x <= (_scene.LEFT_EDGE + _node.size.width / 2) ||
-               _node.position.x >= (_scene.RIGHT_EDGE - _node.size.width / 2)
+        let left_threshold = ceil(_scene.LEFT_EDGE + _node.size.width / 2)
+        let right_threshold = floor(_scene.RIGHT_EDGE - _node.size.width / 2)
+        
+        return ceil(_node.position.x) <= left_threshold ||
+               floor(_node.position.x) >= right_threshold
     }
     
     private func _isOnWheel () -> Bool {
@@ -152,18 +160,13 @@ class Player {
     }
     
     private func _startDecreasingHealth() {
-        if _health <= 0 {
-            return
-        }
-        
         let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000)
         let time = dispatch_time(DISPATCH_TIME_NOW, delta)
         
         dispatch_after(time, dispatch_get_main_queue(), {
             self._health--
-            print("DIE!!!!!!!", self.health)
             
-            if self._isDying {
+            if self._isDying && self._health > 0 {
                 self._startDecreasingHealth()
             }
         });

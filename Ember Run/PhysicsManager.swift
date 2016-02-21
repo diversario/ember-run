@@ -65,7 +65,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
 
             player.node!.constraints!.first!.enabled = true
         } else if mask == BODY.WATER | BODY.PLAYER {
-            _scene.player?.startDying()
+            _playerInWater(player)
         }
     }
     
@@ -95,5 +95,17 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         }
         
         return (p, w)
+    }
+    
+    private func _playerInWater (player: SKPhysicsBody) {
+        player.linearDamping = 1
+        player.angularDamping = 1
+        _scene.player?.startDying()
+    }
+    
+    private func _playerOutOfWater (player: SKPhysicsBody) {
+        player.linearDamping = 0.2
+        player.angularDamping = 0.2
+        _scene.player?.stopDying()
     }
 }
