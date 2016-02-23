@@ -89,7 +89,7 @@ class Player {
         
         _node.physicsBody!.usesPreciseCollisionDetection = true
         
-        _node.physicsBody!.mass = 0.007854
+        _node.physicsBody!.mass = 0.01 * SCREEN_SCALE
         
         _node.physicsBody!.linearDamping = 0.2
         _node.physicsBody!.angularDamping = 0.2
@@ -104,8 +104,9 @@ class Player {
             if let wheel = _physicsManager.wheel {
                 vector = CGVectorMake(playerCoords.x - wheel.position.x, playerCoords.y - wheel.position.y)
                 vector = normalizeVector(vector!)
-                vector!.dx *= 3
-                vector!.dy *= 3
+                
+                vector!.dx *= 4.5 * SCREEN_SCALE
+                vector!.dy *= 4.5 * SCREEN_SCALE
             }
         } else if _isOnTheWall() {
             if playerCoords.x < 0 { // it's on the left wall
@@ -116,8 +117,8 @@ class Player {
             
             vector = normalizeVector(vector!)
             
-            vector!.dx *= 2.5
-            vector!.dy *= 2.5
+            vector!.dx *= 4 * SCREEN_SCALE
+            vector!.dy *= 4 * SCREEN_SCALE
         }
         
         return vector

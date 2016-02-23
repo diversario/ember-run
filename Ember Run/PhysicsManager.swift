@@ -27,7 +27,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         super.init()
 
         self._scene.physicsWorld.contactDelegate = self
-        self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2)
+        self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2 * SCREEN_SCALE)
     }
     
     deinit {

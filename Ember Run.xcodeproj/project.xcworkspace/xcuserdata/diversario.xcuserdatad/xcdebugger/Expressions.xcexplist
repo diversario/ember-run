@@ -3,29 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "WheelPlacer.update() -&gt; ():WheelPlacer.swift">
+         contextName = "Player.(_setPhysicsBody in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; ():Player.swift">
          <PersistentStrings>
             <PersistentString
-               value = "scene.camera!.frame">
+               value = "_node.physicsBody!.mass">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GameScene.didMoveToView(SKView) -&gt; ():GameScene.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.frame">
-            </PersistentString>
-            <PersistentString
-               value = "self.size">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "WallBuilder.update() -&gt; ():WallBuilder.swift">
-      </ContextState>
-      <ContextState
-         contextName = "Player.getJumpVector() -&gt; CGVector:Player.swift">
       </ContextState>
       <ContextState
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
@@ -56,12 +39,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Player.getJumpVector() -&gt; CGVector?:Player.swift">
+         contextName = "Player.(getJumpVector in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; CGVector?:Player.swift">
          <PersistentStrings>
             <PersistentString
-               value = "physicsManager.joint">
+               value = "self._scene.frame">
+            </PersistentString>
+            <PersistentString
+               value = "_node.parent!.name">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.viewDidLoad() -&gt; ():HomeViewController.swift">
       </ContextState>
       <ContextState
          contextName = "Water.(_initNode in _2F5DD9E5F6B9A6D7D871EEF6B7C6471D)() -&gt; ():Water.swift">
@@ -72,7 +61,54 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeViewController.viewDidLoad() -&gt; ():HomeViewController.swift">
+         contextName = "Player.(_isOnTheWall in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; Bool:Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_node.size.width / 2">
+            </PersistentString>
+            <PersistentString
+               value = "_node.position.x">
+            </PersistentString>
+            <PersistentString
+               value = "_scene.LEFT_EDGE">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Player.getJumpVector() -&gt; CGVector?:Player.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "physicsManager.joint">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WallBuilder.update() -&gt; ():WallBuilder.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Player.getJumpVector() -&gt; CGVector:Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WheelPlacer.update() -&gt; ():WheelPlacer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scene.camera!.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.didMoveToView(SKView) -&gt; ():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.size">
+            </PersistentString>
+            <PersistentString
+               value = "UIScreen.mainScreen().scale">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "Player.onTap() -&gt; ():Player.swift">
@@ -82,14 +118,6 @@
             </PersistentString>
             <PersistentString
                value = "node.position">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Player.(getJumpVector in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; CGVector?:Player.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "_node.parent!.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
