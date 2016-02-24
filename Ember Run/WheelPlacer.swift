@@ -21,13 +21,13 @@ class WheelPlacer {
     private let _MIN_RADIUS: Int = 25
     private let _MAX_RADIUS: Int
     private let _MIN_DISTANCE: CGFloat = 20
-    private let _MAX_DISTANCE: CGFloat = 200
+    private let _MAX_DISTANCE: CGFloat// = 200
 
     init(scene: SKScene) {
         self._scene = scene
         _frame_size = scene.size
         _MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
-        
+        _MAX_DISTANCE = CGFloat(_MAX_RADIUS) * 1.2
         _randomRadius = GKRandomDistribution(lowestValue: _MIN_RADIUS, highestValue: _MAX_RADIUS)
     }
     

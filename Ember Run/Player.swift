@@ -105,20 +105,20 @@ class Player {
                 vector = CGVectorMake(playerCoords.x - wheel.position.x, playerCoords.y - wheel.position.y)
                 vector = normalizeVector(vector!)
                 
-                vector!.dx *= 4.5 * SCREEN_SCALE
-                vector!.dy *= 4.5 * SCREEN_SCALE
+                vector!.dx *= 3.5 * SCREEN_SCALE
+                vector!.dy *= 3.5 * SCREEN_SCALE
             }
         } else if _isOnTheWall() {
             if playerCoords.x < 0 { // it's on the left wall
-                vector = CGVectorMake(1, 1)
+                vector = CGVectorMake(1 * SCREEN_SCALE, 1 * SCREEN_SCALE)
             } else {
-                vector = CGVectorMake(-1, 1)
+                vector = CGVectorMake(-1 * SCREEN_SCALE, 1 * SCREEN_SCALE)
             }
             
             vector = normalizeVector(vector!)
             
-            vector!.dx *= 4 * SCREEN_SCALE
-            vector!.dy *= 4 * SCREEN_SCALE
+            vector!.dx *= 3 * SCREEN_SCALE
+            vector!.dy *= 3 * SCREEN_SCALE
         }
         
         return vector
