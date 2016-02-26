@@ -26,7 +26,7 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         _physicsMgr = PhysicsManager(scene: self)
-        
+
         let cam = SKCameraNode()
         self.addChild(cam)
         self.camera = cam

@@ -29,4 +29,6 @@ struct CAT {
     static let WATER: UInt32 = 0x1 << 2
 }
 
-let SCREEN_SCALE = CGFloat(UIScreen.mainScreen().scale == 2 ? 2 : 4)
+let SCREEN_SCALE = UIScreen.mainScreen().scale
+
+let IMPULSE_MULTIPLIER = UIScreen.mainScreen().bounds.width / 320

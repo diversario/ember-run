@@ -62,7 +62,7 @@ class Player {
             } else {
                 _setPhysicsBody()
             }
-            
+            print(SCREEN_SCALE, impulse!)
             _node.physicsBody?.applyImpulse(impulse!)
         }
     }
@@ -105,20 +105,20 @@ class Player {
                 vector = CGVectorMake(playerCoords.x - wheel.position.x, playerCoords.y - wheel.position.y)
                 vector = normalizeVector(vector!)
                 
-                vector!.dx *= 3.5 * SCREEN_SCALE
-                vector!.dy *= 3.5 * SCREEN_SCALE
+                vector!.dx *= 3.5 * SCREEN_SCALE * IMPULSE_MULTIPLIER
+                vector!.dy *= 3.5 * SCREEN_SCALE * IMPULSE_MULTIPLIER
             }
         } else if _isOnTheWall() {
             if playerCoords.x < 0 { // it's on the left wall
-                vector = CGVectorMake(1 * SCREEN_SCALE, 1 * SCREEN_SCALE)
+                vector = CGVectorMake(1 * SCREEN_SCALE * IMPULSE_MULTIPLIER, 1 * SCREEN_SCALE * IMPULSE_MULTIPLIER)
             } else {
-                vector = CGVectorMake(-1 * SCREEN_SCALE, 1 * SCREEN_SCALE)
+                vector = CGVectorMake(-1 * SCREEN_SCALE * IMPULSE_MULTIPLIER, 1 * SCREEN_SCALE * IMPULSE_MULTIPLIER)
             }
             
             vector = normalizeVector(vector!)
             
-            vector!.dx *= 3 * SCREEN_SCALE
-            vector!.dy *= 3 * SCREEN_SCALE
+            vector!.dx *= 4.2 * SCREEN_SCALE * IMPULSE_MULTIPLIER
+            vector!.dy *= 4.2 * SCREEN_SCALE * IMPULSE_MULTIPLIER
         }
         
         return vector
