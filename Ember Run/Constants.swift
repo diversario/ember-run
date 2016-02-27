@@ -32,3 +32,7 @@ struct CAT {
 let SCREEN_SCALE = UIScreen.mainScreen().scale
 
 let IMPULSE_MULTIPLIER = UIScreen.mainScreen().bounds.width / 320
+
+let distance = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale / 80
+
+let IMPULSE_COMP = sqrt(distance * SCREEN_SCALE) * sqrt(SCREEN_SCALE) * 1.45
