@@ -77,6 +77,7 @@ class WallBuilder {
         tile.size = _tile_size
         tile.position = placement
         tile.zPosition = Z.WALL
+        tile.alpha = 0.5
 
         self._scene.addChild(tile)
         

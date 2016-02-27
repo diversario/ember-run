@@ -53,8 +53,8 @@ class WheelPlacer {
         wheel.physicsBody = SKPhysicsBody(circleOfRadius: radius - 1)
         wheel.physicsBody!.affectedByGravity = false
         wheel.physicsBody!.dynamic = false
-        wheel.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL
-        wheel.physicsBody!.collisionBitMask = BODY.PLAYER | BODY.WHEEL
+        wheel.physicsBody!.contactTestBitMask = CONTACT_MASK.WHEEL
+        wheel.physicsBody!.collisionBitMask = COLLISION_MASK.WHEEL
         wheel.physicsBody!.categoryBitMask = CAT.WHEEL
         wheel.physicsBody!.usesPreciseCollisionDetection = true
         

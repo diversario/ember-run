@@ -27,14 +27,14 @@ class Water {
         _node = SKSpriteNode(imageNamed: "water1")
         _node.zPosition = Z.WATER
         
-        _node.position.x = _scene.LEFT_EDGE + _node.frame.width / 2 + 20
+        _node.position.x = _scene.LEFT_EDGE + _node.frame.width / 2
         _node.position.y = _scene.camera!.position.y - _scene.size.height/2
         
         _node.alpha = 0.5
         
         _node.physicsBody = SKPhysicsBody(rectangleOfSize: _node.frame.size)
-        _node.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WATER
-        _node.physicsBody!.collisionBitMask = 0
+        _node.physicsBody!.contactTestBitMask = CONTACT_MASK.WATER
+        _node.physicsBody!.collisionBitMask = COLLISION_MASK.WATER
         _node.physicsBody!.categoryBitMask = CAT.WATER
         _node.physicsBody!.dynamic = false
         

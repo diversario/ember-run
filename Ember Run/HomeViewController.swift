@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
             
             skView.showsFPS = true
             skView.showsNodeCount = true
-            skView.showsPhysics = false
+            skView.showsPhysics = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true

@@ -1,0 +1,23 @@
+iphone 4s:
+  wall edges: -128.5 128.5
+  screen: 320x480
+  scale: 2
+  wall impulse: CGVector(dx: -5.65685, dy: 5.65685)
+
+iphone 5:
+  wall edges: -128.5 128.5
+  screen: 320x568
+  scale: 2
+  wall impulse: CGVector(dx: -5.65685, dy: 5.65685)
+
+iphone 6:
+  wall edges: -156 156
+  scale: 2
+  screen: 375x667
+  wall impulse: CGVector(dx: -6.36396103067893, dy: 6.36396103067893)
+
+iphone 6+:
+  wall edges: -165.3 165.3
+  screen: 414x736
+  scale: 4
+  wall impulse: CGVector(dx: -18.3847763108502, dy: 18.3847763108502)

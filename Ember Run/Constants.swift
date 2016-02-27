@@ -17,22 +17,29 @@ struct Z {
     static let WATER: CGFloat = 400
 }
 
-struct BODY {
-    static let WHEEL: UInt32 = 0x1 << 0
-    static let PLAYER: UInt32 = 0x1 << 1
-    static let WATER: UInt32 = 0x1 << 2
-}
-
 struct CAT {
     static let WHEEL: UInt32 = 0x1 << 0
     static let PLAYER: UInt32 = 0x1 << 1
     static let WATER: UInt32 = 0x1 << 2
 }
 
+struct COLLISION_MASK {
+    static let WHEEL: UInt32 = 0
+    static let PLAYER: UInt32 = 0
+    static let WATER: UInt32 = 0
+}
+
+struct CONTACT_MASK {
+    static let WHEEL: UInt32 = 0
+    static let PLAYER: UInt32 = CAT.WHEEL | CAT.WATER
+    static let WATER: UInt32 = 0
+}
+
 let SCREEN_SCALE = UIScreen.mainScreen().scale
 
-let IMPULSE_MULTIPLIER = UIScreen.mainScreen().bounds.width / 320
+private let FAKE_PX_TO_M_RATIO: CGFloat = 80
 
-let distance = UIScreen.mainScreen().bounds.width * UIScreen.mainScreen().scale / 80
-
-let IMPULSE_COMP = sqrt(distance * SCREEN_SCALE) * sqrt(SCREEN_SCALE) * 1.45
+struct IMPULSE {
+    static let WALL = sqrt(UIScreen.mainScreen().bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.45
+    static let WHEEL = sqrt(UIScreen.mainScreen().bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.35
+}

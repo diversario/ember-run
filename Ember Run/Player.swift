@@ -21,8 +21,13 @@ class Player {
         return _node.position
     }
     
-    var velocity: CGVector {
-        return _node.physicsBody!.velocity
+    var velocity: CGVector? {
+        get {
+            return _node.physicsBody?.velocity
+        }
+        set {
+            _node.physicsBody?.velocity = newValue!
+        }
     }
     
     var health: Int {
@@ -83,16 +88,33 @@ class Player {
     
     private func _setPhysicsBody() {
         _node.physicsBody = SKPhysicsBody(circleOfRadius: _node.size.width/2)
-        _node.physicsBody!.contactTestBitMask = BODY.PLAYER | BODY.WHEEL | BODY.WATER
-        _node.physicsBody!.collisionBitMask = BODY.PLAYER | BODY.WHEEL
+        _node.physicsBody!.contactTestBitMask = CONTACT_MASK.PLAYER
+        _node.physicsBody!.collisionBitMask = COLLISION_MASK.PLAYER
         _node.physicsBody!.categoryBitMask = CAT.PLAYER
         
         _node.physicsBody!.usesPreciseCollisionDetection = true
         
         _node.physicsBody!.mass = 0.01 * SCREEN_SCALE
         
+        normalDamping()
+    }
+    
+    func highDamping () {
+        _node.physicsBody!.linearDamping = 1
+        _node.physicsBody!.angularDamping = 1
+    }
+    
+    func normalDamping () {
         _node.physicsBody!.linearDamping = 0.2
         _node.physicsBody!.angularDamping = 0.2
+    }
+
+    func reduceVelocity () {
+        _node.physicsBody!.velocity = CGVector(
+            dx: _node.physicsBody!.velocity.dx / 3,
+            dy: _node.physicsBody!.velocity.dy / 3
+        )
+
     }
     
     private func getJumpVector () -> CGVector? {
@@ -105,8 +127,8 @@ class Player {
                 vector = CGVectorMake(playerCoords.x - wheel.position.x, playerCoords.y - wheel.position.y)
                 vector = normalizeVector(vector!)
                 
-                vector!.dx *= IMPULSE_COMP
-                vector!.dy *= IMPULSE_COMP
+                vector!.dx *= IMPULSE.WHEEL
+                vector!.dy *= IMPULSE.WHEEL
             }
         } else if _isOnTheWall() {
             if playerCoords.x < 0 { // it's on the left wall
@@ -117,8 +139,8 @@ class Player {
             
             vector = normalizeVector(vector!)
 
-            vector!.dx *= IMPULSE_COMP
-            vector!.dy *= IMPULSE_COMP
+            vector!.dx *= IMPULSE.WALL
+            vector!.dy *= IMPULSE.WALL
         }
         
         return vector
