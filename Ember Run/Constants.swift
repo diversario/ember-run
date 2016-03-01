@@ -31,7 +31,7 @@ struct COLLISION_MASK {
 
 struct CONTACT_MASK {
     static let WHEEL: UInt32 = 0
-    static let PLAYER: UInt32 = CAT.WHEEL | CAT.WATER
+    static let PLAYER: UInt32 = CAT.WHEEL
     static let WATER: UInt32 = 0
 }
 
@@ -39,6 +39,7 @@ let SCREEN_SCALE = UIScreen.mainScreen().scale
 
 private let FAKE_PX_TO_M_RATIO: CGFloat = 80
 
+// http://formulas.tutorvista.com/physics/projectile-motion-formula.html
 struct IMPULSE {
     static let WALL = sqrt(UIScreen.mainScreen().bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.45
     static let WHEEL = sqrt(UIScreen.mainScreen().bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.35

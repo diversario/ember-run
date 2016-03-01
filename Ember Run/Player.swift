@@ -34,6 +34,10 @@ class Player {
         return _health
     }
     
+    var isDying: Bool {
+        return _isDying
+    }
+    
     init(scene: GameScene, physicsManager: PhysicsManager) {
         self._scene = scene
         self._physicsManager = physicsManager
@@ -100,21 +104,25 @@ class Player {
     }
     
     func highDamping () {
-        _node.physicsBody!.linearDamping = 1
-        _node.physicsBody!.angularDamping = 1
+        _node.physicsBody?.linearDamping = 1
+        _node.physicsBody?.angularDamping = 1
     }
     
     func normalDamping () {
-        _node.physicsBody!.linearDamping = 0.2
-        _node.physicsBody!.angularDamping = 0.2
+        _node.physicsBody?.linearDamping = 0.2
+        _node.physicsBody?.angularDamping = 0.2
     }
 
     func reduceVelocity () {
-        _node.physicsBody!.velocity = CGVector(
+        _node.physicsBody?.velocity = CGVector(
             dx: _node.physicsBody!.velocity.dx / 3,
             dy: _node.physicsBody!.velocity.dy / 3
         )
 
+    }
+    
+    func isInWater (water: Water) -> Bool {
+        return position.y < water.waterline
     }
     
     private func getJumpVector () -> CGVector? {
@@ -163,19 +171,25 @@ class Player {
     }
     
     func startDying () {
-        _node.runAction(_getDecreaseHealthAction())
+        if !self._isDying {
+            print("💀💀💀💀💀💀💀💀")
+            self._isDying = true
+            _node.runAction(_getDecreaseHealthAction())
+        }
     }
     
     func stopDying () {
-        _node.removeAllActions()
-        _isDying = false
+        if isDying {
+            _node.removeAllActions()
+            _isDying = false
+            print("😅😅😅😅😅😅😅😅😅😅")
+        }
     }
     
     private func _getDecreaseHealthAction () -> SKAction {
         let wait = SKAction.waitForDuration(0.7)
         
         let decreaseHealth = SKAction.runBlock { _ in
-            self._isDying = true
             self._startDecreasingHealth()
         }
         

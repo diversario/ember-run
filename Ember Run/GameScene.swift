@@ -73,7 +73,9 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        _followPlayer()
+        self._checkPlayerPosition()
+        
+         _followPlayer()
         
         if _isPlayerDead() {
             _gameOver()
@@ -128,5 +130,28 @@ class GameScene: SKScene {
                 self.view!.presentScene(gameOver)
             }
         }
+    }
+    
+    private func _checkPlayerPosition() {
+        if let player = player, water = _water, pm = _physicsMgr {
+            if player.isInWater(water) {
+                if !player.isDying {
+                    player.highDamping()
+                    player.reduceVelocity()
+                    
+                    pm.setInWaterGravity()
+                }
+                
+                player.startDying()
+            } else {
+                player.normalDamping()
+                
+                player.stopDying()
+                
+                pm.setNormalGravity()
+            }
+            
+        }
+
     }
 }

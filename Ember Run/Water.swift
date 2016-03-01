@@ -13,6 +13,10 @@ class Water {
     private var _node: SKSpriteNode!
     private unowned var _scene: GameScene
     
+    var waterline: CGFloat {
+        return _node.position.y + _node.size.height / 2
+    }
+    
     init (scene: GameScene) {
         _scene = scene
         
@@ -42,9 +46,9 @@ class Water {
             SKTexture(imageNamed: "water1"),
             SKTexture(imageNamed: "water2")
         ]
-        
+
         let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.3)
-        
+
         _node.runAction(SKAction.repeatActionForever(animation))
         
 //        let shader = SKShader(fileNamed: "shader_water.fsh")

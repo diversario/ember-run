@@ -28,7 +28,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
 
         self._scene.physicsWorld.contactDelegate = self
         
-        _setNormalGravity()
+        setNormalGravity()
     }
     
     deinit {
@@ -65,18 +65,6 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             _scene.physicsWorld.addJoint(_joint)
 
             player.node!.constraints!.first!.enabled = true
-        } else if mask == CAT.WATER {
-            _playerInWater(player)
-        }
-    }
-    
-    func didEndContact(contact: SKPhysicsContact) {
-        let (player, other) = _getBodies(contact)
-        
-        let mask = player.contactTestBitMask & other.categoryBitMask
-        
-        if mask == CAT.WATER {
-            _playerOutOfWater(player)
         }
     }
     
@@ -100,28 +88,11 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         return (p, w)
     }
     
-    private func _playerInWater (player: SKPhysicsBody) {
-        _scene.player?.highDamping()
-        _scene.player?.reduceVelocity()
-        
-        _setInWaterGravity()
-        
-        _scene.player?.startDying()
-    }
-    
-    private func _playerOutOfWater (player: SKPhysicsBody) {
-        _scene.player?.normalDamping()
-        
-        _scene.player?.stopDying()
-
-        _setNormalGravity()
-    }
-    
-    private func _setNormalGravity () {
+     func setNormalGravity () {
         self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2 * SCREEN_SCALE)
     }
     
-    private func _setInWaterGravity () {
+     func setInWaterGravity () {
         self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -0.5 * SCREEN_SCALE)
     }
 }
