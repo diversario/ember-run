@@ -28,7 +28,8 @@ class Water {
     }
     
     private func _initNode () {
-        _node = SKSpriteNode(imageNamed: "water1")
+        _node = SKSpriteNode.init(imageNamed: "water1")
+        _node.size = CGSize(width: _scene.frame.width - WALL_WIDTH * 2, height: _scene.frame.height)
         _node.zPosition = Z.WATER
         
         _node.position.x = _scene.LEFT_EDGE + _node.frame.width / 2
