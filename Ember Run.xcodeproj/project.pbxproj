@@ -21,6 +21,7 @@
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		200F4A311C727D5C00A24A49 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A301C727D5C00A24A49 /* Player.swift */; };
+		2069B6531C87EA9B00EB0188 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2069B6521C87EA9B00EB0188 /* README.md */; };
 		209C60471C76F794002816C3 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209C60461C76F794002816C3 /* Water.swift */; };
 		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
 		209C606D1C7849DD002816C3 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 209C606C1C7849DD002816C3 /* GameOver.sks */; };
@@ -66,6 +67,7 @@
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		200F4A301C727D5C00A24A49 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		2069B6521C87EA9B00EB0188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		209C60461C76F794002816C3 /* Water.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
 		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
 		209C606C1C7849DD002816C3 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		200F49C61C6ED8C300A24A49 = {
 			isa = PBXGroup;
 			children = (
+				2069B6521C87EA9B00EB0188 /* README.md */,
 				200F49D11C6ED8C400A24A49 /* Ember Run */,
 				200F49EA1C6ED8C400A24A49 /* Ember RunTests */,
 				200F49F51C6ED8C400A24A49 /* Ember RunUITests */,
@@ -336,6 +339,7 @@
 				200F49D91C6ED8C400A24A49 /* HomeViewController.swift in Sources */,
 				200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */,
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
+				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
 				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
 				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,
 				200F4A291C6EF0D600A24A49 /* WallBuilder.swift in Sources */,

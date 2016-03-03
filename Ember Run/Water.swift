@@ -29,11 +29,11 @@ class Water {
     
     private func _initNode () {
         _node = SKSpriteNode.init(imageNamed: "water1")
-        _node.size = CGSize(width: _scene.frame.width - WALL_WIDTH * 2, height: _scene.frame.height)
+        _node.size = CGSize(width: _scene.frame.width - WALL_WIDTH * 2, height: _scene.frame.height * 2)
         _node.zPosition = Z.WATER
         
         _node.position.x = _scene.LEFT_EDGE + _node.frame.width / 2
-        _node.position.y = _scene.camera!.position.y - _scene.size.height/2
+        _node.position.y = _scene.camera!.position.y - _scene.size.height * 2
         
         _node.alpha = 0.5
         
@@ -58,9 +58,19 @@ class Water {
 //        ]
 //        
 //        _node.shader = shader
+        
+        _movement()
     }
     
     func addToScene () {
         _scene.addChild(_node)
+    }
+    
+    private func _movement () {
+        let move = SKAction.moveBy(CGVector(dx: 0, dy: 100), duration: 1)
+        
+        _node.runAction(move) { () -> Void in
+            self._movement()
+        }
     }
 }
