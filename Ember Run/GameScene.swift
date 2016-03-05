@@ -75,6 +75,7 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         self._checkPlayerPosition()
         
+        _player?.syncParticles()
          _followPlayer()
         
         if _isPlayerDead() {

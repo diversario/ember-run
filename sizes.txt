@@ -4,6 +4,27 @@ iphone 4s:
   scale: 2
   wall impulse: CGVector(dx: -5.65685, dy: 5.65685)
 
+    v = sqrt(R*g / sin2a)
+    v = sqrt(320 * 2 * 2) / 1 = 35
+    v = sqrt(4.2 * 2) / 1 = 8.4
+
+    v = sqrt(x^2 * 2)
+    v^2 = x^2 * 2
+    v^2/2 = x^2
+    sqrt(v^2/2) = x
+
+    8.4 = sqrt(x^2 * 2)
+
+    70.56 = x^2 * 2
+    35 = x ^ 2
+
+    8 = sqrt(x^2 * 2)
+    64 = x^2 * 2
+    32 = x^2
+
+    R = v^2 * sin(2*a) / g
+    R = 7.9 * 1 / 2 = 3.95
+
 iphone 5:
   wall edges: -128.5 128.5
   screen: 320x568
@@ -21,3 +42,6 @@ iphone 6+:
   screen: 414x736
   scale: 4
   wall impulse: CGVector(dx: -18.3847763108502, dy: 18.3847763108502)
+
+  scale: 3
+  wall impulse: 3.0 CGVector(dx: 12.3036579926459, dy: 12.3036579926459)

@@ -17,6 +17,8 @@ class Player {
     private var _health = 100
     private var _isDying = false
     
+    private var _particleTrail: SKEmitterNode
+    
     var position: CGPoint {
         return _node.position
     }
@@ -45,6 +47,7 @@ class Player {
         _node = SKSpriteNode(imageNamed: "player")
         _node.zPosition = Z.PLAYER
 
+        _particleTrail = SKEmitterNode(fileNamed: "PlayerTrail")!
     }
     
     deinit {
@@ -76,6 +79,10 @@ class Player {
         }
     }
     
+    func syncParticles() {
+        _particleTrail.position = _node.position
+    }
+    
     private func _initPlayerNode() {
         _setPhysicsBody()
         
@@ -88,6 +95,10 @@ class Player {
             )
         )
         _node.constraints = [constr]
+
+        //_particleTrail.targetNode = _node
+        //_node.addChild(_particleTrail)
+        _scene.addChild(_particleTrail)
     }
     
     private func _setPhysicsBody() {
@@ -174,7 +185,7 @@ class Player {
         if !self._isDying {
             print("💀💀💀💀💀💀💀💀")
             self._isDying = true
-            _node.runAction(_getDecreaseHealthAction())
+            //_node.runAction(_getDecreaseHealthAction())
         }
     }
     
