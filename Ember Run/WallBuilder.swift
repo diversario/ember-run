@@ -19,11 +19,11 @@ class WallBuilder {
     private let _frame_size: CGSize
     
     private var _tiles = [
-        _WALL_SIDE.LEFT: [SKSpriteNode](),
-        _WALL_SIDE.RIGHT: [SKSpriteNode]()
+        _WALL_SIDE.LEFT: [WallTile](),
+        _WALL_SIDE.RIGHT: [WallTile]()
     ]
 
-    private let _tile_size = UIImage(named: "wall tile")!.size
+    private let _tile_size = WallTile.TILE_SIZE
     
     private var _left_edge: SKPhysicsBody!
     private var _right_edge: SKPhysicsBody!
@@ -72,12 +72,7 @@ class WallBuilder {
             placement.y = last_tile.position.y + _tile_size.height
         }
         
-        let tile = SKSpriteNode.init(imageNamed: "wall tile")
-        
-        tile.size = _tile_size
-        tile.position = placement
-        tile.zPosition = Z.WALL
-        tile.alpha = 0.5
+        let tile = WallTile(atPosition: placement)
 
         self._scene.addChild(tile)
         
