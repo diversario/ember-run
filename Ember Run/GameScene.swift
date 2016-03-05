@@ -94,18 +94,6 @@ class GameScene: SKScene {
         }
 
         return
-        
-        let bottom_edge = camera!.position.y - scene!.frame.size.height / 2
-        let top_edge = camera!.position.y + scene!.frame.size.height / 2
-        
-        let bottom_threshold = bottom_edge + (camera!.position.y - bottom_edge)/2
-        let top_threshold = top_edge - (top_edge - camera!.position.y)/2
-        
-        if _player?.position.y < bottom_threshold {
-            camera!.position.y -= 5
-        } else if _player?.position.y > top_threshold {
-            camera!.position.y += 5
-        }
     }
     
     private func _isPlayerDead () -> Bool {

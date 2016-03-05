@@ -13,22 +13,16 @@ import GameplayKit
 class WheelPlacer {
     private unowned let _scene: SKScene
     private let _frame_size: CGSize
-    private var _wheels = [SKNode]()
+    private var _wheels = [Wheel]()
     
-    private let _randomRadius: GKRandomDistribution!
-    private let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
-    
-    private let _MIN_RADIUS: Int = 25
-    private let _MAX_RADIUS: Int
     private let _MIN_DISTANCE: CGFloat = 20
     private let _MAX_DISTANCE: CGFloat// = 200
 
     init(scene: SKScene) {
         self._scene = scene
         _frame_size = scene.size
-        _MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
-        _MAX_DISTANCE = CGFloat(_MAX_RADIUS) * 1.2
-        _randomRadius = GKRandomDistribution(lowestValue: _MIN_RADIUS, highestValue: _MAX_RADIUS)
+        Wheel.MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
+        _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS) * 1.2
     }
     
     deinit {
@@ -43,29 +37,6 @@ class WheelPlacer {
         }
     }
     
-    private func _makeWheel () -> SKNode {
-        let radius = _getRandomRadius()
-        let wheel = SKSpriteNode(imageNamed: "wheel")
-
-        wheel.size = CGSize(width: radius * 2, height: radius * 2)
-        wheel.zPosition = Z.WHEEL
-        
-        wheel.physicsBody = SKPhysicsBody(circleOfRadius: radius - 1)
-        wheel.physicsBody!.affectedByGravity = false
-        wheel.physicsBody!.dynamic = false
-        wheel.physicsBody!.contactTestBitMask = CONTACT_MASK.WHEEL
-        wheel.physicsBody!.collisionBitMask = COLLISION_MASK.WHEEL
-        wheel.physicsBody!.categoryBitMask = CAT.WHEEL
-        wheel.physicsBody!.usesPreciseCollisionDetection = true
-        
-        wheel.name = "wheel\(_wheels.count)"
-        
-        let rotate = _getRandomRotationAction()
-        wheel.runAction(SKAction.repeatActionForever(rotate))
-        
-        return wheel
-    }
-    
     private func _placeWheel() -> SKNode {
         var last_wheel: SKNode?
         
@@ -73,7 +44,7 @@ class WheelPlacer {
             last_wheel = _last_wheel
         }
         
-        let wheel = _makeWheel()
+        let wheel = Wheel()
         
         let position = CGPoint(
             x: _getRandomX(wheel),
@@ -130,21 +101,6 @@ class WheelPlacer {
         
         return CGFloat(rand.nextInt())
     }
-
-    
-    private func _getRandomRadius () -> CGFloat {
-        return CGFloat(_randomRadius.nextInt())
-    }
-
-    private func _getRandomAngularSpeed() -> CGFloat {
-        return CGFloat(CGFloat(_randomAngularSpeed.nextInt()) / 10.0)
-    }
-    
-    private func _getRandomRotationAction() -> SKAction {
-        let angle = _getRandomAngularSpeed() * (randomBool.nextBool() ? 1 : -1)
-        return SKAction.rotateByAngle(angle, duration: 1)
-    }
-
     
     /**
     Calculates distance between edges of two circles on a line

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		20020A9D1C8A8E80002CE0A0 /* PlayerTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 20020A9B1C8A8E80002CE0A0 /* PlayerTrail.sks */; };
 		20020A9E1C8A8E80002CE0A0 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 20020A9C1C8A8E80002CE0A0 /* spark.png */; };
+		20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020A9F1C8B6627002CE0A0 /* Wheel.swift */; };
 		200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49D21C6ED8C400A24A49 /* AppDelegate.swift */; };
 		200F49D51C6ED8C400A24A49 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 200F49D41C6ED8C400A24A49 /* GameScene.sks */; };
 		200F49D71C6ED8C400A24A49 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49D61C6ED8C400A24A49 /* GameScene.swift */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		20020A9B1C8A8E80002CE0A0 /* PlayerTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerTrail.sks; sourceTree = "<group>"; };
 		20020A9C1C8A8E80002CE0A0 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		20020A9F1C8B6627002CE0A0 /* Wheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wheel.swift; sourceTree = "<group>"; };
 		200F49CF1C6ED8C300A24A49 /* Ember Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ember Run.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200F49D21C6ED8C400A24A49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200F49D41C6ED8C400A24A49 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				209C60461C76F794002816C3 /* Water.swift */,
 				20020A9B1C8A8E80002CE0A0 /* PlayerTrail.sks */,
 				20020A9C1C8A8E80002CE0A0 /* spark.png */,
+				20020A9F1C8B6627002CE0A0 /* Wheel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				200F49D91C6ED8C400A24A49 /* HomeViewController.swift in Sources */,
 				200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */,
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
+				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
 				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
 				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
 				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,
