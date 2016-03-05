@@ -1,5 +1,5 @@
 //
-//  WallBuilder.swift
+//  Wall.swift
 //  Ember Run
 //
 //  Created by Ilya Shaisultanov on 2/12/16.
@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class WallBuilder {
+class Wall {
     private enum _WALL_SIDE {
         case LEFT
         case RIGHT

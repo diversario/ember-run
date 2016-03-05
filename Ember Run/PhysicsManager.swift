@@ -18,8 +18,8 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         return _joint != nil
     }
     
-    var wheel: SKSpriteNode? {
-        return _joint?.bodyB.node as? SKSpriteNode
+    var wheel: Wheel? {
+        return _joint?.bodyB.node as? Wheel
     }
     
     init(scene: GameScene) {

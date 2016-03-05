@@ -2,33 +2,31 @@
 //  Player.swift
 //  Ember Run
 //
-//  Created by Ilya Shaisultanov on 2/15/16.
+//  Created by Ilya Shaisultanov on 3/5/16.
 //  Copyright © 2016 Ilya Shaisultanov. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class Player {
+class Player: SKSpriteNode {
+    private static let Texture = SKTexture(imageNamed: "player")
+
     private unowned let _scene: GameScene
-    private let _node: SKSpriteNode
     private unowned let _physicsManager: PhysicsManager
+    
     private var _positioned = false
     private var _health = 100
     private var _isDying = false
     
-    private var _particleTrail: SKEmitterNode
-    
-    var position: CGPoint {
-        return _node.position
-    }
+    private var _particleTrail = SKEmitterNode(fileNamed: "PlayerTrail")!
     
     var velocity: CGVector? {
         get {
-            return _node.physicsBody?.velocity
+            return physicsBody?.velocity
         }
         set {
-            _node.physicsBody?.velocity = newValue!
+            physicsBody?.velocity = newValue!
         }
     }
     
@@ -40,30 +38,41 @@ class Player {
         return _isDying
     }
     
-    init(scene: GameScene, physicsManager: PhysicsManager) {
-        self._scene = scene
-        self._physicsManager = physicsManager
+    init (scene: GameScene, physicsManager: PhysicsManager) {
+        _scene = scene
+        _physicsManager = physicsManager
         
-        _node = SKSpriteNode(imageNamed: "player")
-        _node.zPosition = Z.PLAYER
-
-        _particleTrail = SKEmitterNode(fileNamed: "PlayerTrail")!
+        super.init(texture: Player.Texture, color: SKColor.clearColor(), size: Player.Texture.size())
+        
+        _setAttributes()
     }
     
     deinit {
         print("DEINIT PLAYER")
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        _scene = GameScene(fileNamed: "GameScene")!
+        _physicsManager = PhysicsManager(scene: _scene)
+        
+        super.init(coder: aDecoder)
+    }
+
+    private func _setAttributes () {
+        zPosition = Z.PLAYER
+    }
+    
     func positionPlayer(pos: CGPoint) {
         if !_positioned {
-            _node.position = pos
+            position = pos
             
             _initPlayerNode()
             
-            _scene.addChild(_node)
+            _scene.addChild(self)
             _positioned = true
         }
     }
+    
     
     func onTap () {
         let impulse = getJumpVector()
@@ -74,62 +83,64 @@ class Player {
             } else {
                 _setPhysicsBody()
             }
-
-            _node.physicsBody?.applyImpulse(impulse!)
+            
+            physicsBody?.applyImpulse(impulse!)
         }
     }
     
     func syncParticles() {
-        _particleTrail.position = _node.position
+        _particleTrail.position = position
     }
+    
     
     private func _initPlayerNode() {
         _setPhysicsBody()
         
-        _node.name = "player"
+        name = "player"
         
         let constr = SKConstraint.positionX(
             SKRange(
-                lowerLimit: _scene.LEFT_EDGE + _node.size.width / 2,
-                upperLimit: _scene.RIGHT_EDGE - _node.size.width / 2
+                lowerLimit: _scene.LEFT_EDGE + size.width / 2,
+                upperLimit: _scene.RIGHT_EDGE - size.width / 2
             )
         )
-        _node.constraints = [constr]
-
+        
+        constraints = [constr]
+        
         //_particleTrail.targetNode = _node
         //_node.addChild(_particleTrail)
         _scene.addChild(_particleTrail)
     }
     
     private func _setPhysicsBody() {
-        _node.physicsBody = SKPhysicsBody(circleOfRadius: _node.size.width/2)
-        _node.physicsBody!.contactTestBitMask = CONTACT_MASK.PLAYER
-        _node.physicsBody!.collisionBitMask = COLLISION_MASK.PLAYER
-        _node.physicsBody!.categoryBitMask = CAT.PLAYER
+        physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
+        physicsBody!.contactTestBitMask = CONTACT_MASK.PLAYER
+        physicsBody!.collisionBitMask = COLLISION_MASK.PLAYER
+        physicsBody!.categoryBitMask = CAT.PLAYER
         
-        _node.physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.usesPreciseCollisionDetection = true
         
-        _node.physicsBody!.mass = 0.01 * SCREEN_SCALE
+        physicsBody!.mass = 0.01 * SCREEN_SCALE
         
         normalDamping()
     }
     
     func highDamping () {
-        _node.physicsBody?.linearDamping = 1
-        _node.physicsBody?.angularDamping = 1
+        physicsBody?.linearDamping = 1
+        physicsBody?.angularDamping = 1
     }
     
     func normalDamping () {
-        _node.physicsBody?.linearDamping = 0.2
-        _node.physicsBody?.angularDamping = 0.2
+        physicsBody?.linearDamping = 0.2
+        physicsBody?.angularDamping = 0.2
     }
-
+    
     func reduceVelocity () {
-        _node.physicsBody?.velocity = CGVector(
-            dx: _node.physicsBody!.velocity.dx / 3,
-            dy: _node.physicsBody!.velocity.dy / 3
+        physicsBody?.velocity = CGVector(
+            dx: physicsBody!.velocity.dx / 3,
+            dy: physicsBody!.velocity.dy / 3
         )
-
+        
     }
     
     func isInWater (water: Water) -> Bool {
@@ -137,7 +148,7 @@ class Player {
     }
     
     private func getJumpVector () -> CGVector? {
-        let playerCoords = _node.position
+        let playerCoords = position
         
         var vector: CGVector?
         
@@ -157,7 +168,7 @@ class Player {
             }
             
             vector = normalizeVector(vector!)
-
+            
             vector!.dx *= IMPULSE.WALL
             vector!.dy *= IMPULSE.WALL
         }
@@ -166,15 +177,15 @@ class Player {
     }
     
     private func _isOnTheWall () -> Bool {
-        let left_threshold = ceil(_scene.LEFT_EDGE + _node.size.width / 2)
-        let right_threshold = floor(_scene.RIGHT_EDGE - _node.size.width / 2)
+        let left_threshold = ceil(_scene.LEFT_EDGE + size.width / 2)
+        let right_threshold = floor(_scene.RIGHT_EDGE - size.width / 2)
         
-        return ceil(_node.position.x) <= left_threshold ||
-               floor(_node.position.x) >= right_threshold
+        return ceil(position.x) <= left_threshold ||
+            floor(position.x) >= right_threshold
     }
     
     private func _isOnWheel () -> Bool {
-        if let name = _node.parent?.name {
+        if let name = parent?.name {
             return name.containsString("wheel")
         }
         
@@ -191,7 +202,7 @@ class Player {
     
     func stopDying () {
         if isDying {
-            _node.removeAllActions()
+            removeAllActions()
             _isDying = false
             print("😅😅😅😅😅😅😅😅😅😅")
         }

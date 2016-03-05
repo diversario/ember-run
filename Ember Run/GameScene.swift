@@ -9,7 +9,7 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    private var _wallBuilder: WallBuilder?
+    private var _wallBuilder: Wall?
     private var _wheelPlacer: WheelPlacer?
     private var _water: Water?
     private var _physicsMgr: PhysicsManager?
@@ -39,7 +39,7 @@ class GameScene: SKScene {
         
         self.camera!.constraints = [camConstraint]
         
-        _wallBuilder = WallBuilder(scene: self)
+        _wallBuilder = Wall(scene: self)
         _wallBuilder?.buildWalls()
         
         _wheelPlacer = WheelPlacer(scene: self)
