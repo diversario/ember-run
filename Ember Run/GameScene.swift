@@ -47,7 +47,7 @@ class GameScene: SKScene {
         _player = Player(scene: self, physicsManager: _physicsMgr!)
         
         _water = Water(scene: self)
-        _water?.addToScene()
+        addChild(_water!)
     }
     
     deinit {
