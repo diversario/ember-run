@@ -66,6 +66,8 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         _player?.onTap()
         
+
+        
         for touch in touches {
             let location = touch.locationInNode(self)
             _player?.positionPlayer(location)

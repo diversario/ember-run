@@ -34,7 +34,7 @@ class Wall {
     }
     
     deinit {
-        print("DEINIT WALLBUILDER")
+        print("DEINIT WALL")
     }
     
     func buildWalls () {

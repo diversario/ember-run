@@ -12,7 +12,7 @@ import SpriteKit
 class Water: SKSpriteNode {
     private unowned var _scene: GameScene
     
-    private static let Texture = SKTexture(imageNamed: "water 1")
+    private static let Texture = SKTexture(imageNamed: "water1")
     
     var waterline: CGFloat {
         return position.y + size.height / 2
