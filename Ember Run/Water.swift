@@ -45,12 +45,6 @@ class Water: SKSpriteNode {
         
         alpha = 0.5
         
-//        physicsBody = SKPhysicsBody(rectangleOfSize: _node.frame.size)
-//        physicsBody!.contactTestBitMask = CONTACT_MASK.WATER
-//        physicsBody!.collisionBitMask = COLLISION_MASK.WATER
-//        physicsBody!.categoryBitMask = CAT.WATER
-//        physicsBody!.dynamic = false
-        
         let textures = [
             SKTexture(imageNamed: "water1"),
             SKTexture(imageNamed: "water2")

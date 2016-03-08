@@ -25,9 +25,6 @@ class Wall {
 
     private let _tile_size = WallTile.TILE_SIZE
     
-    private var _left_edge: SKPhysicsBody!
-    private var _right_edge: SKPhysicsBody!
-    
     init(scene: SKScene) {
         self._scene = scene
         _frame_size = scene.size
