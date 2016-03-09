@@ -9,9 +9,9 @@
 import Foundation
 import SpriteKit
 
-class WallTile: SKSpriteNode {
+class WallTile: Tile {
     private static let Texture = SKTexture(imageNamed: "wall tile")
-    static let TILE_SIZE = WallTile.Texture.size()
+    override var TILE_SIZE: CGSize! = WallTile.Texture.size()
     
     convenience init(atPosition position: CGPoint) {
         self.init()

@@ -13,3 +13,4 @@ Copyright 2016 Ilya Shaisultanov.
 * make wheel radius distibution non-uniform
 * figure out good max distance between wheels
 * particles
+* parallax?
