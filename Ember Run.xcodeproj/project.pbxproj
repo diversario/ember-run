@@ -15,6 +15,8 @@
 		20020AA61C8CDF39002CE0A0 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AA51C8CDF39002CE0A0 /* Water.swift */; };
 		20020AA81C8E8734002CE0A0 /* Tiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AA71C8E8733002CE0A0 /* Tiler.swift */; };
 		20020AAA1C8FEE3E002CE0A0 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AA91C8FEE3E002CE0A0 /* Tile.swift */; };
+		20020AAC1C9140E3002CE0A0 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AAB1C9140E3002CE0A0 /* Wall.swift */; };
+		20020AAE1C914653002CE0A0 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AAD1C914653002CE0A0 /* Background.swift */; };
 		200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49D21C6ED8C400A24A49 /* AppDelegate.swift */; };
 		200F49D51C6ED8C400A24A49 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 200F49D41C6ED8C400A24A49 /* GameScene.sks */; };
 		200F49D71C6ED8C400A24A49 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49D61C6ED8C400A24A49 /* GameScene.swift */; };
@@ -24,7 +26,6 @@
 		200F49E11C6ED8C400A24A49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */; };
 		200F49EC1C6ED8C400A24A49 /* Ember_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49EB1C6ED8C400A24A49 /* Ember_RunTests.swift */; };
 		200F49F71C6ED8C400A24A49 /* Ember_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */; };
-		200F4A291C6EF0D600A24A49 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A281C6EF0D600A24A49 /* Wall.swift */; };
 		200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */; };
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
@@ -61,6 +62,8 @@
 		20020AA51C8CDF39002CE0A0 /* Water.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
 		20020AA71C8E8733002CE0A0 /* Tiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tiler.swift; sourceTree = "<group>"; };
 		20020AA91C8FEE3E002CE0A0 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		20020AAB1C9140E3002CE0A0 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		20020AAD1C914653002CE0A0 /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		200F49CF1C6ED8C300A24A49 /* Ember Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ember Run.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200F49D21C6ED8C400A24A49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200F49D41C6ED8C400A24A49 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -76,7 +79,6 @@
 		200F49F21C6ED8C400A24A49 /* Ember RunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ember RunUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ember_RunUITests.swift; sourceTree = "<group>"; };
 		200F49F81C6ED8C400A24A49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		200F4A281C6EF0D600A24A49 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPlacer.swift; sourceTree = "<group>"; };
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
@@ -182,10 +184,11 @@
 				20020A9C1C8A8E80002CE0A0 /* spark.png */,
 				20020A9F1C8B6627002CE0A0 /* Wheel.swift */,
 				20020AA11C8B8361002CE0A0 /* WallTile.swift */,
-				200F4A281C6EF0D600A24A49 /* Wall.swift */,
 				20020AA31C8B88F2002CE0A0 /* Player.swift */,
 				20020AA51C8CDF39002CE0A0 /* Water.swift */,
 				20020AA71C8E8733002CE0A0 /* Tiler.swift */,
+				20020AAB1C9140E3002CE0A0 /* Wall.swift */,
+				20020AAD1C914653002CE0A0 /* Background.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -358,17 +361,18 @@
 				200F49D91C6ED8C400A24A49 /* HomeViewController.swift in Sources */,
 				200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */,
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
+				20020AAE1C914653002CE0A0 /* Background.swift in Sources */,
 				20020AA81C8E8734002CE0A0 /* Tiler.swift in Sources */,
 				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
 				20020AA41C8B88F2002CE0A0 /* Player.swift in Sources */,
 				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
 				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
 				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,
-				200F4A291C6EF0D600A24A49 /* Wall.swift in Sources */,
 				20B66E321C75540C0062AA16 /* Util.swift in Sources */,
 				20020AAA1C8FEE3E002CE0A0 /* Tile.swift in Sources */,
 				20020AA61C8CDF39002CE0A0 /* Water.swift in Sources */,
 				20020AA21C8B8361002CE0A0 /* WallTile.swift in Sources */,
+				20020AAC1C9140E3002CE0A0 /* Wall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

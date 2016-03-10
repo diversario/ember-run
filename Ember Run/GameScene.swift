@@ -9,6 +9,7 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    private var _background: Background?
     private var _wallBuilder: Wall?
     private var _wheelPlacer: WheelPlacer?
     private var _water: Water?
@@ -47,6 +48,9 @@ class GameScene: SKScene {
         _player = Player(scene: self, physicsManager: _physicsMgr!)
         
         _water = Water(scene: self)
+        
+        _background = Background(scene: self)
+        
         addChild(_water!)
     }
     
@@ -65,8 +69,6 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         _player?.onTap()
-        
-
         
         for touch in touches {
             let location = touch.locationInNode(self)
@@ -88,6 +90,7 @@ class GameScene: SKScene {
     override func didApplyConstraints() {
         _wallBuilder?.update()
         _wheelPlacer?.update()
+        _background?.update()
     }
     
     private func _followPlayer() {

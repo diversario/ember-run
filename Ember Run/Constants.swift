@@ -15,6 +15,7 @@ struct Z {
     static let WHEEL: CGFloat = 100
     static let PLAYER: CGFloat = 300
     static let WATER: CGFloat = 400
+    static let BACKGROUND: CGFloat = 50
 }
 
 struct CAT {

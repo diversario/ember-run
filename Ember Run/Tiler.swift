@@ -20,27 +20,32 @@ class Tiler {
     private var _tiles = [SKSpriteNode]()
     
     private let _position: Position
-    private let _Tile: Tile.Type
-    private let _tile_size: CGSize
+    private let _Tile: () -> Tile
     
     private let _frame_size: CGSize
+    private var _tile_size: CGSize!
     
-    init (_ type: Tile.Type, atPosition position: Position, inScene scene: SKScene) {
+    init (_ type: () -> Tile, atPosition position: Position, inScene scene: SKScene) {
         _scene = scene
         _position = position
         
         _Tile = type
-        _tile_size = _Tile.TILE_SIZE
         
         _frame_size = _scene.size
     }
     
     func update () {
-    
+        _populateTiles()
     }
     
     
     private func _populateTiles () {
+        let tile = _Tile()
+        
+        if _tile_size == nil {
+            _tile_size = tile.tileSize
+        }
+        
         let (start_point, end_point) = _getVerticalBounds()
         
         var placement = CGPoint(x: start_point.x + _tile_size.width/2, y: start_point.y  + _tile_size.height/2)
@@ -53,7 +58,7 @@ class Tiler {
             placement.y = last_tile.position.y + _tile_size.height
         }
         
-        let tile = _Tile.init()
+        
         tile.position = placement
         
         self._scene.addChild(tile)
@@ -76,7 +81,7 @@ class Tiler {
             case .RIGHT:
                 x = _frame_size.width / 2 - _tile_size.width
             case .CENTER:
-                x = -_tile_size.width
+                x = 0 - _tile_size.width / 2
         }
         
         let start_point = CGPoint(

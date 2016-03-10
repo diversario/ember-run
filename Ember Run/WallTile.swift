@@ -10,8 +10,11 @@ import Foundation
 import SpriteKit
 
 class WallTile: Tile {
-    private static let Texture = SKTexture(imageNamed: "wall tile")
-    override var TILE_SIZE: CGSize! = WallTile.Texture.size()
+    private var _texture: SKTexture! = SKTexture(imageNamed: "wall tile")
+    
+    override var tileSize: CGSize {
+        return _texture.size()
+    }
     
     convenience init(atPosition position: CGPoint) {
         self.init()
@@ -19,7 +22,7 @@ class WallTile: Tile {
     }
     
     init () {
-        super.init(texture: WallTile.Texture, color: SKColor.clearColor(), size: WallTile.TILE_SIZE)
+        super.init(t: _texture, c: SKColor.clearColor(), s: _texture.size())
         
         _setAttributes()
     }
