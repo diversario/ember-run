@@ -2,19 +2,9 @@ import Foundation
 import SpriteKit
 
 class BackgroundTile: Tile {
-    private var _texture: SKTexture! = SKTexture(imageNamed: "background")
-    
-    override var tileSize: CGSize {
-        return _texture.size()
-    }
-    
-    convenience init(atPosition position: CGPoint) {
-        self.init()
-        self.position = position
-    }
-    
     init () {
-        super.init(t: _texture, c: SKColor.clearColor(), s: _texture.size())
+        let texture = SKTexture(imageNamed: "background")
+        super.init(t: texture, c: SKColor.clearColor(), s: texture.size())
         
         _setAttributes()
     }

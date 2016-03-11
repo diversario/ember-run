@@ -9,10 +9,6 @@
 import Foundation
 import SpriteKit
 
-protocol TileSize {
-    var tileSize: CGSize {get}
-}
-
 class Tile: SKSpriteNode {
     private var _texture: SKTexture!
     
@@ -21,6 +17,7 @@ class Tile: SKSpriteNode {
     }
     
     init(t: SKTexture, c: SKColor, s: CGSize) {
+        _texture = t
         super.init(texture: t, color: c, size: s)
     }
 

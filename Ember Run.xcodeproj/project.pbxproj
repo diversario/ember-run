@@ -180,6 +180,7 @@
 		20B66E2E1C7401530062AA16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20020AA91C8FEE3E002CE0A0 /* Tile.swift */,
 				20020A9B1C8A8E80002CE0A0 /* PlayerTrail.sks */,
 				20020A9C1C8A8E80002CE0A0 /* spark.png */,
 				20020A9F1C8B6627002CE0A0 /* Wheel.swift */,
@@ -212,7 +213,6 @@
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
 				20B66E311C75540C0062AA16 /* Util.swift */,
 				209C60481C77C163002816C3 /* shader_water.fsh */,
-				20020AA91C8FEE3E002CE0A0 /* Tile.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";

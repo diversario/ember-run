@@ -20,16 +20,16 @@ class Tiler {
     private var _tiles = [SKSpriteNode]()
     
     private let _position: Position
-    private let _Tile: () -> Tile
+    private let _makeTile: () -> Tile
     
     private let _frame_size: CGSize
     private var _tile_size: CGSize!
     
-    init (_ type: () -> Tile, atPosition position: Position, inScene scene: SKScene) {
+    init (_ tileMaker: () -> Tile, atPosition position: Position, inScene scene: SKScene) {
         _scene = scene
         _position = position
         
-        _Tile = type
+        _makeTile = tileMaker
         
         _frame_size = _scene.size
         
@@ -53,7 +53,7 @@ class Tiler {
     
     
     private func _populateTiles () {
-        let tile = _Tile()
+        let tile = _makeTile()
         
         if _tile_size == nil {
             _tile_size = tile.tileSize
