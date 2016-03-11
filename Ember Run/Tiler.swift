@@ -32,10 +32,23 @@ class Tiler {
         _Tile = type
         
         _frame_size = _scene.size
+        
+        _populateTiles()
     }
     
     func update () {
-        _populateTiles()
+        let (start_point, end_point) = _getVerticalBounds()
+        
+        if _tiles.first!.position.y > start_point.y {
+            let tile = _tiles.removeLast()
+            tile.position.y = _tiles.first!.position.y - _tile_size.height
+            _tiles.insert(tile, atIndex: 0)
+        } else if _tiles.last!.position.y < end_point.y {
+            // assuming here there cannot be a situation where both of these are true
+            let tile = _tiles.removeFirst()
+            tile.position.y = _tiles.last!.position.y + _tile_size.height
+            _tiles.append(tile)
+        }
     }
     
     
