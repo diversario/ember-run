@@ -1,10 +1,22 @@
 import Foundation
 import SpriteKit
+import UIKit
+
 
 class BackgroundTile: Tile {
+    var _size: CGSize!
+    
+    override var tileSize: CGSize {
+        return _size
+    }
+    
     init () {
         let texture = SKTexture(imageNamed: "background")
-        super.init(t: texture, c: SKColor.clearColor(), s: texture.size())
+        let texture_size = texture.size()
+        let height = texture_size.height * (UIScreen.mainScreen().bounds.width / texture_size.width)
+
+        _size = CGSize(width: UIScreen.mainScreen().bounds.width, height: height)
+        super.init(t: texture, c: SKColor.clearColor(), s: _size)
         
         _setAttributes()
     }
