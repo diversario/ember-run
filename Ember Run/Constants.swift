@@ -8,7 +8,7 @@
 
 import UIKit
 
-let WALL_WIDTH = UIImage(named: "wall tile")!.size.width
+let WALL_WIDTH = UIImage(named: "wall-tile-left")!.size.width
 
 struct Z {
     static let WALL: CGFloat = 500

@@ -10,8 +10,12 @@ import Foundation
 import SpriteKit
 
 
-func makeWallTile () -> Tile {
-    return WallTile()
+func tileMaker (side: Side) -> () -> Tile {
+    func makeTile () -> Tile {
+        return WallTile(side: side)
+    }
+    
+    return makeTile
 }
 
 
@@ -30,8 +34,8 @@ class Wall {
         self._scene = scene
         _frame_size = scene.size
         
-        _tiles[_WALL_SIDE.LEFT] = Tiler(makeWallTile, atPosition: Position.LEFT, inScene: _scene)
-        _tiles[_WALL_SIDE.RIGHT] = Tiler(makeWallTile, atPosition: Position.RIGHT, inScene: _scene)
+        _tiles[_WALL_SIDE.LEFT] = Tiler(tileMaker(.LEFT), atPosition: Position.LEFT, inScene: _scene)
+        _tiles[_WALL_SIDE.RIGHT] = Tiler(tileMaker(.RIGHT), atPosition: Position.RIGHT, inScene: _scene)
     }
     
     deinit {

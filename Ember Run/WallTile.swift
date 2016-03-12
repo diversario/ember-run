@@ -9,9 +9,21 @@
 import Foundation
 import SpriteKit
 
+public enum Side {
+    case LEFT
+    case RIGHT
+}
+
 class WallTile: Tile {
-    init () {
-        let texture = SKTexture(imageNamed: "wall tile")
+    init (side: Side) {
+        let texture: SKTexture
+        
+        if side == .LEFT {
+            texture = SKTexture(imageNamed: "wall-tile-left")
+        } else {
+            texture = SKTexture(imageNamed: "wall-tile-right")
+        }
+        
         super.init(t: texture, c: SKColor.clearColor(), s: texture.size())
         
         _setAttributes()
@@ -23,6 +35,6 @@ class WallTile: Tile {
     
     private func _setAttributes () {
         zPosition = Z.WALL
-        alpha = 0.5
+        alpha = 1
     }
 }
