@@ -11,7 +11,7 @@ class BackgroundTile: Tile {
     }
     
     init () {
-        let texture = SKTexture(imageNamed: "background")
+        let texture = SKTexture(imageNamed: "level background tile")
         let texture_size = texture.size()
         let height = texture_size.height * (UIScreen.mainScreen().bounds.width / texture_size.width)
 
@@ -27,7 +27,7 @@ class BackgroundTile: Tile {
     
     private func _setAttributes () {
         zPosition = Z.BACKGROUND
-        alpha = 0.5
+        alpha = 1
     }
 }
 

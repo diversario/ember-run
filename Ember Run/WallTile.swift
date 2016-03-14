@@ -35,6 +35,6 @@ class WallTile: Tile {
     
     private func _setAttributes () {
         zPosition = Z.WALL
-        alpha = 0.3
+        alpha = 1
     }
 }
