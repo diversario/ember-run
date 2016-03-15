@@ -89,7 +89,7 @@ class GameScene: SKScene {
     
     override func didApplyConstraints() {
         _wallBuilder?.update()
-        //_wheelPlacer?.update()
+        _wheelPlacer?.update()
         _background?.update()
     }
     

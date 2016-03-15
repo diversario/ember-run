@@ -42,14 +42,13 @@ class Background {
     private let _frame_size: CGSize
     
     private var _tiles: Tiler
-    private var _view: SKView
     
     init(scene: SKScene) {
         self._scene = scene
         _frame_size = scene.size
         
         _tiles = Tiler(makeTile, atPosition: Position.CENTER, inScene: _scene)
-}
+    }
     
     deinit {
         print("DEINIT BACKGROUND")
