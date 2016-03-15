@@ -11,7 +11,7 @@ class BackgroundTile: Tile {
     }
     
     init () {
-        let texture = SKTexture(imageNamed: "level background tile")
+        let texture = SKTexture(imageNamed: "level-background-tile")
         let texture_size = texture.size()
         let height = texture_size.height * (UIScreen.mainScreen().bounds.width / texture_size.width)
 
@@ -42,13 +42,14 @@ class Background {
     private let _frame_size: CGSize
     
     private var _tiles: Tiler
+    private var _view: SKView
     
     init(scene: SKScene) {
         self._scene = scene
         _frame_size = scene.size
         
         _tiles = Tiler(makeTile, atPosition: Position.CENTER, inScene: _scene)
-    }
+}
     
     deinit {
         print("DEINIT BACKGROUND")

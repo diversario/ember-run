@@ -17,6 +17,7 @@
 		20020AAA1C8FEE3E002CE0A0 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AA91C8FEE3E002CE0A0 /* Tile.swift */; };
 		20020AAC1C9140E3002CE0A0 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AAB1C9140E3002CE0A0 /* Wall.swift */; };
 		20020AAE1C914653002CE0A0 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AAD1C914653002CE0A0 /* Background.swift */; };
+		20020AB41C97ABA6002CE0A0 /* FloatingImageViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20020AB31C97ABA6002CE0A0 /* FloatingImageViews.swift */; };
 		200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49D21C6ED8C400A24A49 /* AppDelegate.swift */; };
 		200F49D51C6ED8C400A24A49 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 200F49D41C6ED8C400A24A49 /* GameScene.sks */; };
 		200F49D71C6ED8C400A24A49 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49D61C6ED8C400A24A49 /* GameScene.swift */; };
@@ -64,6 +65,7 @@
 		20020AA91C8FEE3E002CE0A0 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		20020AAB1C9140E3002CE0A0 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		20020AAD1C914653002CE0A0 /* Background.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		20020AB31C97ABA6002CE0A0 /* FloatingImageViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingImageViews.swift; sourceTree = "<group>"; };
 		200F49CF1C6ED8C300A24A49 /* Ember Run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ember Run.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200F49D21C6ED8C400A24A49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200F49D41C6ED8C400A24A49 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		20B66E2E1C7401530062AA16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20020AB31C97ABA6002CE0A0 /* FloatingImageViews.swift */,
 				20020AA91C8FEE3E002CE0A0 /* Tile.swift */,
 				20020A9B1C8A8E80002CE0A0 /* PlayerTrail.sks */,
 				20020A9C1C8A8E80002CE0A0 /* spark.png */,
@@ -362,6 +365,7 @@
 				200F49D31C6ED8C400A24A49 /* AppDelegate.swift in Sources */,
 				200F4A2D1C70048600A24A49 /* Constants.swift in Sources */,
 				20020AAE1C914653002CE0A0 /* Background.swift in Sources */,
+				20020AB41C97ABA6002CE0A0 /* FloatingImageViews.swift in Sources */,
 				20020AA81C8E8734002CE0A0 /* Tiler.swift in Sources */,
 				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
 				20020AA41C8B88F2002CE0A0 /* Player.swift in Sources */,
