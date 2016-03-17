@@ -15,6 +15,7 @@ class GameScene: SKScene {
     private var _water: Water?
     private var _physicsMgr: PhysicsManager?
     private var _player: Player?
+    private var _clouds: Clouds?
     
     private var _gameOverCalled = false
     
@@ -51,6 +52,8 @@ class GameScene: SKScene {
         
         _background = Background(scene: self)
         
+        _clouds = Clouds(scene: self)
+        
         addChild(_water!)
     }
     
@@ -64,6 +67,8 @@ class GameScene: SKScene {
         _wheelPlacer = nil
         _water = nil
         _physicsMgr = nil
+        _background = nil
+        _clouds = nil
         _player = nil
     }
     
@@ -91,6 +96,7 @@ class GameScene: SKScene {
         _wallBuilder?.update()
         _wheelPlacer?.update()
         _background?.update()
+        _clouds?.update()
     }
     
     private func _followPlayer() {
