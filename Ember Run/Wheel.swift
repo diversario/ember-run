@@ -31,10 +31,12 @@ class Wheel: SKSpriteNode {
         }
         
         // actual init
-        let texture = SKTexture(imageNamed: "wheel-m")
         let color = UIColor.clearColor()
         
         _radius = CGFloat(Wheel._randomRadius.nextInt())
+        
+        let texture = _getTexture(_radius)
+
         print(_radius)
         let size = CGSize(width: _radius * 2, height: _radius * 2)
         
@@ -77,8 +79,12 @@ class Wheel: SKSpriteNode {
     private func _getRandomAngularSpeed() -> CGFloat {
         return CGFloat(CGFloat(Wheel._randomAngularSpeed.nextInt()) / 10.0)
     }
+}
+
+private func _getTexture (radius: CGFloat) -> SKTexture {
+    let step = CGFloat((Wheel.MAX_RADIUS - Wheel.MIN_RADIUS)) / 4.0 // 5 wheels. Should be programmatic tho
+    let num = radius - CGFloat(Wheel.MIN_RADIUS)
+    let texture_num = round(num / step) + 1
     
-    private func _getTexture () {
-    
-    }
+    return SKTexture(imageNamed: "wheel-\(texture_num)")
 }
