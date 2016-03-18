@@ -16,7 +16,7 @@ class Clouds {
     private unowned let _scene: SKScene
     private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
     private let _randomY = GKRandomDistribution(lowestValue: 50, highestValue: 100)
-    private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 50)
+    private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
     private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
     
     init(scene: SKScene) {
@@ -75,7 +75,7 @@ class Clouds {
         return cloud.position.y < (_scene.camera!.position.y - _frame_size.height * 2)
     }
     
-    private func _movement (var cloud: SKSpriteNode, var speed: CGFloat) {
+    private func _movement (cloud: SKSpriteNode, var speed: CGFloat) {
         let move = SKAction.moveBy(CGVector(dx: speed, dy: 0), duration: 1)
         
         cloud.runAction(move) {

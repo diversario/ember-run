@@ -22,7 +22,7 @@ class WheelPlacer {
         self._scene = scene
         _frame_size = scene.size
         Wheel.MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
-        _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS) * 1.2
+        _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS) * 1.05
     }
     
     deinit {
