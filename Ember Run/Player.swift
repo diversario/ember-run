@@ -69,22 +69,23 @@ class Player: SKSpriteNode {
             _initPlayerNode()
             
             _scene.addChild(self)
+            print("POZISHUN \(zRotation)")
             _positioned = true
         }
     }
     
     
     func onTap () {
-        let impulse = getJumpVector()
-        
-        if impulse != nil {
+        if let impulse = getJumpVector() {
             if _physicsManager.isPlayerOnWheel {
                 _physicsManager.detachPlayerFromWheel()
             } else {
                 _setPhysicsBody()
             }
             
-            physicsBody?.applyImpulse(impulse!)
+            _orientToMovement(impulse)
+            
+            physicsBody?.applyImpulse(impulse)
         }
     }
     
@@ -172,7 +173,7 @@ class Player: SKSpriteNode {
             vector!.dx *= IMPULSE.WALL
             vector!.dy *= IMPULSE.WALL
         }
-        
+
         return vector
     }
     
@@ -190,6 +191,13 @@ class Player: SKSpriteNode {
         }
         
         return false
+    }
+    
+    private func _orientToMovement (impulse: CGVector) {
+        let angle = _getRotationAngle(impulse)
+        
+        let rotate = SKAction.rotateToAngle(angle, duration: 0.1, shortestUnitArc: true)
+        runAction(rotate)
     }
     
     func startDying () {
@@ -230,4 +238,10 @@ class Player: SKSpriteNode {
             }
         });
     }
+}
+
+private let _angleAdjustment = CGFloat(90 * M_PI/180.0)
+
+private func _getRotationAngle(v: CGVector) -> CGFloat {
+    return atan2(v.dy, v.dx) - _angleAdjustment
 }

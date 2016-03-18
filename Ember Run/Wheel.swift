@@ -37,14 +37,13 @@ class Wheel: SKSpriteNode {
         
         let texture = _getTexture(_radius)
 
-        print(_radius)
         let size = CGSize(width: _radius * 2, height: _radius * 2)
         
         super.init(texture: texture, color: color, size: size)
         
         _setAttributes()
         _setPhysicsBody()
-        _setRotation()
+        //_setRotation()
     }
 
     required init?(coder aDecoder: NSCoder) {
