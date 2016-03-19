@@ -60,10 +60,15 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             )
             
             player.node!.position = adjustedContactPoint
-            
-            _joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheel, anchor: contact.contactPoint)
-            _scene.physicsWorld.addJoint(_joint)
 
+            if let playerInstance = Player.getPlayer() {
+                let angle = getPlayerRotationAngle(normalizedVTCP)
+                playerInstance.zRotation = angle
+            }
+            
+            self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheel, anchor: contact.contactPoint)
+            self._scene.physicsWorld.addJoint(self._joint)
+            
             player.node!.constraints!.first!.enabled = true
         }
     }

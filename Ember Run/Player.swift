@@ -10,6 +10,8 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
+    private static var _instance: Player!
+    
     private static let Texture = SKTexture(imageNamed: "player")
 
     private unowned let _scene: GameScene
@@ -38,6 +40,14 @@ class Player: SKSpriteNode {
         return _isDying
     }
     
+    static func getPlayer () -> Player? {
+        if let p = Player._instance {
+            return p
+        }
+        
+        return nil
+    }
+    
     init (scene: GameScene, physicsManager: PhysicsManager) {
         _scene = scene
         _physicsManager = physicsManager
@@ -45,6 +55,8 @@ class Player: SKSpriteNode {
         super.init(texture: Player.Texture, color: SKColor.clearColor(), size: Player.Texture.size())
         
         _setAttributes()
+        
+        Player._instance = self
     }
     
     deinit {
@@ -69,11 +81,9 @@ class Player: SKSpriteNode {
             _initPlayerNode()
             
             _scene.addChild(self)
-            print("POZISHUN \(zRotation)")
             _positioned = true
         }
     }
-    
     
     func onTap () {
         if let impulse = getJumpVector() {
@@ -83,7 +93,7 @@ class Player: SKSpriteNode {
                 _setPhysicsBody()
             }
             
-            _orientToMovement(impulse)
+            orientToMovement(impulse)
             
             physicsBody?.applyImpulse(impulse)
         }
@@ -193,10 +203,10 @@ class Player: SKSpriteNode {
         return false
     }
     
-    private func _orientToMovement (impulse: CGVector) {
-        let angle = _getRotationAngle(impulse)
+    func orientToMovement (impulse: CGVector) {
+        let angle = getPlayerRotationAngle(impulse)
         
-        let rotate = SKAction.rotateToAngle(angle, duration: 0.1, shortestUnitArc: true)
+        let rotate = SKAction.rotateToAngle(angle, duration: 0.03, shortestUnitArc: true)
         runAction(rotate)
     }
     
@@ -242,6 +252,6 @@ class Player: SKSpriteNode {
 
 private let _angleAdjustment = CGFloat(90 * M_PI/180.0)
 
-private func _getRotationAngle(v: CGVector) -> CGFloat {
+func getPlayerRotationAngle(v: CGVector) -> CGFloat {
     return atan2(v.dy, v.dx) - _angleAdjustment
 }

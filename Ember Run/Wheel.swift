@@ -43,7 +43,7 @@ class Wheel: SKSpriteNode {
         
         _setAttributes()
         _setPhysicsBody()
-        //_setRotation()
+        _setRotation()
     }
 
     required init?(coder aDecoder: NSCoder) {
