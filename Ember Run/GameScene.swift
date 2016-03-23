@@ -9,6 +9,8 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    let effect = SKEffectNode()
+    
     private var _background: Background?
     private var _wallBuilder: Wall?
     private var _wheelPlacer: WheelPlacer?
@@ -30,7 +32,8 @@ class GameScene: SKScene {
         _physicsMgr = PhysicsManager(scene: self)
 
         let cam = SKCameraNode()
-        self.addChild(cam)
+        cam.setScale(1)
+        self.effect.addChild(cam)
         self.camera = cam
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
@@ -54,7 +57,13 @@ class GameScene: SKScene {
         
         _clouds = Clouds(scene: self)
         
-        addChild(_water!)
+        effect.addChild(_water!)
+        
+        let shader = SKShader(fileNamed: "shader_water.fsh")
+        
+        addChild(effect)
+        
+        effect.shader = shader
     }
     
     deinit {
@@ -84,11 +93,15 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         self._checkPlayerPosition()
         
-        _player?.syncParticles()
+//        _player?.syncParticles()
          _followPlayer()
         
         if _isPlayerDead() {
             _gameOver()
+        }
+        
+        if let p = _player {
+            print(p.position.y, effect.frame.height)
         }
     }
     
@@ -153,5 +166,13 @@ class GameScene: SKScene {
             
         }
 
+    }
+    
+    func shouldRemoveFromScene (node: SKNode) -> Bool {
+        if let water = _water {
+            return node.position.y < (water.position.y - water.size.height/2)
+        }
+        
+        return false
     }
 }

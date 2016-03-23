@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
             scene.size = skView.frame.size
             
             self.view.addSubview(skView)
+            
             skView.presentScene(scene)
         }
     }

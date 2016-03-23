@@ -16,7 +16,7 @@ public enum Position : Int {
 }
 
 class Tiler {
-    private unowned let _scene: SKScene
+    private unowned let _scene: GameScene
     private var _tiles = [SKSpriteNode]()
     
     private let _position: Position
@@ -25,7 +25,7 @@ class Tiler {
     private let _frame_size: CGSize
     private var _tile_size: CGSize!
     
-    init (_ tileMaker: () -> Tile, atPosition position: Position, inScene scene: SKScene) {
+    init (_ tileMaker: () -> Tile, atPosition position: Position, inScene scene: GameScene) {
         _scene = scene
         _position = position
         
@@ -74,7 +74,7 @@ class Tiler {
         
         tile.position = placement
         
-        self._scene.addChild(tile)
+        self._scene.effect.addChild(tile)
         
         _tiles.append(tile)
         
@@ -99,12 +99,12 @@ class Tiler {
         
         let start_point = CGPoint(
             x: frame_position.x + x,
-            y: frame_position.y - _frame_size.height / 2 - _tile_size.height * 2
+            y: frame_position.y - 2.0 * _frame_size.height// / 2 - _tile_size.height * 2
         )
         
         let end_point = CGPoint(
             x: start_point.x,
-            y: frame_position.y + _frame_size.height / 2 + _tile_size.height * 2
+            y: frame_position.y + 2.0 * _frame_size.height// / 2// + _tile_size.height * 4
         )
         
         return (start_point, end_point)

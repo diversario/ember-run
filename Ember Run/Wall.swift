@@ -25,12 +25,12 @@ class Wall {
         case RIGHT
     }
     
-    private unowned let _scene: SKScene
+    private unowned let _scene: GameScene
     private let _frame_size: CGSize
     
     private var _tiles = [_WALL_SIDE: Tiler]()
     
-    init(scene: SKScene) {
+    init(scene: GameScene) {
         self._scene = scene
         _frame_size = scene.size
         

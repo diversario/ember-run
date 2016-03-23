@@ -13,13 +13,13 @@ import GameplayKit
 class Clouds {
     private var _clouds = [SKSpriteNode]()
     private let _frame_size: CGSize
-    private unowned let _scene: SKScene
+    private unowned let _scene: GameScene
     private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
     private let _randomY = GKRandomDistribution(lowestValue: 50, highestValue: 100)
     private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
     private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
     
-    init(scene: SKScene) {
+    init(scene: GameScene) {
         _scene = scene
         _frame_size = scene.size
     }
@@ -55,7 +55,7 @@ class Clouds {
         _movement(cloud, speed: speed)
         
         _clouds.append(cloud)
-        _scene.addChild(cloud)
+        _scene.effect.addChild(cloud)
     }
     
     private func _getRandomX(cloud: SKNode) -> CGFloat {
@@ -71,15 +71,11 @@ class Clouds {
         return cloud.position.x < _frame_size.width / 2
     }
     
-    private func _shouldDestroyCloud (cloud: SKSpriteNode) -> Bool {
-        return cloud.position.y < (_scene.camera!.position.y - _frame_size.height * 2)
-    }
-    
-    private func _movement (cloud: SKSpriteNode, var speed: CGFloat) {
+    private func _movement (cloud: SKSpriteNode, speed: CGFloat) {
         let move = SKAction.moveBy(CGVector(dx: speed, dy: 0), duration: 1)
         
         cloud.runAction(move) {
-            if self._shouldDestroyCloud(cloud) {
+            if self._scene.shouldRemoveFromScene(cloud) {
                 if let idx = self._clouds.indexOf(cloud) {
                     self._clouds.removeAtIndex(idx)
                 }
@@ -90,14 +86,18 @@ class Clouds {
                 return
             }
             
+            let newSpeed: CGFloat
+            
             if !self._isCloudVisible(cloud) {
                 cloud.position.x = -self._frame_size.width / 2
                 cloud.alpha = CGFloat(self._randomAlpha.nextInt()) / 10.0
                 
-                speed = CGFloat(self._randomVelocity.nextInt())
+                newSpeed = CGFloat(self._randomVelocity.nextInt())
+            } else {
+                newSpeed = speed
             }
             
-            self._movement(cloud, speed: speed)
+            self._movement(cloud, speed: newSpeed)
         }
     }
 }

@@ -21,7 +21,7 @@ class Water: SKSpriteNode {
     init (scene: GameScene) {
         _scene = scene
         
-        super.init(texture: Water.Texture, color: SKColor.clearColor(), size: Water.Texture.size())
+        super.init(texture: nil /*Water.Texture*/, color: SKColor.clearColor(), size: Water.Texture.size())
         
         _setAttributes()
     }
@@ -37,7 +37,7 @@ class Water: SKSpriteNode {
     }
     
     private func _setAttributes () {
-        size = CGSize(width: _scene.frame.width - WALL_WIDTH * 2, height: _scene.frame.height * 2)
+        size = CGSize(width: _scene.frame.width - WALL_WIDTH * 2, height: _scene.frame.height)
         zPosition = Z.WATER
         
         position.x = _scene.LEFT_EDGE + frame.width / 2
@@ -53,13 +53,6 @@ class Water: SKSpriteNode {
         let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.3)
         
         runAction(SKAction.repeatActionForever(animation))
-        
-        //        let shader = SKShader(fileNamed: "shader_water.fsh")
-        //        shader.uniforms = [
-        //            SKUniform(name: "size", floatVector3: GLKVector3Make(Float(_scene.frame.size.width), Float(_scene.frame.size.height), 0))
-        //        ]
-        //
-        //        _node.shader = shader
         
         _movement()
     }

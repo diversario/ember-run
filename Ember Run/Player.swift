@@ -21,7 +21,7 @@ class Player: SKSpriteNode {
     private var _health = 100
     private var _isDying = false
     
-    private var _particleTrail = SKEmitterNode(fileNamed: "PlayerTrail")!
+//    private var _particleTrail = SKEmitterNode(fileNamed: "PlayerTrail")!
     
     var velocity: CGVector? {
         get {
@@ -80,7 +80,7 @@ class Player: SKSpriteNode {
             
             _initPlayerNode()
             
-            _scene.addChild(self)
+            _scene.effect.addChild(self)
             _positioned = true
         }
     }
@@ -99,9 +99,9 @@ class Player: SKSpriteNode {
         }
     }
     
-    func syncParticles() {
-        _particleTrail.position = position
-    }
+//    func syncParticles() {
+//        _particleTrail.position = position
+//    }
     
     
     private func _initPlayerNode() {
@@ -120,7 +120,7 @@ class Player: SKSpriteNode {
         
         //_particleTrail.targetNode = _node
         //_node.addChild(_particleTrail)
-        _scene.addChild(_particleTrail)
+        // _scene.addChild(_particleTrail)
     }
     
     private func _setPhysicsBody() {
@@ -241,7 +241,7 @@ class Player: SKSpriteNode {
         let time = dispatch_time(DISPATCH_TIME_NOW, delta)
         
         dispatch_after(time, dispatch_get_main_queue(), {
-            self._health--
+            self._health -= 1
             
             if self._isDying && self._health > 0 {
                 self._startDecreasingHealth()

@@ -11,14 +11,14 @@ import SpriteKit
 import GameplayKit
 
 class WheelPlacer {
-    private unowned let _scene: SKScene
+    private unowned let _scene: GameScene
     private let _frame_size: CGSize
     private var _wheels = [Wheel]()
     
     private let _MIN_DISTANCE: CGFloat = 20
     private let _MAX_DISTANCE: CGFloat// = 200
 
-    init(scene: SKScene) {
+    init(scene: GameScene) {
         self._scene = scene
         _frame_size = scene.size
         Wheel.MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
@@ -34,6 +34,14 @@ class WheelPlacer {
 
         while _wheels.last?.position.y <= max_y {
             _placeWheel()
+        }
+
+        for wheel in _wheels {
+            if _scene.shouldRemoveFromScene(wheel) {
+                wheel.removeFromParent()
+                wheel.removeAllActions()
+                _wheels.removeAtIndex(_wheels.indexOf(wheel)!)
+            }
         }
     }
     
@@ -55,11 +63,11 @@ class WheelPlacer {
         
         if last_wheel == nil {
             _wheels.append(wheel)
-            _scene.addChild(wheel)
+            _scene.effect.addChild(wheel)
         } else {
             _adjustWheelPosition(wheel)
             _wheels.append(wheel)
-            _scene.addChild(wheel)
+            _scene.effect.addChild(wheel)
         }
         
         return wheel
