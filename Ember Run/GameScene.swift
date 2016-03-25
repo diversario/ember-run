@@ -32,7 +32,7 @@ class GameScene: SKScene {
         _physicsMgr = PhysicsManager(scene: self)
 
         let cam = SKCameraNode()
-        cam.setScale(1)
+        cam.setScale(6)
         self.effect.addChild(cam)
         self.camera = cam
         
@@ -57,13 +57,17 @@ class GameScene: SKScene {
         
         _clouds = Clouds(scene: self)
         
-        effect.addChild(_water!)
+        //effect.addChild(_water!)
         
         let shader = SKShader(fileNamed: "shader_water.fsh")
         
+        shader.uniforms = [
+            SKUniform(name: "test", float: Float(_player!.position.y))
+        ]
+        
         addChild(effect)
         
-        effect.shader = shader
+        //effect.shader = shader
     }
     
     deinit {
@@ -102,14 +106,15 @@ class GameScene: SKScene {
         
         if let p = _player {
             print(p.position.y, effect.frame.height)
+            effect.shader?.uniformNamed("test")?.floatValue = Float(p.position.y)
         }
     }
     
     override func didApplyConstraints() {
         _wallBuilder?.update()
-        _wheelPlacer?.update()
+        //_wheelPlacer?.update()
         _background?.update()
-        _clouds?.update()
+        //_clouds?.update()
     }
     
     private func _followPlayer() {
