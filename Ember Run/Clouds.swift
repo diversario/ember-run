@@ -10,20 +10,59 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
+class Cloud: SKSpriteNode, CustomSprite {
+    private var _parentNode: SKEffectNode?
+    var positionInScene: CGPoint!
+
+    private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
+    private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
+    private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
+    
+    init() {
+        let texture = SKTexture(imageNamed: "cloud-\(_cloudType.nextInt())")
+        let color = SKColor.clearColor()
+        let size = texture.size()
+        
+        super.init(texture: texture, color: color, size: size)
+        
+        zPosition = Z.CLOUD
+        alpha = CGFloat(_randomAlpha.nextInt()) / 10.0
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    func update() {
+        if let p = parent as? GameScene {
+            if p.shouldHide(self) {
+                _parentNode = p
+                self.removeFromParent()
+                self.paused = true
+            } else if p.shouldUnide(self) {
+                _parentNode?.addChild(self)
+                self.paused = false
+            }
+        }
+    }
+    
+}
+
 class Clouds {
-    private var _clouds = [SKSpriteNode]()
+    private var _clouds = [Cloud]()
     private let _frame_size: CGSize
     private unowned let _scene: GameScene
-    private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
     private let _randomY = GKRandomDistribution(lowestValue: 50, highestValue: 100)
     private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
     private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
+    
+    var positionInScene: CGPoint!
     
     init(scene: GameScene) {
         _scene = scene
         _frame_size = scene.size
     }
-    
+  
     func update () {
         let max_y = _scene.camera!.position.y + _frame_size.height/2
         
@@ -33,13 +72,13 @@ class Clouds {
     }
     
     private func _placeClouds() {
-        var last_cloud: SKSpriteNode?
+        var last_cloud: Cloud?
         
         if let _cloud = _clouds.last {
             last_cloud = _cloud
         }
         
-        let cloud = SKSpriteNode(imageNamed: "cloud-\(_cloudType.nextInt())")
+        let cloud = Cloud()
         
         let position = CGPoint(
             x: _getRandomX(cloud),
@@ -47,8 +86,7 @@ class Clouds {
         )
         
         cloud.position = position
-        cloud.zPosition = Z.CLOUD
-        cloud.alpha = CGFloat(_randomAlpha.nextInt()) / 10.0
+        cloud.positionInScene = position
         
         let speed = CGFloat(_randomVelocity.nextInt())
         
@@ -71,7 +109,7 @@ class Clouds {
         return cloud.position.x < _frame_size.width / 2
     }
     
-    private func _movement (cloud: SKSpriteNode, speed: CGFloat) {
+    private func _movement (cloud: Cloud, speed: CGFloat) {
         let move = SKAction.moveBy(CGVector(dx: speed, dy: 0), duration: 1)
         
         cloud.runAction(move) {

@@ -10,7 +10,13 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Wheel: SKSpriteNode {
+protocol CustomSprite {
+    var positionInScene: CGPoint! {get set}
+    var parent: SKNode? { get }
+    var name: String? { get set }
+}
+
+class Wheel: SKSpriteNode, CustomSprite {
     static var MIN_RADIUS: Int! = 25
     static var MAX_RADIUS: Int!
     
@@ -19,6 +25,8 @@ class Wheel: SKSpriteNode {
     
     private static var _randomRadius: GKRandomDistribution!
     private var _radius: CGFloat!
+    
+    var positionInScene: CGPoint!
     
     init () {
         Wheel.WHEEL_COUNT += 1

@@ -14,6 +14,7 @@ class WheelPlacer {
     private unowned let _scene: GameScene
     private let _frame_size: CGSize
     private var _wheels = [Wheel]()
+//    private var _wheels_dict = [ Double: Wheel ]()
     
     private let _MIN_DISTANCE: CGFloat = 20
     private let _MAX_DISTANCE: CGFloat// = 200
@@ -38,9 +39,16 @@ class WheelPlacer {
 
         for wheel in _wheels {
             if _scene.shouldRemoveFromScene(wheel) {
+                print("REMOVE \(wheel.name)")
                 wheel.removeFromParent()
                 wheel.removeAllActions()
                 _wheels.removeAtIndex(_wheels.indexOf(wheel)!)
+            } else if wheel.parent != nil && _scene.shouldHide(wheel) {
+                print("HIDE \(wheel.name)")
+                wheel.removeFromParent()
+            } else if wheel.parent == nil && _scene.shouldUnide(wheel) {
+                print("UNHIDE \(wheel.name)")
+                _scene.effect.addChild(wheel)
             }
         }
     }
@@ -56,10 +64,11 @@ class WheelPlacer {
         
         let position = CGPoint(
             x: _getRandomX(wheel),
-            y: last_wheel != nil ? last_wheel!.position.y : _frame_size.height / -2
+            y: last_wheel != nil ? last_wheel!.position.y + 1.0 : _frame_size.height / -2 // y + 1 to avoid hash collisions
         )
         
         wheel.position = position
+        wheel.positionInScene = position
         
         if last_wheel == nil {
             _wheels.append(wheel)

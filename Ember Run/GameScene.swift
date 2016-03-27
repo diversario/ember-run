@@ -21,6 +21,9 @@ class GameScene: SKScene {
     
     private var _gameOverCalled = false
     
+    var timeWhenStarted: Double!
+    var timeSinceStart: Double!
+    
     var LEFT_EDGE: CGFloat!
     var RIGHT_EDGE: CGFloat!
     
@@ -32,7 +35,7 @@ class GameScene: SKScene {
         _physicsMgr = PhysicsManager(scene: self)
 
         let cam = SKCameraNode()
-        cam.setScale(6)
+        cam.setScale(4)
         self.effect.addChild(cam)
         self.camera = cam
         
@@ -57,7 +60,7 @@ class GameScene: SKScene {
         
         _clouds = Clouds(scene: self)
         
-        //effect.addChild(_water!)
+        effect.addChild(_water!)
         
         let shader = SKShader(fileNamed: "shader_water.fsh")
         
@@ -95,8 +98,23 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        self._checkPlayerPosition()
+        if timeWhenStarted == nil {
+            timeWhenStarted = currentTime
+        }
         
+        timeSinceStart = currentTime - timeWhenStarted
+        
+//        let marker = SKShapeNode(circleOfRadius: 2)
+//        marker.strokeColor = SKColor.clearColor()
+//        marker.fillColor = SKColor.blackColor()
+//        
+//        marker.position = camera!.position
+//        marker.zPosition = 10000
+//        effect.addChild(marker)
+        
+        self._checkPlayerPosition()
+        //print(timeSinceStart)
+        //_water?.position.y = CGFloat(timeSinceStart)
 //        _player?.syncParticles()
          _followPlayer()
         
@@ -104,17 +122,14 @@ class GameScene: SKScene {
             _gameOver()
         }
         
-        if let p = _player {
-            print(p.position.y, effect.frame.height)
-            effect.shader?.uniformNamed("test")?.floatValue = Float(p.position.y)
-        }
+        effect.shader?.uniformNamed("test")?.floatValue = Float(timeSinceStart)
     }
     
     override func didApplyConstraints() {
         _wallBuilder?.update()
-        //_wheelPlacer?.update()
+        _wheelPlacer?.update()
         _background?.update()
-        //_clouds?.update()
+        _clouds?.update()
     }
     
     private func _followPlayer() {
@@ -173,11 +188,27 @@ class GameScene: SKScene {
 
     }
     
-    func shouldRemoveFromScene (node: SKNode) -> Bool {
+    func shouldRemoveFromScene (node: CustomSprite) -> Bool {
         if let water = _water {
-            return node.position.y < (water.position.y - water.size.height/2)
+            return node.positionInScene.y < (water.position.y - water.size.height/2)
         }
         
         return false
+    }
+    
+    func shouldHide (node: CustomSprite) -> Bool {
+        let pos = node.positionInScene
+        
+        return node.parent != nil &&
+               pos.y < (camera!.position.y - frame.size.height) ||
+               pos.y > (camera!.position.y + frame.size.height)
+    }
+    
+    func shouldUnide (node: CustomSprite) -> Bool {
+        let pos = node.positionInScene
+        
+        return node.parent == nil &&
+            pos.y > (camera!.position.y - frame.size.height) &&
+            pos.y < (camera!.position.y + frame.size.height)
     }
 }

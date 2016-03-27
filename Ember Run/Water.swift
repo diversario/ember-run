@@ -54,7 +54,7 @@ class Water: SKSpriteNode {
         
         runAction(SKAction.repeatActionForever(animation))
         
-        _movement()
+        //_movement()
     }
     
     private func _movement () {
