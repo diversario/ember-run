@@ -12,6 +12,8 @@ import GameplayKit
 
 class Cloud: SKSpriteNode, CustomSprite {
     private var _parentNode: SKEffectNode?
+    private var _speed: CGFloat!
+    
     var positionInScene: CGPoint!
 
     private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
@@ -26,26 +28,52 @@ class Cloud: SKSpriteNode, CustomSprite {
         super.init(texture: texture, color: color, size: size)
         
         zPosition = Z.CLOUD
-        alpha = CGFloat(_randomAlpha.nextInt()) / 10.0
+        initialize()
+        _movement()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    func initialize (){
+        alpha = CGFloat(_randomAlpha.nextInt()) / 10.0
+        _speed = CGFloat(self._randomVelocity.nextInt())
+    }
+    
+    func prepareToDie(){
+        removeAllActions()
+        removeFromParent()
+    }
+    
     func update() {
-        if let p = parent as? GameScene {
-            if p.shouldHide(self) {
+        var p: SKEffectNode?
+        
+        if let _p = parent {
+            p = _p as? SKEffectNode
+        } else if let _p = _parentNode {
+            p = _p
+        }
+        
+        if let p = p, let scene = p.parent as? GameScene {
+            if scene.shouldHide(self) {
                 _parentNode = p
                 self.removeFromParent()
                 self.paused = true
-            } else if p.shouldUnide(self) {
+            } else if scene.shouldUnide(self) {
                 _parentNode?.addChild(self)
                 self.paused = false
             }
         }
     }
     
+    private func _movement () {
+        let move = SKAction.moveBy(CGVector(dx: _speed, dy: 0), duration: 1)
+        
+        runAction(move) {
+            self._movement()
+        }
+    }
 }
 
 class Clouds {
@@ -69,6 +97,23 @@ class Clouds {
         while _clouds.last?.position.y <= max_y {
             _placeClouds()
         }
+        
+        for cloud in _clouds {
+            if self._scene.shouldRemoveFromScene(cloud) {
+                if let idx = self._clouds.indexOf(cloud) {
+                    self._clouds.removeAtIndex(idx)
+                }
+                
+                cloud.prepareToDie()
+            } else {
+                if !self._isCloudVisible(cloud) {
+                    cloud.position.x = -self._frame_size.width / 2
+                    cloud.initialize()
+                }
+                
+                cloud.update()
+            }
+        }
     }
     
     private func _placeClouds() {
@@ -88,10 +133,6 @@ class Clouds {
         cloud.position = position
         cloud.positionInScene = position
         
-        let speed = CGFloat(_randomVelocity.nextInt())
-        
-        _movement(cloud, speed: speed)
-        
         _clouds.append(cloud)
         _scene.effect.addChild(cloud)
     }
@@ -107,35 +148,5 @@ class Clouds {
 
     private func _isCloudVisible (cloud: SKSpriteNode) -> Bool {
         return cloud.position.x < _frame_size.width / 2
-    }
-    
-    private func _movement (cloud: Cloud, speed: CGFloat) {
-        let move = SKAction.moveBy(CGVector(dx: speed, dy: 0), duration: 1)
-        
-        cloud.runAction(move) {
-            if self._scene.shouldRemoveFromScene(cloud) {
-                if let idx = self._clouds.indexOf(cloud) {
-                    self._clouds.removeAtIndex(idx)
-                }
-                
-                cloud.removeAllActions()
-                cloud.removeFromParent()
-                
-                return
-            }
-            
-            let newSpeed: CGFloat
-            
-            if !self._isCloudVisible(cloud) {
-                cloud.position.x = -self._frame_size.width / 2
-                cloud.alpha = CGFloat(self._randomAlpha.nextInt()) / 10.0
-                
-                newSpeed = CGFloat(self._randomVelocity.nextInt())
-            } else {
-                newSpeed = speed
-            }
-            
-            self._movement(cloud, speed: newSpeed)
-        }
     }
 }

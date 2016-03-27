@@ -39,15 +39,15 @@ class WheelPlacer {
 
         for wheel in _wheels {
             if _scene.shouldRemoveFromScene(wheel) {
-                print("REMOVE \(wheel.name)")
+//                print("REMOVE \(wheel.name)")
                 wheel.removeFromParent()
                 wheel.removeAllActions()
                 _wheels.removeAtIndex(_wheels.indexOf(wheel)!)
             } else if wheel.parent != nil && _scene.shouldHide(wheel) {
-                print("HIDE \(wheel.name)")
+//                print("HIDE \(wheel.name)")
                 wheel.removeFromParent()
             } else if wheel.parent == nil && _scene.shouldUnide(wheel) {
-                print("UNHIDE \(wheel.name)")
+//                print("UNHIDE \(wheel.name)")
                 _scene.effect.addChild(wheel)
             }
         }

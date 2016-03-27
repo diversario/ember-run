@@ -60,7 +60,7 @@ class GameScene: SKScene {
         
         _clouds = Clouds(scene: self)
         
-        effect.addChild(_water!)
+        //effect.addChild(_water!)
         
         let shader = SKShader(fileNamed: "shader_water.fsh")
         
