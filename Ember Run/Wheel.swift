@@ -25,6 +25,7 @@ class Wheel: SKSpriteNode, CustomSprite {
     
     private static var _randomRadius: GKRandomDistribution!
     private var _radius: CGFloat!
+    private var _parentNode: SKEffectNode?
     
     var positionInScene: CGPoint!
     
@@ -58,6 +59,32 @@ class Wheel: SKSpriteNode, CustomSprite {
         super.init(coder: aDecoder)
     }
     
+    func prepareToDie () {
+        removeFromParent()
+        removeAllActions()
+    }
+    
+    func update() {
+        var p: SKEffectNode?
+        
+        if let _p = parent {
+            p = _p as? SKEffectNode
+        } else if let _p = _parentNode {
+            p = _p
+        }
+        
+        if let p = p, let scene = p.parent as? GameScene {
+            if scene.shouldHide(self) {
+                _parentNode = p
+                self.removeFromParent()
+                self.paused = true
+            } else if scene.shouldUnide(self) {
+                _parentNode?.addChild(self)
+                self.paused = false
+            }
+        }
+    }
+
     private func _setAttributes () {
         zPosition = Z.WHEEL
         name = "wheel\(Wheel.WHEEL_COUNT)"

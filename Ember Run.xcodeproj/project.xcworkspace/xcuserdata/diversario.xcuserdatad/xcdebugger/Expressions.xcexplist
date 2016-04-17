@@ -31,10 +31,10 @@
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "contact.bodyA.node?.name">
+               value = "p.node!.constraints">
             </PersistentString>
             <PersistentString
-               value = "p.node!.constraints">
+               value = "contact.bodyA.node?.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -42,13 +42,13 @@
          contextName = "Player.(getJumpVector in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; CGVector?:Player.swift">
          <PersistentStrings>
             <PersistentString
-               value = "_node.parent!.name">
-            </PersistentString>
-            <PersistentString
                value = "IMPULSE_COMP">
             </PersistentString>
             <PersistentString
                value = "self._scene.frame">
+            </PersistentString>
+            <PersistentString
+               value = "_node.parent!.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -90,6 +90,17 @@
       </ContextState>
       <ContextState
          contextName = "Player.getJumpVector() -&gt; CGVector:Player.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.didFinishUpdate() -&gt; ():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scene!.calculateAccumulatedFrame().size">
+            </PersistentString>
+            <PersistentString
+               value = "scene!.calculateAccumulatedFrame().origin.y">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "WheelPlacer.update() -&gt; ():WheelPlacer.swift">

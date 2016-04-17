@@ -76,19 +76,26 @@ void main (void) {
     vec2 tc = v_tex_coord;
     vec3 color = vec3(0.0);
     
-    float y = smoothstep(0.0, 0.5, tc.y);
-    float x = smoothstep(0.0, 0.5, tc.x);
+    //float level = test - tc.y;
     
-    float offset_y = y/800.0;
-    float offset_x = x/200.0;
-    
-    color.r = texture2D(u_texture, vec2(v_tex_coord.x + offset_x, v_tex_coord.y + offset_y)).r;
-    color.g = texture2D(u_texture, vec2(v_tex_coord.x - offset_x, v_tex_coord.y - offset_y)).g;
-    color.b = texture2D(u_texture, vec2(v_tex_coord.x + offset_x, v_tex_coord.y - offset_y)).b;
-    
-    //color.r += sin(test / 1000.0);
-    
-    gl_FragColor = vec4(color,1.0);
+    if (tc.y > test) {
+        gl_FragColor = SKDefaultShading();
+        gl_FragColor.b = 0.9;
+    } else {
+        float y = smoothstep(0.0, 0.5, tc.y);
+        float x = smoothstep(0.0, 0.5, tc.x);
+        
+        float offset_y = y/800.0;
+        float offset_x = x/200.0;
+        
+        color.r = texture2D(u_texture, vec2(tc.x + offset_x, tc.y + offset_y)).r;
+        color.g = 0.2;// texture2D(u_texture, vec2(tc.x - offset_x, tc.y - offset_y)).g;
+        color.b = 0.2;//texture2D(u_texture, vec2(tc.x + offset_x, tc.y - offset_y)).b;
+        
+        //color.r += sin(test / 1000.0);
+        
+        gl_FragColor = vec4(color,1.0);
+    }
 }
 
 // uniform split

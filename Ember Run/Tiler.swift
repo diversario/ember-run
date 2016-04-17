@@ -99,12 +99,12 @@ class Tiler {
         
         let start_point = CGPoint(
             x: frame_position.x + x,
-            y: frame_position.y - 2.0 * _frame_size.height// / 2 - _tile_size.height * 2
+            y: frame_position.y - 2.0 * _frame_size.height / 2 - _tile_size.height * 2
         )
         
         let end_point = CGPoint(
             x: start_point.x,
-            y: frame_position.y + 2.0 * _frame_size.height// / 2// + _tile_size.height * 4
+            y: frame_position.y + 2.0 * _frame_size.height / 2 + _tile_size.height * 2
         )
         
         return (start_point, end_point)
