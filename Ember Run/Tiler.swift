@@ -74,7 +74,7 @@ class Tiler {
         
         tile.position = placement
         
-        self._scene.effect.addChild(tile)
+        self._scene.addChild(tile)
         
         _tiles.append(tile)
         

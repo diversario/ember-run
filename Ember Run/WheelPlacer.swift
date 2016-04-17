@@ -66,11 +66,11 @@ class WheelPlacer {
         
         if last_wheel == nil {
             _wheels.append(wheel)
-            _scene.effect.addChild(wheel)
+            _scene.addChild(wheel)
         } else {
             _adjustWheelPosition(wheel)
             _wheels.append(wheel)
-            _scene.effect.addChild(wheel)
+            _scene.addChild(wheel)
         }
         
         return wheel

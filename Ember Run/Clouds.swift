@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 
 class Cloud: SKSpriteNode, CustomSprite {
-    private var _parentNode: SKEffectNode?
+    private var _parentNode: GameScene?
     private var _speed: CGFloat!
     
     var positionInScene: CGPoint!
@@ -47,17 +47,17 @@ class Cloud: SKSpriteNode, CustomSprite {
     }
     
     func update() {
-        var p: SKEffectNode?
+        var scene: GameScene?
         
-        if let _p = parent {
-            p = _p as? SKEffectNode
+        if let _p = parent as? GameScene {
+            scene = _p
         } else if let _p = _parentNode {
-            p = _p
+            scene = _p
         }
         
-        if let p = p, let scene = p.parent as? GameScene {
+        if let scene = scene {
             if scene.shouldHide(self) {
-                _parentNode = p
+                _parentNode = scene
                 self.removeFromParent()
                 self.paused = true
             } else if scene.shouldUnide(self) {
@@ -134,7 +134,7 @@ class Clouds {
         cloud.positionInScene = position
         
         _clouds.append(cloud)
-        _scene.effect.addChild(cloud)
+        _scene.addChild(cloud)
     }
     
     private func _getRandomX(cloud: SKNode) -> CGFloat {

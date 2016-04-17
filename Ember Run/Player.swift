@@ -80,7 +80,7 @@ class Player: SKSpriteNode {
             
             _initPlayerNode()
             
-            _scene.effect.addChild(self)
+            _scene.addChild(self)
             _positioned = true
 //            physicsBody?.dynamic = false
 //            let act = SKAction.repeatActionForever(SKAction.moveBy(CGVector(dx: 0, dy: 500), duration: 1))

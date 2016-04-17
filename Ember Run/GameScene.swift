@@ -9,8 +9,6 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    let effect = SKEffectNode()
-    
     private var _background: Background?
     private var _wallBuilder: Wall?
     private var _wheelPlacer: WheelPlacer?
@@ -18,6 +16,7 @@ class GameScene: SKScene {
     private var _physicsMgr: PhysicsManager?
     private var _player: Player?
     private var _clouds: Clouds?
+    private var _camera = SKCameraNode()
     
     private var _gameOverCalled = false
     
@@ -33,11 +32,9 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         _physicsMgr = PhysicsManager(scene: self)
-
-        let cam = SKCameraNode()
-        cam.setScale(4)
-        self.effect.addChild(cam)
-        self.camera = cam
+        
+        self.camera = _camera
+        camera!.setScale(4)
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
         RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
@@ -60,17 +57,7 @@ class GameScene: SKScene {
         
         _clouds = Clouds(scene: self)
         
-        //effect.addChild(_water!)
-        
-        let shader = SKShader(fileNamed: "shader_water.fsh")
-        
-        shader.uniforms = [
-            SKUniform(name: "test", float: Float(_player!.position.y))
-        ]
-        
-        addChild(effect)
-        
-        //effect.shader = shader
+//        addChild(_water!)
     }
     
     deinit {
@@ -103,7 +90,7 @@ class GameScene: SKScene {
         }
         
         timeSinceStart = currentTime - timeWhenStarted
-        
+
 //        let marker = SKShapeNode(circleOfRadius: 2)
 //        marker.strokeColor = SKColor.clearColor()
 //        marker.fillColor = SKColor.blackColor()
@@ -114,15 +101,12 @@ class GameScene: SKScene {
         
         self._checkPlayerPosition()
         //print(timeSinceStart)
-        //_water?.position.y = CGFloat(timeSinceStart)
-//        _player?.syncParticles()
-         _followPlayer()
+//        _water?.position.y = CGFloat(timeSinceStart)
+        _followPlayer()
         
         if _isPlayerDead() {
             _gameOver()
         }
-        
-        effect.shader?.uniformNamed("test")?.floatValue = Float(timeSinceStart)
     }
     
     override func didApplyConstraints() {
