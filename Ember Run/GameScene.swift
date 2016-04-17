@@ -57,7 +57,7 @@ class GameScene: SKScene {
         
         _clouds = Clouds(scene: self)
         
-//        addChild(_water!)
+        addChild(_water!)
     }
     
     deinit {
@@ -86,22 +86,15 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         if timeWhenStarted == nil {
-            timeWhenStarted = currentTime
+            timeWhenStarted = currentTime - Double(frame.size.height/3)
         }
         
         timeSinceStart = currentTime - timeWhenStarted
-
-//        let marker = SKShapeNode(circleOfRadius: 2)
-//        marker.strokeColor = SKColor.clearColor()
-//        marker.fillColor = SKColor.blackColor()
-//        
-//        marker.position = camera!.position
-//        marker.zPosition = 10000
-//        effect.addChild(marker)
         
         self._checkPlayerPosition()
-        //print(timeSinceStart)
-//        _water?.position.y = CGFloat(timeSinceStart)
+
+        _water?.position.y += CGFloat(abs(timeSinceStart)/100)
+        
         _followPlayer()
         
         if _isPlayerDead() {
@@ -120,8 +113,6 @@ class GameScene: SKScene {
         if let pos = _player?.position {
             camera?.position = pos
         }
-
-        return
     }
     
     private func _isPlayerDead () -> Bool {
