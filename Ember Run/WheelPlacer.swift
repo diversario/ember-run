@@ -62,7 +62,7 @@ class WheelPlacer {
         )
         
         wheel.position = position
-        wheel.positionInScene = position
+        wheel.positionInScene = position // TODO: add an observer for .position instead
         
         if last_wheel == nil {
             _wheels.append(wheel)
@@ -76,7 +76,7 @@ class WheelPlacer {
         return wheel
     }
     
-    private func _adjustWheelPosition (wheel: SKNode) {
+    private func _adjustWheelPosition (wheel: Wheel) {
         var ok = true
         
         for w in _wheels {
@@ -88,9 +88,11 @@ class WheelPlacer {
         
         if !ok {
             wheel.position.y += 1
+            wheel.positionInScene = wheel.position
             _adjustWheelPosition(wheel)
         } else {
             wheel.position.y = _getRandomY(wheel)
+            wheel.positionInScene = wheel.position
         }
     }
     

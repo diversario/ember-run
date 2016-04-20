@@ -16,7 +16,8 @@ class GameScene: SKScene {
     private var _physicsMgr: PhysicsManager?
     private var _player: Player?
     private var _clouds: Clouds?
-    private var _camera = SKCameraNode()
+    private let _camera = SKCameraNode()
+    private let _camConstraint = SKConstraint.positionX(SKRange(constantValue: 0))
     
     private var _gameOverCalled = false
     
@@ -34,15 +35,14 @@ class GameScene: SKScene {
         _physicsMgr = PhysicsManager(scene: self)
         
         self.camera = _camera
-        camera!.setScale(4)
+        camera!.setScale(1)
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
         RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
         
-        let camConstraint = SKConstraint.positionX(SKRange(constantValue: 0))
-        camConstraint.referenceNode = self
+        _camConstraint.referenceNode = self
         
-        self.camera!.constraints = [camConstraint]
+        self.camera!.constraints = [_camConstraint]
         
         _wallBuilder = Wall(scene: self)
         _wallBuilder?.buildWalls()
@@ -85,16 +85,17 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
+        // water position is time-based
         if timeWhenStarted == nil {
             timeWhenStarted = currentTime - Double(frame.size.height/3)
         }
         
         timeSinceStart = currentTime - timeWhenStarted
-        
-        self._checkPlayerPosition()
 
         _water?.position.y += CGFloat(abs(timeSinceStart)/100)
         
+        self._checkPlayerPosition()
+
         _followPlayer()
         
         if _isPlayerDead() {
@@ -111,7 +112,7 @@ class GameScene: SKScene {
     
     private func _followPlayer() {
         if let pos = _player?.position {
-            camera?.position = pos
+            _camera.position = pos
         }
     }
     
