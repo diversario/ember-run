@@ -35,6 +35,7 @@ class GameScene: SKScene {
         _physicsMgr = PhysicsManager(scene: self)
         
         self.camera = _camera
+        addChild(_camera)
         camera!.setScale(1)
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
@@ -112,7 +113,7 @@ class GameScene: SKScene {
     
     private func _followPlayer() {
         if let pos = _player?.position {
-            _camera.position = pos
+            _camera.position.y = pos.y
         }
     }
     
