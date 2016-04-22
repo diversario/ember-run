@@ -17,7 +17,7 @@ class GameScene: SKScene {
     private var _player: Player?
     private var _clouds: Clouds?
     private let _camera = SKCameraNode()
-    private let _camConstraint = SKConstraint.positionX(SKRange(constantValue: 0))
+    private var _cameraMovedToPlayer = false
     
     private var _gameOverCalled = false
     
@@ -41,9 +41,9 @@ class GameScene: SKScene {
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
         RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
         
-        _camConstraint.referenceNode = self
+//        _camConstraint.referenceNode = self
         
-        self.camera!.constraints = [_camConstraint]
+//        self.camera!.constraints = [_camConstraint]
         
         _wallBuilder = Wall(scene: self)
         _wallBuilder?.buildWalls()
@@ -112,8 +112,30 @@ class GameScene: SKScene {
     }
     
     private func _followPlayer() {
-        if let pos = _player?.position {
-            _camera.position.y = pos.y
+        if let player = _player, cam = camera {
+            cam.position.y = player.position.y
+            return
+            
+            if let wheel = player.isOnWheel {
+                _cameraMovedToPlayer = false
+                
+                if !cam.hasActions() {
+                    let move = SKAction.moveToY(wheel.positionInScene.y, duration: 0.2)
+                    
+                    cam.runAction(move)
+                }
+            } else {
+                if _cameraMovedToPlayer {
+                    cam.position.y = player.position.y
+                } else {
+                    let move = SKAction.moveToY(player.position.y, duration: 0.1)
+                    
+                    cam.runAction(move, completion: {
+                        cam.position.y = player.position.y
+                        self._cameraMovedToPlayer = true
+                    })
+                }
+            }
         }
     }
     

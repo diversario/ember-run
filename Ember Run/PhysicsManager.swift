@@ -64,6 +64,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             if let playerInstance = Player.getPlayer() {
                 let angle = getPlayerRotationAngle(normalizedVTCP)
                 playerInstance.zRotation = angle
+                playerInstance.isOnWheel = wheel.node as? Wheel
             }
             
             self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheel, anchor: contact.contactPoint)
@@ -76,6 +77,10 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
     func detachPlayerFromWheel() {
         _scene.physicsWorld.removeJoint(_joint)
         _joint = nil
+        
+        if let playerInstance = Player.getPlayer() {
+            playerInstance.isOnWheel = nil
+        }
     }
     
     private func _getBodies (contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {

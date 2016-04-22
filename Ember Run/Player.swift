@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
-    private static var _instance: Player!
+private static var _instance: Player!
     
     private static let Texture = SKTexture(imageNamed: "player")
 
@@ -21,7 +21,17 @@ class Player: SKSpriteNode {
     private var _health = 100
     private var _isDying = false
     
-//    private var _particleTrail = SKEmitterNode(fileNamed: "PlayerTrail")!
+    private var _isOnWheel: Wheel? = nil
+    
+    var isOnWheel: Wheel? {
+        get {
+            return _isOnWheel
+        }
+        
+        set {
+            _isOnWheel = newValue
+        }
+    }
     
     var velocity: CGVector? {
         get {
@@ -197,14 +207,7 @@ class Player: SKSpriteNode {
         return ceil(position.x) <= left_threshold ||
             floor(position.x) >= right_threshold
     }
-    
-    private func _isOnWheel () -> Bool {
-        if let name = parent?.name {
-            return name.containsString("wheel")
-        }
-        
-        return false
-    }
+
     
     func orientToMovement (impulse: CGVector) {
         let angle = getPlayerRotationAngle(impulse)
