@@ -56,11 +56,11 @@ class GameScene: SKScene {
         
         let scoreLabel = SKLabelNode(text: "10000")
         
-        scoreLabel.fontName = "Menlo"
+        scoreLabel.fontName = "Phatone-Regular"
         scoreLabel.fontSize = 15
         scoreLabel.name = "score"
         scoreLabel.zPosition = 10000
-        scoreLabel.position = CGPoint(x: 0, y: frame.height / 2 - 30)
+        scoreLabel.position = CGPoint(x: 0, y: frame.height / 2 - 20)
         
         camera?.addChild(scoreLabel)
     }
