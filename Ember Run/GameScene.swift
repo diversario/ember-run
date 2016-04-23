@@ -11,7 +11,6 @@ import AVFoundation
 
 class GameScene: SKScene {
     private var _background: Background?
-    private var _wallBuilder: Wall?
     private var _wheelPlacer: WheelPlacer?
     private var _water: Water?
     private var _physicsMgr: PhysicsManager?
@@ -40,11 +39,8 @@ class GameScene: SKScene {
         
         addChild(_camera)
         
-        LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
-        RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
-        
-        _wallBuilder = Wall(scene: self)
-        _wallBuilder?.buildWalls()
+        LEFT_EDGE = self.camera!.position.x - self.size.width / 2
+        RIGHT_EDGE = self.camera!.position.x + self.size.width / 2
         
         _wheelPlacer = WheelPlacer(scene: self)
         
@@ -65,7 +61,6 @@ class GameScene: SKScene {
     
     override func willMoveFromView(view: SKView) {
         print("GAMESCENE WILLMOVEFROMVIEW")
-        _wallBuilder = nil
         _wheelPlacer = nil
         _water = nil
         _physicsMgr = nil
@@ -124,7 +119,6 @@ class GameScene: SKScene {
     }
     
     override func didApplyConstraints() {
-        _wallBuilder?.update()
         _wheelPlacer?.update()
         _background?.update()
         _clouds?.update()
@@ -195,15 +189,16 @@ class GameScene: SKScene {
                 
                 player.startDying()
             } else {
+                if player.position.x < LEFT_EDGE || player.position.x > RIGHT_EDGE {
+                    player.startDying()
+                } else {
+                  player.stopDying()
+                }
+                
                 player.normalDamping()
-                
-                player.stopDying()
-                
                 pm.setNormalGravity()
             }
-            
         }
-
     }
     
     func shouldRemoveFromScene (node: CustomSprite) -> Bool {

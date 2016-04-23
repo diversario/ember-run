@@ -17,11 +17,14 @@ class Player: SKSpriteNode {
     private unowned let _scene: GameScene
     private unowned let _physicsManager: PhysicsManager
     
-    private var _positioned = false
-    private var _health = 100
+    private var _health = 1
     private var _isDying = false
     
     private var _isOnWheel: Wheel? = nil
+    
+    private var _positioned: Bool {
+        return parent != nil
+    }
     
     var radius: CGFloat {
         return self.size.height / 2
@@ -95,10 +98,6 @@ class Player: SKSpriteNode {
             _initPlayerNode()
             
             _scene.addChild(self)
-            _positioned = true
-//            physicsBody?.dynamic = false
-//            let act = SKAction.repeatActionForever(SKAction.moveBy(CGVector(dx: 0, dy: 500), duration: 1))
-//            runAction(act)
         }
     }
     
@@ -125,15 +124,6 @@ class Player: SKSpriteNode {
         _setPhysicsBody()
         
         name = "player"
-        
-        let constr = SKConstraint.positionX(
-            SKRange(
-                lowerLimit: _scene.LEFT_EDGE + size.width / 2,
-                upperLimit: _scene.RIGHT_EDGE - size.width / 2
-            )
-        )
-        
-        constraints = [constr]
         
         //_particleTrail.targetNode = _node
         //_node.addChild(_particleTrail)
@@ -224,7 +214,7 @@ class Player: SKSpriteNode {
         if !self._isDying {
             print("💀💀💀💀💀💀💀💀")
             self._isDying = true
-            //_node.runAction(_getDecreaseHealthAction())
+            runAction(_getDecreaseHealthAction())
         }
     }
     
@@ -237,7 +227,7 @@ class Player: SKSpriteNode {
     }
     
     private func _getDecreaseHealthAction () -> SKAction {
-        let wait = SKAction.waitForDuration(0.7)
+        let wait = SKAction.waitForDuration(0)
         
         let decreaseHealth = SKAction.runBlock { _ in
             self._startDecreasingHealth()

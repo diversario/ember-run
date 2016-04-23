@@ -14,16 +14,15 @@ class WheelPlacer {
     private unowned let _scene: GameScene
     private let _frame_size: CGSize
     private var _wheels = [Wheel]()
-//    private var _wheels_dict = [ Double: Wheel ]()
     
-    private let _MIN_DISTANCE: CGFloat = 20
+    private let _MIN_DISTANCE: CGFloat = 30
     private let _MAX_DISTANCE: CGFloat// = 200
 
     init(scene: GameScene) {
         self._scene = scene
         _frame_size = scene.size
         Wheel.MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
-        _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS) * 1.05
+        _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS)
     }
     
     deinit {

@@ -70,8 +70,6 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 
                 self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheelPB, anchor: contact.contactPoint)
                 self._scene.physicsWorld.addJoint(self._joint)
-                
-                player.node!.constraints!.first!.enabled = true
             }
         }
     }
