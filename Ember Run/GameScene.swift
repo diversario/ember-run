@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     private var _background: Background?
@@ -40,10 +41,6 @@ class GameScene: SKScene {
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
         RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
-        
-//        _camConstraint.referenceNode = self
-        
-//        self.camera!.constraints = [_camConstraint]
         
         _wallBuilder = Wall(scene: self)
         _wallBuilder?.buildWalls()
@@ -79,12 +76,31 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         _player?.onTap()
 
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            _player?.positionPlayer(location)
+        if _player?.parent == nil {
+            for touch in touches {
+                let location = touch.locationInNode(self)
+                
+                let canStart = self.nodesAtPoint(location).filter({ (n) -> Bool in
+                    if let name = n.name {
+                        if name.containsString("wheel") {
+                            if let wheel = n as? Wheel {
+                                return wheel.contains(location)
+                            }
+                        }
+                    }
+                    
+                    return false
+                }).isEmpty
+                
+                if canStart {
+                    _player?.positionPlayer(location)
+                } else {
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                }
+            }
         }
     }
-   
+    
     override func update(currentTime: CFTimeInterval) {
         // water position is time-based
         if timeWhenStarted == nil {

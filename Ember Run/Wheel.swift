@@ -85,6 +85,10 @@ class Wheel: SKSpriteNode, CustomSprite {
         }
     }
 
+    func contains (point: CGPoint) -> Bool {
+        return distanceBetweenPoints(point, positionInScene) <= _radius
+    }
+    
     private func _setAttributes () {
         zPosition = Z.WHEEL
         name = "wheel\(Wheel.WHEEL_COUNT)"
