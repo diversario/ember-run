@@ -53,6 +53,16 @@ class GameScene: SKScene {
         _clouds = Clouds(scene: self)
         
         addChild(_water!)
+        
+        let scoreLabel = SKLabelNode(text: "10000")
+        
+        scoreLabel.fontName = "Menlo"
+        scoreLabel.fontSize = 15
+        scoreLabel.name = "score"
+        scoreLabel.zPosition = 10000
+        scoreLabel.position = CGPoint(x: 0, y: frame.height / 2 - 30)
+        
+        camera?.addChild(scoreLabel)
     }
     
     deinit {

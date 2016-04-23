@@ -178,30 +178,10 @@ class Player: SKSpriteNode {
                 vector!.dx *= IMPULSE.WHEEL
                 vector!.dy *= IMPULSE.WHEEL
             }
-        } else if _isOnTheWall() {
-            if playerCoords.x < 0 { // it's on the left wall
-                vector = CGVectorMake(1, 1)
-            } else {
-                vector = CGVectorMake(-1, 1)
-            }
-            
-            vector = normalizeVector(vector!)
-            
-            vector!.dx *= IMPULSE.WALL
-            vector!.dy *= IMPULSE.WALL
         }
 
         return vector
     }
-    
-    private func _isOnTheWall () -> Bool {
-        let left_threshold = ceil(_scene.LEFT_EDGE + size.width / 2)
-        let right_threshold = floor(_scene.RIGHT_EDGE - size.width / 2)
-        
-        return ceil(position.x) <= left_threshold ||
-            floor(position.x) >= right_threshold
-    }
-
     
     func orientToMovement (impulse: CGVector) {
         let angle = getPlayerRotationAngle(impulse)

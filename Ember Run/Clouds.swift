@@ -138,8 +138,8 @@ class Clouds {
     }
     
     private func _getRandomX(cloud: SKNode) -> CGFloat {
-        let min = Int(WALL_WIDTH + cloud.frame.width / 2 - _frame_size.width / 2)
-        let max = Int(_frame_size.width / 2 - WALL_WIDTH - cloud.frame.width / 2)
+        let min = Int(cloud.frame.width / 2 - _frame_size.width / 2)
+        let max = Int(_frame_size.width / 2 - cloud.frame.width / 2)
         
         let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
         

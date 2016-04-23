@@ -21,7 +21,7 @@ class WheelPlacer {
     init(scene: GameScene) {
         self._scene = scene
         _frame_size = scene.size
-        Wheel.MAX_RADIUS = Int((scene.size.width - WALL_WIDTH * 2) * 0.8 / 2) // 80% of available space
+        Wheel.MAX_RADIUS = Int((scene.size.width) * 0.8 / 2) // 80% of available space
         _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS)
     }
     
@@ -96,8 +96,8 @@ class WheelPlacer {
     }
     
     private func _getRandomX(wheel: SKNode) -> CGFloat {
-        let min = Int(WALL_WIDTH + wheel.frame.width / 2 + _MIN_DISTANCE - _frame_size.width / 2)
-        let max = Int(_frame_size.width / 2 - WALL_WIDTH - _MIN_DISTANCE - wheel.frame.width / 2)
+        let min = Int(wheel.frame.width / 2 + _MIN_DISTANCE - _frame_size.width / 2)
+        let max = Int(_frame_size.width / 2 - _MIN_DISTANCE - wheel.frame.width / 2)
         
         let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
         
