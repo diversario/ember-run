@@ -36,8 +36,9 @@ class GameScene: SKScene {
         _physicsMgr = PhysicsManager(scene: self)
         
         self.camera = _camera
-        addChild(_camera)
         camera!.setScale(1)
+        
+        addChild(_camera)
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2 + WALL_WIDTH
         RIGHT_EDGE = self.camera!.position.x + self.size.width / 2 - WALL_WIDTH
@@ -78,26 +79,28 @@ class GameScene: SKScene {
 
         if _player?.parent == nil {
             for touch in touches {
-                let location = touch.locationInNode(self)
-                
-                let canStart = self.nodesAtPoint(location).filter({ (n) -> Bool in
-                    if let name = n.name {
-                        if name.containsString("wheel") {
-                            if let wheel = n as? Wheel {
-                                return wheel.contains(location)
-                            }
-                        }
+                placePlayer(touch.locationInNode(self))
+            }
+        }
+    }
+    
+    func placePlayer (location: CGPoint) {
+        let canStart = self.nodesAtPoint(location).filter({ (n) -> Bool in
+            if let name = n.name {
+                if name.containsString("wheel") {
+                    if let wheel = n as? Wheel {
+                        return wheel.contains(location)
                     }
-                    
-                    return false
-                }).isEmpty
-                
-                if canStart {
-                    _player?.positionPlayer(location)
-                } else {
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                 }
             }
+            
+            return false
+        }).isEmpty
+        
+        if canStart {
+            _player?.positionPlayer(location)
+        } else {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         }
     }
     

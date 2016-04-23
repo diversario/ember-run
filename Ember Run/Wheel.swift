@@ -29,6 +29,10 @@ class Wheel: SKSpriteNode, CustomSprite {
     
     var positionInScene: CGPoint!
     
+    var radius: CGFloat {
+        return _radius
+    }
+    
     init () {
         Wheel.WHEEL_COUNT += 1
         

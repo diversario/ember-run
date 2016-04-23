@@ -41,36 +41,38 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         let mask = player.contactTestBitMask & other.categoryBitMask
         
         if mask == CAT.WHEEL {
-            let wheel = other
+            let wheelPB = other
             
-            if _joint != nil {
-                _scene.physicsWorld.removeJoint(_joint)
-            }
-            
-            let vectorToContactPoint = CGVector(
-                dx: contact.contactPoint.x - wheel.node!.position.x,
-                dy: contact.contactPoint.y - wheel.node!.position.y
-            )
-            
-            let normalizedVTCP = normalizeVector(vectorToContactPoint)
-        
-            let adjustedContactPoint = CGPoint(
-                x: contact.contactPoint.x + 8*normalizedVTCP.dx,
-                y: contact.contactPoint.y + 8*normalizedVTCP.dy
-            )
-            
-            player.node!.position = adjustedContactPoint
-
-            if let playerInstance = Player.getPlayer() {
-                let angle = getPlayerRotationAngle(normalizedVTCP)
+            if let wheel = wheelPB.node as? Wheel, playerInstance = Player.getPlayer() {
+                if _joint != nil {
+                    _scene.physicsWorld.removeJoint(_joint)
+                }
+                
+                let vectorToContactPoint = CGVector(
+                    dx: contact.contactPoint.x - wheel.positionInScene.x,
+                    dy: contact.contactPoint.y - wheel.positionInScene.y
+                )
+                
+                let distanceFromWheelCenter = wheel.radius + playerInstance.radius
+                
+                let multiplier = distanceFromWheelCenter / vectorLength(vectorToContactPoint)
+                
+                let adjustedContactPoint = CGPoint(
+                    x: wheel.positionInScene.x + multiplier * vectorToContactPoint.dx,
+                    y: wheel.positionInScene.y + multiplier * vectorToContactPoint.dy
+                )
+                
+                player.node!.position = adjustedContactPoint
+                
+                let angle = getPlayerRotationAngle(vectorToContactPoint)
                 playerInstance.zRotation = angle
-                playerInstance.isOnWheel = wheel.node as? Wheel
+                playerInstance.isOnWheel = wheel
+                
+                self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheelPB, anchor: contact.contactPoint)
+                self._scene.physicsWorld.addJoint(self._joint)
+                
+                player.node!.constraints!.first!.enabled = true
             }
-            
-            self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheel, anchor: contact.contactPoint)
-            self._scene.physicsWorld.addJoint(self._joint)
-            
-            player.node!.constraints!.first!.enabled = true
         }
     }
     

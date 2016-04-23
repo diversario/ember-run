@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
-private static var _instance: Player!
+    private static var _instance: Player!
     
     private static let Texture = SKTexture(imageNamed: "player")
 
@@ -22,6 +22,10 @@ private static var _instance: Player!
     private var _isDying = false
     
     private var _isOnWheel: Wheel? = nil
+    
+    var radius: CGFloat {
+        return self.size.height / 2
+    }
     
     var isOnWheel: Wheel? {
         get {
