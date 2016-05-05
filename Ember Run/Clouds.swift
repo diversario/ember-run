@@ -16,6 +16,12 @@ class Cloud: SKSpriteNode, CustomSprite {
     
     var positionInScene: CGPoint!
 
+    override var position: CGPoint {
+        willSet {
+            positionInScene = newValue
+        }
+    }
+
     private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
     private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
     private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
@@ -84,8 +90,6 @@ class Clouds {
     private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
     private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
     
-    var positionInScene: CGPoint!
-    
     init(scene: GameScene) {
         _scene = scene
         _frame_size = scene.size
@@ -98,6 +102,7 @@ class Clouds {
             _placeClouds()
         }
         
+        // this is repeated in WheelPlacer, can be broken out, maybe
         for cloud in _clouds {
             if self._scene.shouldRemoveFromScene(cloud) {
                 if let idx = self._clouds.indexOf(cloud) {
@@ -131,7 +136,7 @@ class Clouds {
         )
         
         cloud.position = position
-        cloud.positionInScene = position
+//        cloud.positionInScene = position
         
         _clouds.append(cloud)
         _scene.addChild(cloud)

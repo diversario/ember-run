@@ -47,7 +47,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 if _joint != nil {
                     _scene.physicsWorld.removeJoint(_joint)
                 }
-                
+            
                 let vectorToContactPoint = CGVector(
                     dx: contact.contactPoint.x - wheel.positionInScene.x,
                     dy: contact.contactPoint.y - wheel.positionInScene.y

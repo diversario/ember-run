@@ -61,7 +61,7 @@ class WheelPlacer {
         )
         
         wheel.position = position
-        wheel.positionInScene = position // TODO: add an observer for .position instead
+//        wheel.positionInScene = position // TODO: add an observer for .position instead
         
         if last_wheel == nil {
             _wheels.append(wheel)

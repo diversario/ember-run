@@ -28,6 +28,8 @@
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		203042BB1CCB5DF600859701 /* Phatone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 203042BA1CCB5DF600859701 /* Phatone-Regular.otf */; };
+		203042BD1CCC0D7000859701 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BC1CCC0D7000859701 /* Coin.swift */; };
+		203042BF1CCEE10300859701 /* CustomSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BE1CCEE10300859701 /* CustomSprite.swift */; };
 		2069B6531C87EA9B00EB0188 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2069B6521C87EA9B00EB0188 /* README.md */; };
 		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
 		209C606D1C7849DD002816C3 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 209C606C1C7849DD002816C3 /* GameOver.sks */; };
@@ -81,6 +83,8 @@
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		203042BA1CCB5DF600859701 /* Phatone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phatone-Regular.otf"; sourceTree = "<group>"; };
+		203042BC1CCC0D7000859701 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		203042BE1CCEE10300859701 /* CustomSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSprite.swift; sourceTree = "<group>"; };
 		2069B6521C87EA9B00EB0188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
 		209C606C1C7849DD002816C3 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				20020AA71C8E8733002CE0A0 /* Tiler.swift */,
 				20020AAD1C914653002CE0A0 /* Background.swift */,
 				20FFE0B21C9A656400C95811 /* Clouds.swift */,
+				203042BC1CCC0D7000859701 /* Coin.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			children = (
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
 				20B66E311C75540C0062AA16 /* Util.swift */,
+				203042BE1CCEE10300859701 /* CustomSprite.swift */,
 				209C60481C77C163002816C3 /* shader_water.fsh */,
 			);
 			name = Util;
@@ -373,6 +379,8 @@
 				20020AAA1C8FEE3E002CE0A0 /* Tile.swift in Sources */,
 				20020AA61C8CDF39002CE0A0 /* Water.swift in Sources */,
 				20FFE0B31C9A656400C95811 /* Clouds.swift in Sources */,
+				203042BD1CCC0D7000859701 /* Coin.swift in Sources */,
+				203042BF1CCEE10300859701 /* CustomSprite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

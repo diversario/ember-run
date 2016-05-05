@@ -18,6 +18,7 @@ class GameScene: SKScene {
     private var _clouds: Clouds?
     private let _camera = SKCameraNode()
     private var _cameraMovedToPlayer = false
+    private var _coin: Coin?
     
     private var _gameOverCalled = false
     
@@ -63,6 +64,10 @@ class GameScene: SKScene {
         scoreLabel.position = CGPoint(x: 0, y: frame.height / 2 - 20)
         
         camera?.addChild(scoreLabel)
+        
+        _coin = Coin(scene: self, physicsManager: _physicsMgr!)
+        _coin!.position = camera!.position
+        addChild(_coin!)
     }
     
     deinit {

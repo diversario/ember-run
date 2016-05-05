@@ -17,6 +17,8 @@ class Player: SKSpriteNode {
     private unowned let _scene: GameScene
     private unowned let _physicsManager: PhysicsManager
     
+    private var _fieldNode: SKFieldNode?
+
     private var _health = 1
     private var _isDying = false
     
@@ -139,6 +141,14 @@ class Player: SKSpriteNode {
         physicsBody!.usesPreciseCollisionDetection = true
         
         physicsBody!.mass = 0.01 * SCREEN_SCALE
+        
+        physicsBody!.fieldBitMask = CAT.PLAYER
+        _fieldNode = SKFieldNode.springField()
+        _fieldNode!.strength = 100
+        _fieldNode!.categoryBitMask = CAT.COIN
+        _fieldNode!.region = SKRegion(radius: Float(radius * 6))
+        
+        addChild(_fieldNode!)
         
         normalDamping()
     }

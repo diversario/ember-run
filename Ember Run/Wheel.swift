@@ -10,10 +10,10 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-protocol CustomSprite {
-    var positionInScene: CGPoint! {get set}
-    var parent: SKNode? { get }
-    var name: String? { get set }
+// clockwise, counterclockwise
+enum ROTATION_DIRECTION {
+    case CW
+    case CCW
 }
 
 class Wheel: SKSpriteNode, CustomSprite {
@@ -26,6 +26,22 @@ class Wheel: SKSpriteNode, CustomSprite {
     private static var _randomRadius: GKRandomDistribution!
     private var _radius: CGFloat!
     private var _parentNode: GameScene?
+    
+    private var _rotationDirection: ROTATION_DIRECTION?
+    
+    var direction: ROTATION_DIRECTION {
+        return _rotationDirection!
+    }
+    
+    var velocity: CGFloat {
+        return physicsBody!.angularVelocity
+    }
+    
+    override var position: CGPoint {
+        willSet {
+            positionInScene = newValue
+        }
+    }
     
     var positionInScene: CGPoint!
     
@@ -114,7 +130,11 @@ class Wheel: SKSpriteNode, CustomSprite {
     }
     
     private func _getRandomRotationAction() -> SKAction {
-        let angle = _getRandomAngularSpeed() * (randomBool.nextBool() ? 1 : -1)
+        let direction: CGFloat = randomBool.nextBool() ? 1 : -1
+        
+        _rotationDirection = direction > 0 ? .CCW : .CW
+        
+        let angle = _getRandomAngularSpeed() * direction
         return SKAction.rotateByAngle(angle, duration: 1)
     }
     
