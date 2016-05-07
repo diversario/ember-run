@@ -19,6 +19,7 @@ class GameScene: SKScene {
     private let _camera = SKCameraNode()
     private var _cameraMovedToPlayer = false
     private var _coin: Coin?
+    private var _pin: CoinPin?
     
     private var _gameOverCalled = false
     
@@ -31,6 +32,8 @@ class GameScene: SKScene {
     var player: Player? {
         return _player
     }
+    
+    private var _joint: SKPhysicsJointSpring?
     
     override func didMoveToView(view: SKView) {
         _physicsMgr = PhysicsManager(scene: self)
@@ -65,9 +68,28 @@ class GameScene: SKScene {
         
         camera?.addChild(scoreLabel)
         
+        /** testing out coin **/
+        
         _coin = Coin(scene: self, physicsManager: _physicsMgr!)
         _coin!.position = camera!.position
+        
         addChild(_coin!)
+        
+//        _pin = CoinPin(scene: self)
+//        _pin?.position = _coin!.position
+//        
+//        addChild(_pin!)
+        
+//        _joint = SKPhysicsJointSpring.jointWithBodyA(
+//            _coin!.physicsBody!,
+//            bodyB: _pin!.physicsBody!,
+//            anchorA: _pin!.position,
+//            anchorB: _coin!.position
+//        )
+//        
+//        _joint?.damping = 10
+        
+//        physicsWorld.addJoint(_joint!)
     }
     
     deinit {

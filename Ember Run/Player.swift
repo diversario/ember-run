@@ -138,7 +138,7 @@ class Player: SKSpriteNode {
         physicsBody!.collisionBitMask = COLLISION_MASK.PLAYER
         physicsBody!.categoryBitMask = CAT.PLAYER
         
-        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.usesPreciseCollisionDetection = false
         
         physicsBody!.mass = 0.01 * SCREEN_SCALE
         

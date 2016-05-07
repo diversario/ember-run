@@ -22,6 +22,7 @@ struct CAT {
     static let PLAYER: UInt32 = 0x1 << 1
     static let WATER: UInt32 = 0x1 << 2
     static let COIN: UInt32 = 0x1 << 3
+    static let COIN_PIN: UInt32 = 0x1 << 4
 }
 
 struct COLLISION_MASK {
@@ -29,13 +30,15 @@ struct COLLISION_MASK {
     static let PLAYER: UInt32 = 0
     static let WATER: UInt32 = 0
     static let COIN: UInt32 = CAT.WHEEL
+    static let COIN_PIN: UInt32 = 0
 }
 
 struct CONTACT_MASK {
     static let WHEEL: UInt32 = 0
-    static let PLAYER: UInt32 = CAT.WHEEL
+    static let PLAYER: UInt32 = CAT.WHEEL | CAT.COIN
     static let WATER: UInt32 = 0
     static let COIN: UInt32 = CAT.PLAYER
+    static let COIN_PIN: UInt32 = 0
 }
 
 let SCREEN_SCALE = UIScreen.mainScreen().scale

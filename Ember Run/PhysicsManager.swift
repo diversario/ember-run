@@ -37,7 +37,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         let (player, other) = _getBodies(contact)
-        
+
         let mask = player.contactTestBitMask & other.categoryBitMask
         
         if mask == CAT.WHEEL {
@@ -94,7 +94,7 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             p = contact.bodyB
             w = contact.bodyA
         }
-        
+      
         return (p, w)
     }
     

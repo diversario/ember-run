@@ -121,7 +121,7 @@ class Wheel: SKSpriteNode, CustomSprite {
         physicsBody!.contactTestBitMask = CONTACT_MASK.WHEEL
         physicsBody!.collisionBitMask = COLLISION_MASK.WHEEL
         physicsBody!.categoryBitMask = CAT.WHEEL
-        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.usesPreciseCollisionDetection = false
     }
     
     private func _setRotation () {

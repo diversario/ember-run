@@ -9,6 +9,37 @@
 import Foundation
 import SpriteKit
 
+class CoinPin: SKNode, CustomSprite {
+    private var _parentNode: GameScene?
+    private unowned let _scene: GameScene
+    
+    override var position: CGPoint {
+        willSet {
+            positionInScene = newValue
+        }
+    }
+    
+    var positionInScene: CGPoint!
+
+    init(scene: GameScene) {
+        _scene = scene
+        
+        super.init()
+        
+        physicsBody = SKPhysicsBody(circleOfRadius: 1)
+        physicsBody!.dynamic = false
+        physicsBody!.categoryBitMask = CAT.COIN_PIN
+        physicsBody!.collisionBitMask = CAT.COIN_PIN
+        physicsBody!.contactTestBitMask = CAT.COIN_PIN
+        physicsBody!.fieldBitMask = CAT.COIN_PIN
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        _scene = GameScene(fileNamed: "GameScene")!
+        super.init(coder: aDecoder)
+    }
+}
+
 class Coin: SKSpriteNode, CustomSprite {
     private var _parentNode: GameScene?
     
@@ -52,7 +83,6 @@ class Coin: SKSpriteNode, CustomSprite {
         
         physicsBody = SKPhysicsBody(circleOfRadius: Coin.Texture.size().height)
         physicsBody!.mass = 1//20// 0.01 * SCREEN_SCALE // maybe not needed
-        //physicsBody!.density = 0
         physicsBody!.affectedByGravity = false
         physicsBody!.linearDamping = 1
         physicsBody!.restitution = 0
