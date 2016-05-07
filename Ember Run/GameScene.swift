@@ -75,21 +75,22 @@ class GameScene: SKScene {
         
         addChild(_coin!)
         
-//        _pin = CoinPin(scene: self)
-//        _pin?.position = _coin!.position
-//        
-//        addChild(_pin!)
+        _pin = CoinPin(scene: self)
+        _pin?.position = CGPoint(x: _coin!.position.x + 10.0, y: _coin!.position.y + 10.0)
         
-//        _joint = SKPhysicsJointSpring.jointWithBodyA(
-//            _coin!.physicsBody!,
-//            bodyB: _pin!.physicsBody!,
-//            anchorA: _pin!.position,
-//            anchorB: _coin!.position
-//        )
-//        
-//        _joint?.damping = 10
+        addChild(_pin!)
         
-//        physicsWorld.addJoint(_joint!)
+        _joint = SKPhysicsJointSpring.jointWithBodyA(
+            _coin!.physicsBody!,
+            bodyB: _pin!.physicsBody!,
+            anchorA: _pin!.position,
+            anchorB: _coin!.position
+        )
+        
+        _joint?.damping = 10
+        _joint?.frequency = 10
+        
+        physicsWorld.addJoint(_joint!)
     }
     
     deinit {
