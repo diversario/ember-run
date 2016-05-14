@@ -18,15 +18,31 @@ class WheelPlacer {
     private let _MIN_DISTANCE: CGFloat = 30
     private let _MAX_DISTANCE: CGFloat// = 200
 
+    private static var _instance: WheelPlacer!
+    
+    static var instance: WheelPlacer? {
+        if let wp = _instance {
+            return wp
+        }
+        
+        return nil
+    }
+    
     init(scene: GameScene) {
         self._scene = scene
         _frame_size = scene.size
-        Wheel.MAX_RADIUS = Int((scene.size.width) * 0.8 / 2) // 80% of available space
+        Wheel.MAX_RADIUS = Int((scene.size.width) * 0.5 / 2) // 80% of available space
         _MAX_DISTANCE = CGFloat(Wheel.MAX_RADIUS)
+        
+        WheelPlacer._instance = self
     }
     
     deinit {
         print("DEINIT WHEELPLACER")
+    }
+    
+    var wheels: [Wheel] {
+        return _wheels
     }
     
     func update() {

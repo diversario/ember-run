@@ -31,10 +31,10 @@
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "p.node!.constraints">
+               value = "contact.bodyA.node?.name">
             </PersistentString>
             <PersistentString
-               value = "contact.bodyA.node?.name">
+               value = "p.node!.constraints">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -45,10 +45,10 @@
                value = "IMPULSE_COMP">
             </PersistentString>
             <PersistentString
-               value = "self._scene.frame">
+               value = "_node.parent!.name">
             </PersistentString>
             <PersistentString
-               value = "_node.parent!.name">
+               value = "self._scene.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -121,6 +121,9 @@
             </PersistentString>
             <PersistentString
                value = "UIScreen.mainScreen().scale">
+            </PersistentString>
+            <PersistentString
+               value = "UIScreen.mainScreen().bounds">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

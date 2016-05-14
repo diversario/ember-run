@@ -50,13 +50,13 @@ class GameScene: SKScene {
         
         _player = Player(scene: self, physicsManager: _physicsMgr!)
         
-        _water = Water(scene: self)
+        //_water = Water(scene: self)
         
         _background = Background(scene: self)
         
         _clouds = Clouds(scene: self)
         
-        addChild(_water!)
+//        addChild(_water!)
         
         let scoreLabel = SKLabelNode(text: "10000")
         
@@ -70,7 +70,7 @@ class GameScene: SKScene {
         
         /** testing out coin **/
         
-        _coin = Coin(scene: self, physicsManager: _physicsMgr!)
+        _coin = Coin(scene: self)
         _coin!.position = camera!.position
         
         addChild(_coin!)
@@ -87,8 +87,8 @@ class GameScene: SKScene {
             anchorB: _coin!.position
         )
         
-        _joint?.damping = 10
-        _joint?.frequency = 10
+        _joint?.damping = 100
+        _joint?.frequency = 1
         
         physicsWorld.addJoint(_joint!)
     }
@@ -216,8 +216,8 @@ class GameScene: SKScene {
     }
     
     private func _checkPlayerPosition() {
-        if let player = player, water = _water, pm = _physicsMgr {
-            if player.isInWater(water) {
+        if let player = player, pm = _physicsMgr {
+            if let water = _water where player.isInWater(water) {
                 if !player.isDying {
                     player.highDamping()
                     player.reduceVelocity()
@@ -255,6 +255,7 @@ class GameScene: SKScene {
                pos.y > (camera!.position.y + frame.size.height)
     }
     
+// verify that just .position works
     func shouldUnide (node: CustomSprite) -> Bool {
         let pos = node.positionInScene
         

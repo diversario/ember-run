@@ -32,6 +32,13 @@ class CoinPin: SKNode, CustomSprite {
         physicsBody!.collisionBitMask = CAT.COIN_PIN
         physicsBody!.contactTestBitMask = CAT.COIN_PIN
         physicsBody!.fieldBitMask = CAT.COIN_PIN
+        
+        let _fieldNode = SKFieldNode.springField()
+        _fieldNode.strength = 50
+        _fieldNode.categoryBitMask = CAT.COIN
+        _fieldNode.region = SKRegion(radius: 70)
+        
+        addChild(_fieldNode)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,11 +61,9 @@ class Coin: SKSpriteNode, CustomSprite {
     private static let Texture = SKTexture(imageNamed: "coin")
     
     private unowned let _scene: GameScene
-    private unowned let _physicsManager: PhysicsManager
 
-    init (scene: GameScene, physicsManager: PhysicsManager) {
+    init (scene: GameScene) {
         _scene = scene
-        _physicsManager = physicsManager
         
         super.init(texture: Coin.Texture, color: SKColor.clearColor(), size: Coin.Texture.size())
         
@@ -71,7 +76,6 @@ class Coin: SKSpriteNode, CustomSprite {
     
     required init?(coder aDecoder: NSCoder) {
         _scene = GameScene(fileNamed: "GameScene")!
-        _physicsManager = PhysicsManager(scene: _scene)
         
         super.init(coder: aDecoder)
     }

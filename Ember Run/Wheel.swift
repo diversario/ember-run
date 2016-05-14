@@ -99,7 +99,9 @@ class Wheel: SKSpriteNode, CustomSprite {
                 self.removeFromParent()
                 self.paused = true
             } else if scene.shouldUnide(self) {
+                print("BEFORE ADD \(name) \(position)")
                 scene.addChild(self)
+                print("AFTER ADD \(name) \(position)")
                 self.paused = false
             }
         }

@@ -136,15 +136,14 @@ class Clouds {
         )
         
         cloud.position = position
-//        cloud.positionInScene = position
         
         _clouds.append(cloud)
         _scene.addChild(cloud)
     }
     
     private func _getRandomX(cloud: SKNode) -> CGFloat {
-        let min = Int(cloud.frame.width / 2 - _frame_size.width / 2)
-        let max = Int(_frame_size.width / 2 - cloud.frame.width / 2)
+        let min = Int(0 - cloud.frame.width - _frame_size.width / 2)
+        let max = Int(_frame_size.width / 2 + cloud.frame.width)
         
         let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
         
