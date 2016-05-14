@@ -9,18 +9,10 @@
 import Foundation
 import SpriteKit
 
-class CoinPin: SKNode, CustomSprite {
+class CoinPin: SKNode {
     private var _parentNode: GameScene?
     private unowned let _scene: GameScene
     
-    override var position: CGPoint {
-        willSet {
-            positionInScene = newValue
-        }
-    }
-    
-    var positionInScene: CGPoint!
-
     init(scene: GameScene) {
         _scene = scene
         
@@ -47,17 +39,9 @@ class CoinPin: SKNode, CustomSprite {
     }
 }
 
-class Coin: SKSpriteNode, CustomSprite {
+class Coin: SKSpriteNode {
     private var _parentNode: GameScene?
     
-    override var position: CGPoint {
-        willSet {
-            positionInScene = newValue
-        }
-    }
-    
-    var positionInScene: CGPoint!
-
     private static let Texture = SKTexture(imageNamed: "coin")
     
     private unowned let _scene: GameScene

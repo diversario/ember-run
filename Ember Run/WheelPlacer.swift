@@ -103,11 +103,9 @@ class WheelPlacer {
         
         if !ok {
             wheel.position.y += 1
-            wheel.positionInScene = wheel.position
             _adjustWheelPosition(wheel)
         } else {
             wheel.position.y = _getRandomY(wheel)
-            wheel.positionInScene = wheel.position
         }
     }
     

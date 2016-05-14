@@ -16,7 +16,7 @@ enum ROTATION_DIRECTION {
     case CCW
 }
 
-class Wheel: SKSpriteNode, CustomSprite {
+class Wheel: SKSpriteNode {
     static var MIN_RADIUS: Int! = 25
     static var MAX_RADIUS: Int!
     
@@ -36,14 +36,6 @@ class Wheel: SKSpriteNode, CustomSprite {
     var velocity: CGFloat {
         return physicsBody!.angularVelocity
     }
-    
-    override var position: CGPoint {
-        willSet {
-            positionInScene = newValue
-        }
-    }
-    
-    var positionInScene: CGPoint!
     
     var radius: CGFloat {
         return _radius
@@ -94,21 +86,19 @@ class Wheel: SKSpriteNode, CustomSprite {
         }
 
         if let scene = scene {
-            if scene.shouldHide(self) {
+            if scene.shouldHide(self) && self.parent != nil {
                 _parentNode = scene
                 self.removeFromParent()
                 self.paused = true
-            } else if scene.shouldUnide(self) {
-                print("BEFORE ADD \(name) \(position)")
+            } else if scene.shouldUnide(self) && self.parent == nil {
                 scene.addChild(self)
-                print("AFTER ADD \(name) \(position)")
                 self.paused = false
             }
         }
     }
 
     func contains (point: CGPoint) -> Bool {
-        return distanceBetweenPoints(point, positionInScene) <= _radius
+        return distanceBetweenPoints(point, position) <= _radius
     }
     
     private func _setAttributes () {

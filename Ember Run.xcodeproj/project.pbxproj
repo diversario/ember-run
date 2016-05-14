@@ -29,7 +29,6 @@
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		203042BB1CCB5DF600859701 /* Phatone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 203042BA1CCB5DF600859701 /* Phatone-Regular.otf */; };
 		203042BD1CCC0D7000859701 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BC1CCC0D7000859701 /* Coin.swift */; };
-		203042BF1CCEE10300859701 /* CustomSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BE1CCEE10300859701 /* CustomSprite.swift */; };
 		2069B6531C87EA9B00EB0188 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2069B6521C87EA9B00EB0188 /* README.md */; };
 		206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C54891CE40F980047A84D /* CoinPlacer.swift */; };
 		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
@@ -85,7 +84,6 @@
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		203042BA1CCB5DF600859701 /* Phatone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phatone-Regular.otf"; sourceTree = "<group>"; };
 		203042BC1CCC0D7000859701 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
-		203042BE1CCEE10300859701 /* CustomSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSprite.swift; sourceTree = "<group>"; };
 		2069B6521C87EA9B00EB0188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		206C54891CE40F980047A84D /* CoinPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinPlacer.swift; sourceTree = "<group>"; };
 		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 			children = (
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
 				20B66E311C75540C0062AA16 /* Util.swift */,
-				203042BE1CCEE10300859701 /* CustomSprite.swift */,
 				209C60481C77C163002816C3 /* shader_water.fsh */,
 			);
 			name = Util;
@@ -384,7 +381,6 @@
 				20020AA61C8CDF39002CE0A0 /* Water.swift in Sources */,
 				20FFE0B31C9A656400C95811 /* Clouds.swift in Sources */,
 				203042BD1CCC0D7000859701 /* Coin.swift in Sources */,
-				203042BF1CCEE10300859701 /* CustomSprite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

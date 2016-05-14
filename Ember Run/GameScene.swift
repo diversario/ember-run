@@ -171,7 +171,7 @@ class GameScene: SKScene {
                 _cameraMovedToPlayer = false
                 
                 if !cam.hasActions() {
-                    let move = SKAction.moveToY(wheel.positionInScene.y, duration: 0.2)
+                    let move = SKAction.moveToY(wheel.position.y, duration: 0.2)
                     
                     cam.runAction(move)
                 }
@@ -227,28 +227,28 @@ class GameScene: SKScene {
                 
                 player.startDying()
             } else {
-                if player.position.x < LEFT_EDGE || player.position.x > RIGHT_EDGE {
-                    player.startDying()
-                } else {
-                  player.stopDying()
-                }
-                
-                player.normalDamping()
-                pm.setNormalGravity()
+//                if player.position.x < LEFT_EDGE || player.position.x > RIGHT_EDGE {
+//                    player.startDying()
+//                } else {
+//                  player.stopDying()
+//                }
+//                
+//                player.normalDamping()
+//                pm.setNormalGravity()
             }
         }
     }
     
-    func shouldRemoveFromScene (node: CustomSprite) -> Bool {
+    func shouldRemoveFromScene (node: SKNode) -> Bool {
         if let water = _water {
-            return node.positionInScene.y < (water.position.y - water.size.height/2)
+            return node.position.y < (water.position.y - water.size.height/2)
         }
         
         return false
     }
     
-    func shouldHide (node: CustomSprite) -> Bool {
-        let pos = node.positionInScene
+    func shouldHide (node: SKNode) -> Bool {
+        let pos = node.position
         
         return node.parent != nil &&
                pos.y < (camera!.position.y - frame.size.height) ||
@@ -256,8 +256,8 @@ class GameScene: SKScene {
     }
     
 // verify that just .position works
-    func shouldUnide (node: CustomSprite) -> Bool {
-        let pos = node.positionInScene
+    func shouldUnide (node: SKNode) -> Bool {
+        let pos = node.position
         
         return node.parent == nil &&
             pos.y > (camera!.position.y - frame.size.height) &&

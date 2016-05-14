@@ -10,18 +10,10 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Cloud: SKSpriteNode, CustomSprite {
+class Cloud: SKSpriteNode {
     private var _parentNode: GameScene?
     private var _speed: CGFloat!
     
-    var positionInScene: CGPoint!
-
-    override var position: CGPoint {
-        willSet {
-            positionInScene = newValue
-        }
-    }
-
     private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
     private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
     private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)

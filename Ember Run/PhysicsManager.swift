@@ -49,8 +49,8 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 }
             
                 let vectorToContactPoint = CGVector(
-                    dx: contact.contactPoint.x - wheel.positionInScene.x,
-                    dy: contact.contactPoint.y - wheel.positionInScene.y
+                    dx: contact.contactPoint.x - wheel.position.x,
+                    dy: contact.contactPoint.y - wheel.position.y
                 )
                 
                 let distanceFromWheelCenter = wheel.radius + playerInstance.radius
@@ -58,8 +58,8 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 let multiplier = distanceFromWheelCenter / vectorLength(vectorToContactPoint)
                 
                 let adjustedContactPoint = CGPoint(
-                    x: wheel.positionInScene.x + multiplier * vectorToContactPoint.dx,
-                    y: wheel.positionInScene.y + multiplier * vectorToContactPoint.dy
+                    x: wheel.position.x + multiplier * vectorToContactPoint.dx,
+                    y: wheel.position.y + multiplier * vectorToContactPoint.dy
                 )
                 
                 player.node!.position = adjustedContactPoint
