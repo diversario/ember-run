@@ -138,6 +138,8 @@ class GameScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
+        _player?.rotateToMovement()
+        
         // water position is time-based
         if timeWhenStarted == nil {
             timeWhenStarted = currentTime - Double(frame.size.height/3)

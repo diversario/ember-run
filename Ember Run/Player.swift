@@ -175,6 +175,17 @@ class Player: SKSpriteNode {
         return position.y < water.waterline
     }
     
+    func rotateToMovement () {
+        if let vel = physicsBody?.velocity {
+            let point_y = position.y - vel.dy
+            let point_x = position.x - vel.dx
+            
+            let angle = atan2(point_y - position.y , point_x - position.x) + CGFloat((M_PI/180) * 90.0)
+            
+            zRotation = angle
+        }
+    }
+    
     private func getJumpVector () -> CGVector? {
         let playerCoords = position
         
