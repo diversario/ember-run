@@ -27,8 +27,9 @@ class Grid {
         let x = Int(ceil(Float(width)/Float(scale)))
         let y = Int(ceil(Float(height)/Float(scale)))
         
-        for _ in 0...x {
-            let row = Array(count: y, repeatedValue: false)
+        // MARK: swap?
+        for _ in 0...y {
+            let row = Array(count: x, repeatedValue: false)
             _values.append(row)
         }
     }
@@ -42,11 +43,11 @@ class Grid {
     }
     
     var width: Int {
-        return _values.count
+        return _values[0].count
     }
     
     var height: Int {
-        return _values[0].count
+        return _values.count
     }
     
     func drawDebugCells(scene: SKScene) {
@@ -73,14 +74,16 @@ class Grid {
     }
     
     func get(x: Int, y: Int) -> Bool {
-        return _values[x][y]
+        return _values[y][x]
     }
     
     func set(x: Int, y: Int, value: Bool) {
-        if _values.count > x && _values[x].count > y {
-            _values[x][y] = value
+        if _values.count > y && _values[0].count > x {
+            _values[y][x] = value
         } else {
-            resize(x, y: y)
+            resizeY(y)
+            resizeX(x)
+            set(x, y: y, value: value)
         }
     }
     
@@ -94,22 +97,18 @@ class Grid {
         set(x, y: y, value: false)
     }
     
-    func resize(x: Int, y: Int) {
-        let columns = _values[0].count
-        
-        if columns < y {
-            for var row in _values {
-                let additionalElements = Array(count: y - columns, repeatedValue: false)
-                row.appendContentsOf(additionalElements)
-            }
+    func resizeY(y: Int) {
+        while _values.count <= y {
+            let row = Array(count: y, repeatedValue: false)
+            _values.append(row)
         }
-        
-        print("OLD COLUMNS \(columns), NEW COLUMNS \(_values[0].count)")
-        
-        if _values.count < x {
-            while _values.count < x {
-                let row = Array(count: y, repeatedValue: false)
-                _values.append(row)
+    }
+    
+    func resizeX(x: Int) {
+        for var row in _values {
+            while row.count <= x {
+                let cells = Array(count: x - row.count + 1, repeatedValue: false)
+                row.appendContentsOf(cells)
             }
         }
     }
