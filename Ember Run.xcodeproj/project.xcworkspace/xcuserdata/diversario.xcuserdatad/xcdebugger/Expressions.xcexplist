@@ -31,10 +31,10 @@
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "contact.bodyA.node?.name">
+               value = "p.node!.constraints">
             </PersistentString>
             <PersistentString
-               value = "p.node!.constraints">
+               value = "contact.bodyA.node?.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -45,10 +45,10 @@
                value = "IMPULSE_COMP">
             </PersistentString>
             <PersistentString
-               value = "_node.parent!.name">
+               value = "self._scene.frame">
             </PersistentString>
             <PersistentString
-               value = "self._scene.frame">
+               value = "_node.parent!.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -135,6 +135,14 @@
             </PersistentString>
             <PersistentString
                value = "node.position">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Grid.drawDebugCells(SKScene) -&gt; ():Grid.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

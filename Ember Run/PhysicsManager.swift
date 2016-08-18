@@ -71,8 +71,11 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
                 self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheelPB, anchor: contact.contactPoint)
                 self._scene.physicsWorld.addJoint(self._joint)
             }
+        } else {
+            print(player.node!.name, other.node!.name)
         }
     }
+    
     
     func detachPlayerFromWheel() {
         _scene.physicsWorld.removeJoint(_joint)

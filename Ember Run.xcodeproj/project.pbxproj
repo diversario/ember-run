@@ -29,6 +29,7 @@
 		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		203042BB1CCB5DF600859701 /* Phatone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 203042BA1CCB5DF600859701 /* Phatone-Regular.otf */; };
 		203042BD1CCC0D7000859701 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BC1CCC0D7000859701 /* Coin.swift */; };
+		2049D0DB1D617954005E95A3 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2049D0DA1D617954005E95A3 /* Grid.swift */; };
 		2069B6531C87EA9B00EB0188 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2069B6521C87EA9B00EB0188 /* README.md */; };
 		206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C54891CE40F980047A84D /* CoinPlacer.swift */; };
 		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
@@ -84,6 +85,7 @@
 		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		203042BA1CCB5DF600859701 /* Phatone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phatone-Regular.otf"; sourceTree = "<group>"; };
 		203042BC1CCC0D7000859701 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		2049D0DA1D617954005E95A3 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		2069B6521C87EA9B00EB0188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		206C54891CE40F980047A84D /* CoinPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinPlacer.swift; sourceTree = "<group>"; };
 		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				20020AAD1C914653002CE0A0 /* Background.swift */,
 				20FFE0B21C9A656400C95811 /* Clouds.swift */,
 				203042BC1CCC0D7000859701 /* Coin.swift */,
+				2049D0DA1D617954005E95A3 /* Grid.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 		200F49C71C6ED8C300A24A49 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Ilya Shaisultanov";
@@ -363,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2049D0DB1D617954005E95A3 /* Grid.swift in Sources */,
 				200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */,
 				206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */,
 				200F49D71C6ED8C400A24A49 /* GameScene.swift in Sources */,

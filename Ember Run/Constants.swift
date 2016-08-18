@@ -37,7 +37,7 @@ struct CONTACT_MASK {
     static let WHEEL: UInt32 = 0
     static let PLAYER: UInt32 = CAT.WHEEL | CAT.COIN
     static let WATER: UInt32 = 0
-    static let COIN: UInt32 = CAT.PLAYER
+    static let COIN: UInt32 = CAT.PLAYER | CAT.WHEEL
     static let COIN_PIN: UInt32 = 0
 }
 

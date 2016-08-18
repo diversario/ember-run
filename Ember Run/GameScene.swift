@@ -18,8 +18,11 @@ class GameScene: SKScene {
     private var _clouds: Clouds?
     private let _camera = SKCameraNode()
     private var _cameraMovedToPlayer = false
-    private var _coin: Coin?
-    private var _pin: CoinPin?
+//    private var _coin: Coin?
+//    private var _pin: CoinPin?
+//    private var _coinPlacer: CoinPlacer?
+    private var _grid: Grid?
+    private var _grid_rendered = false
     
     private var _gameOverCalled = false
     
@@ -68,29 +71,37 @@ class GameScene: SKScene {
         
         camera?.addChild(scoreLabel)
         
+//        _coinPlacer = CoinPlacer(scene: self)
+//        _coinPlacer?.placeCoins()
+        
         /** testing out coin **/
+//        
+//        _coin = Coin(scene: self)
+//        _coin!.position = camera!.position
+//        
+//        addChild(_coin!)
+//        
+//        _pin = CoinPin(scene: self)
+//        _pin?.position = CGPoint(x: _coin!.position.x + 10.0, y: _coin!.position.y + 10.0)
+//        
+//        addChild(_pin!)
+//        
+//        _joint = SKPhysicsJointSpring.jointWithBodyA(
+//            _coin!.physicsBody!,
+//            bodyB: _pin!.physicsBody!,
+//            anchorA: _pin!.position,
+//            anchorB: _coin!.position
+//        )
+//        
+//        _joint?.damping = 100
+//        _joint?.frequency = 1
+//        
+//        physicsWorld.addJoint(_joint!)
+//        
+//        _pin?.position = _coin!.position
         
-        _coin = Coin(scene: self)
-        _coin!.position = camera!.position
-        
-        addChild(_coin!)
-        
-        _pin = CoinPin(scene: self)
-        _pin?.position = CGPoint(x: _coin!.position.x + 10.0, y: _coin!.position.y + 10.0)
-        
-        addChild(_pin!)
-        
-        _joint = SKPhysicsJointSpring.jointWithBodyA(
-            _coin!.physicsBody!,
-            bodyB: _pin!.physicsBody!,
-            anchorA: _pin!.position,
-            anchorB: _coin!.position
-        )
-        
-        _joint?.damping = 100
-        _joint?.frequency = 1
-        
-        physicsWorld.addJoint(_joint!)
+        /* testing out grid */
+        _grid = Grid(rect: frame)
     }
     
     deinit {
@@ -160,6 +171,17 @@ class GameScene: SKScene {
     
     override func didApplyConstraints() {
         _wheelPlacer?.update()
+        
+        if (!_grid_rendered && _wheelPlacer != nil) {
+            _grid_rendered = true
+            
+            for wheel in (_wheelPlacer?.wheels)! where wheel.parent != nil {
+                _grid!.addCircle(wheel.position, radius: wheel.radius)
+            }
+            
+            _grid!.drawDebugCells(self)
+        }
+        
         _background?.update()
         _clouds?.update()
     }
