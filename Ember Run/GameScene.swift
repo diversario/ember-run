@@ -101,7 +101,7 @@ class GameScene: SKScene {
 //        _pin?.position = _coin!.position
         
         /* testing out grid */
-        _grid = Grid(rect: frame)
+        _grid = Grid(rect: frame, scale: 20)
     }
     
     deinit {
