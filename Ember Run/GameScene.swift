@@ -172,8 +172,8 @@ class GameScene: SKScene {
     override func didApplyConstraints() {
         _wheelPlacer?.update()
         
-        if (!_grid_rendered && _wheelPlacer != nil) {
-            _grid_rendered = true
+        if /*!_grid_rendered &&*/ _wheelPlacer != nil {
+//            _grid_rendered = true
             
             for wheel in (_wheelPlacer?.wheels)! where wheel.parent != nil {
                 _grid!.addCircle(wheel.position, radius: wheel.radius)
