@@ -39,6 +39,10 @@ class Grid {
         self.init(width: Int(rect.width), height: Int(rect.height), scale: scale)
     }
     
+    deinit {
+        print("DEINIT GRID")
+    }
+    
     var values: [[Bool]] {
         return _values
     }
@@ -190,6 +194,10 @@ class Grid {
             }
         }
     }
+    
+//    func findEmptySpace(near: CGPoint) -> CGPoint {
+//        
+//    }
     
     private func getDistance(p1: CGPoint, p2: CGPoint) -> CGFloat {
         return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))

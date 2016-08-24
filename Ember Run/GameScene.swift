@@ -31,7 +31,7 @@ class GameScene: SKScene {
     
     var LEFT_EDGE: CGFloat!
     var RIGHT_EDGE: CGFloat!
-    
+    let a = WheelEntity(texture: SKTexture(imageNamed: "wheel-1"), size: CGSize(width: 10, height: 10))
     var player: Player? {
         return _player
     }
@@ -116,6 +116,7 @@ class GameScene: SKScene {
         _background = nil
         _clouds = nil
         _player = nil
+        _grid = nil
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
