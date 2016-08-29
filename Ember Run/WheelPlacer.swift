@@ -63,7 +63,7 @@ class WheelPlacer {
     }
     
     // this needs to randomize where the search starts
-    // so there are less staircase wheel placements
+    // so there are less stair-like wheel placements
     private func _placeWheel() -> SKNode {
         var last_wheel: SKNode?
         

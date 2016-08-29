@@ -102,6 +102,9 @@ class GameScene: SKScene {
         
         /* testing out grid */
         _grid = Grid(rect: frame, scale: 20)
+        
+        let em = EntityManager(scene: self)
+        em.makeWheel()
     }
     
     deinit {
