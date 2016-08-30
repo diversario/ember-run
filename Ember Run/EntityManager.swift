@@ -29,7 +29,7 @@ class EntityManager {
     }
     
     func add(entity: GKEntity) {
-        if let sprite = entity.componentForClass(SpriteComponent.self) {
+        if let sprite = entity.componentForClass(SpriteComponent) {
             scene.addChild(sprite.node)
         }
         
@@ -61,32 +61,48 @@ class EntityManager {
     
     func makeWheel() {
         let wheel = WheelEntity(randomRadius: EntityManager._randomRadius)
+        placeObject(wheel)
+        entities.insert(wheel)
     }
     
     func placeObject(entity: GKEntity) {
-        if let sprite = entity.componentForClass(SpriteComponent.self) {
+        if let sprite = entity.componentForClass(SpriteComponent) {
             sprite.node.position.x = getRandomX(entity)
+            sprite.node.position.y = getInitialY()
         }
     }
     
+    func getInitialY() -> CGFloat {
+        let y: CGFloat
+        
+        if let last_wheel = getHighestObject(WheelEntity) where last_wheel.componentForClass(SpriteComponent) != nil {
+            y = last_wheel.componentForClass(SpriteComponent)!.node.position.y + 1
+        } else {
+            y = scene.frame.size.height / -2
+        }
+        
+        return y
+    }
+    
     func getRandomX(entity: GKEntity) -> CGFloat {
-        let sprite = entity.componentForClass(SpriteComponent.self)!
-        
-        let min = Int(sprite.node.frame.width / 2 + MIN_OBJ_DISTANCE - scene.frame.width / 2)
-        let max = Int(scene.frame.width / 2 - MIN_OBJ_DISTANCE - sprite.node.frame.width / 2)
-        
-        let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
-        
-        return CGFloat(rand.nextInt())
-
+        return 1
     }
     
     func getRandomY(entity: GKEntity) -> CGFloat {
+        let y: CGFloat
+        
+        if let last_wheel = getHighestObject(WheelEntity) where last_wheel.componentForClass(SpriteComponent) != nil {
+            y = last_wheel.componentForClass(SpriteComponent)!.node.position.y
+        } else {
+            y = scene.frame.size.height / -2
+        }
+        
+        return y
     }
     
     func distanceBetweenObjects(lhs: GKEntity, _ rhs: GKEntity) -> CGFloat {
-        let o1 = lhs.componentForClass(SpriteComponent.self)!
-        let o2 = rhs.componentForClass(SpriteComponent.self)!
+        let o1 = lhs.componentForClass(SpriteComponent)!
+        let o2 = rhs.componentForClass(SpriteComponent)!
         
         let dist = distanceBetweenPoints(o1.node.position, o2.node.position)
         
@@ -97,5 +113,24 @@ class EntityManager {
         return entities.filter { el in
             return true
         }
+    }
+    
+    func getHighestObject(ofType: AnyClass) -> GKEntity? {
+        var objects = entities.filter {el in
+            return el.isKindOfClass(ofType)
+        }
+        
+        if objects.count == 0 {
+            return nil
+        }
+        
+        objects.sortInPlace { (a, b) -> Bool in
+            let n1 = a.componentForClass(SpriteComponent)!.node
+            let n2 = b.componentForClass(SpriteComponent)!.node
+            
+            return n1.position.y > n2.position.y
+        }
+        
+        return objects[0]
     }
 }

@@ -105,6 +105,8 @@ class GameScene: SKScene {
         
         let em = EntityManager(scene: self)
         em.makeWheel()
+        em.makeWheel()
+        em.makeWheel()
     }
     
     deinit {
