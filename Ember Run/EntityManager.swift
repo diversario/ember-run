@@ -62,21 +62,21 @@ class EntityManager {
     func makeWheel() {
         let wheel = WheelEntity(randomRadius: EntityManager._randomRadius)
         placeObject(wheel)
-        entities.insert(wheel)
+        add(wheel)
     }
     
     func placeObject(entity: GKEntity) {
-        if let sprite = entity.componentForClass(SpriteComponent) {
-            sprite.node.position.x = getRandomX(entity)
-            sprite.node.position.y = getInitialY()
+        if var position = entity.componentForClass(SpriteComponent)?.node.position {
+            position.x = getRandomX(entity)
+            position.y = getInitialY()
         }
     }
     
     func getInitialY() -> CGFloat {
         let y: CGFloat
         
-        if let last_wheel = getHighestObject(WheelEntity) where last_wheel.componentForClass(SpriteComponent) != nil {
-            y = last_wheel.componentForClass(SpriteComponent)!.node.position.y + 1
+        if let last_position = getHighestSprite(WheelEntity)?.componentForClass(SpriteComponent)?.node.position {
+            y = last_position.y + 1
         } else {
             y = scene.frame.size.height / -2
         }
@@ -85,14 +85,20 @@ class EntityManager {
     }
     
     func getRandomX(entity: GKEntity) -> CGFloat {
-        return 1
+        let wheel = entity.componentForClass(SpriteComponent)!.node
+        let min = Int(wheel.frame.width / 2 + MIN_OBJ_DISTANCE - scene.frame.size.width / 2)
+        let max = Int(scene.frame.size.width / 2 - MIN_OBJ_DISTANCE - wheel.frame.width / 2)
+        
+        let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
+        
+        return CGFloat(rand.nextInt())
     }
     
     func getRandomY(entity: GKEntity) -> CGFloat {
         let y: CGFloat
         
-        if let last_wheel = getHighestObject(WheelEntity) where last_wheel.componentForClass(SpriteComponent) != nil {
-            y = last_wheel.componentForClass(SpriteComponent)!.node.position.y
+        if let last_position = getHighestSprite(WheelEntity)?.componentForClass(SpriteComponent)?.node.position {
+            y = last_position.y
         } else {
             y = scene.frame.size.height / -2
         }
@@ -115,9 +121,10 @@ class EntityManager {
         }
     }
     
-    func getHighestObject(ofType: AnyClass) -> GKEntity? {
+    func getHighestSprite(ofType: AnyClass) -> GKEntity? {
         var objects = entities.filter {el in
-            return el.isKindOfClass(ofType)
+            return el.isKindOfClass(ofType) &&
+                   el.componentForClass(SpriteComponent) != nil
         }
         
         if objects.count == 0 {
