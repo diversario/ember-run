@@ -41,7 +41,7 @@ class WheelEntity: GKEntity {
     convenience init(randomRadius: GKRandomDistribution) {
         let radius = CGFloat(randomRadius.nextInt())
         let texture = WheelEntity._getWheelTexture(radius, min: randomRadius.lowestValue, max: randomRadius.highestValue)
-        let size = CGSize(width: radius, height: radius)
+        let size = CGSize(width: radius * 2, height: radius * 2)
         
         self.init(texture: texture, size: size)
     }

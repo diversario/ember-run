@@ -23,6 +23,7 @@ class GameScene: SKScene {
 //    private var _coinPlacer: CoinPlacer?
     private var _grid: Grid?
     private var _grid_rendered = false
+    private var _entManager: EntityManager?
     
     private var _gameOverCalled = false
     
@@ -103,10 +104,7 @@ class GameScene: SKScene {
         /* testing out grid */
         _grid = Grid(rect: frame, scale: 20)
         
-        let em = EntityManager(scene: self)
-        em.makeWheel()
-        em.makeWheel()
-        em.makeWheel()
+        _entManager = EntityManager(scene: self)
     }
     
     deinit {
@@ -174,9 +172,16 @@ class GameScene: SKScene {
             _gameOver()
         }
     }
-    
+    var foo = false
     override func didApplyConstraints() {
-        _wheelPlacer?.update()
+        if !foo {
+            _entManager?.makeWheel()
+            _entManager?.makeWheel()
+            _entManager?.makeWheel()
+            
+            foo = true
+        }
+        //_wheelPlacer?.update()
         
         if /*!_grid_rendered &&*/ _wheelPlacer != nil {
 //            _grid_rendered = true

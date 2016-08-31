@@ -61,17 +61,44 @@ class EntityManager {
     
     func makeWheel() {
         let wheel = WheelEntity(randomRadius: EntityManager._randomRadius)
+
         placeObject(wheel)
+        
         add(wheel)
     }
     
     func placeObject(entity: GKEntity) {
-        if var position = entity.componentForClass(SpriteComponent)?.node.position {
-            position.x = getRandomX(entity)
-            position.y = getInitialY()
+        if let node = entity.componentForClass(SpriteComponent)?.node {
+            node.position.x = getRandomX(entity)
+            node.position.y = getInitialY()
+            
+            _adjustWheelPosition(entity as! WheelEntity)
         }
     }
     
+    private func _adjustWheelPosition (wheel: WheelEntity) {
+        var ok = true
+        
+        if let node = wheel.componentForClass(SpriteComponent)?.node {
+            let searchRadius = CGFloat(EntityManager._randomRadius.highestValue) + wheel.radius + 1
+            let nearbyWheels = getObjectAround(wheel, inRadius: searchRadius)
+            
+            for w in nearbyWheels {
+                if distanceBetweenObjects(wheel, w) < MIN_OBJ_DISTANCE {
+                    ok = false
+                    break
+                }
+            }
+            
+            if !ok {
+                node.position.y += 5
+                _adjustWheelPosition(wheel)
+            } else {
+                node.position.y = getRandomY(wheel)!
+            }
+        }
+    }
+
     func getInitialY() -> CGFloat {
         let y: CGFloat
         
@@ -94,16 +121,17 @@ class EntityManager {
         return CGFloat(rand.nextInt())
     }
     
-    func getRandomY(entity: GKEntity) -> CGFloat {
-        let y: CGFloat
-        
-        if let last_position = getHighestSprite(WheelEntity)?.componentForClass(SpriteComponent)?.node.position {
-            y = last_position.y
-        } else {
-            y = scene.frame.size.height / -2
+    func getRandomY(entity: GKEntity) -> CGFloat? {
+        if let node = entity.componentForClass(SpriteComponent)?.node {
+            let min = Int(node.position.y)
+            let max = min + Int(MAX_OBJ_DISTANCE - MIN_OBJ_DISTANCE)
+            
+            let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
+            
+            return CGFloat(rand.nextInt())
         }
         
-        return y
+        return nil
     }
     
     func distanceBetweenObjects(lhs: GKEntity, _ rhs: GKEntity) -> CGFloat {
@@ -115,9 +143,9 @@ class EntityManager {
         return dist - o1.node.frame.width/2 - o2.node.frame.width/2
     }
     
-    func getObjectWithin(radius: CGFloat) -> [GKEntity] {
+    func getObjectAround(obj: GKEntity, inRadius: CGFloat) -> [GKEntity] {
         return entities.filter { el in
-            return true
+            return distanceBetweenObjects(obj, el) <= inRadius
         }
     }
     

@@ -13,7 +13,7 @@ import SpriteKit
 class WheelRotationComponent: GKComponent {
     init (sprite: SKSpriteNode) {
         super.init()
-        sprite.runAction(_getRandomRotationAction())
+        sprite.runAction(_setRotation())
     }
     
     private var _rotationDirection: ROTATION_DIRECTION!
