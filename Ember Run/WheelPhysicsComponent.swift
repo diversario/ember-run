@@ -15,7 +15,7 @@ class WheelPhysicsComponent: GKComponent {
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: radius - 1)
         
         let body = sprite.physicsBody!
-        
+    
         body.affectedByGravity = false
         body.dynamic = false
         body.contactTestBitMask = CONTACT_MASK.WHEEL

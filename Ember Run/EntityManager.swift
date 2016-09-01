@@ -12,6 +12,7 @@ import SpriteKit
 
 class EntityManager {
     let scene: GameScene
+    let physics: PhysicsEntity
     var entities = Set<GKEntity>()
     
     private static var _randomRadius: GKRandomDistribution!
@@ -26,6 +27,8 @@ class EntityManager {
             lowestValue: 25,
             highestValue: Int(MAX_OBJ_DISTANCE)
         )
+        
+        physics = PhysicsEntity(scene: scene)
     }
     
     func add(entity: GKEntity) {

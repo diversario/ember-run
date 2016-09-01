@@ -13,7 +13,7 @@ class GameScene: SKScene {
     private var _background: Background?
     private var _wheelPlacer: WheelPlacer?
     private var _water: Water?
-    private var _physicsMgr: PhysicsManager?
+    private var _physicsMgr: PhysicsEntity?
     private var _player: Player?
     private var _clouds: Clouds?
     private let _camera = SKCameraNode()
@@ -40,7 +40,7 @@ class GameScene: SKScene {
     private var _joint: SKPhysicsJointSpring?
     
     override func didMoveToView(view: SKView) {
-        _physicsMgr = PhysicsManager(scene: self)
+        _physicsMgr = PhysicsEntity(scene: self)
         
         self.camera = _camera
         camera!.setScale(1)
@@ -256,8 +256,6 @@ class GameScene: SKScene {
                 if !player.isDying {
                     player.highDamping()
                     player.reduceVelocity()
-                    
-                    pm.setInWaterGravity()
                 }
                 
                 player.startDying()

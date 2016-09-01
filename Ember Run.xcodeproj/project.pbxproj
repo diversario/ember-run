@@ -26,7 +26,6 @@
 		200F49F71C6ED8C400A24A49 /* Ember_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */; };
 		200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */; };
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
-		200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */; };
 		203042BB1CCB5DF600859701 /* Phatone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 203042BA1CCB5DF600859701 /* Phatone-Regular.otf */; };
 		203042BD1CCC0D7000859701 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BC1CCC0D7000859701 /* Coin.swift */; };
 		2049D0DB1D617954005E95A3 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2049D0DA1D617954005E95A3 /* Grid.swift */; };
@@ -41,6 +40,7 @@
 		209CE4EB1D6ACBE600C49D78 /* WheelRotationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CE4EA1D6ACBE600C49D78 /* WheelRotationComponent.swift */; };
 		209CE4ED1D6C1B3300C49D78 /* WheelPhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CE4EC1D6C1B3200C49D78 /* WheelPhysicsComponent.swift */; };
 		20B66E321C75540C0062AA16 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B66E311C75540C0062AA16 /* Util.swift */; };
+		20C3EA861D77D907004691C2 /* PhysicsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3EA851D77D907004691C2 /* PhysicsEntity.swift */; };
 		20FFE0B31C9A656400C95811 /* Clouds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FFE0B21C9A656400C95811 /* Clouds.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +87,6 @@
 		200F49F81C6ED8C400A24A49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPlacer.swift; sourceTree = "<group>"; };
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		203042BA1CCB5DF600859701 /* Phatone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phatone-Regular.otf"; sourceTree = "<group>"; };
 		203042BC1CCC0D7000859701 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		2049D0DA1D617954005E95A3 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
@@ -102,6 +101,7 @@
 		209CE4EA1D6ACBE600C49D78 /* WheelRotationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelRotationComponent.swift; sourceTree = "<group>"; };
 		209CE4EC1D6C1B3200C49D78 /* WheelPhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPhysicsComponent.swift; sourceTree = "<group>"; };
 		20B66E311C75540C0062AA16 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		20C3EA851D77D907004691C2 /* PhysicsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsEntity.swift; sourceTree = "<group>"; };
 		20FFE0B21C9A656400C95811 /* Clouds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clouds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +191,7 @@
 			children = (
 				209CE4E11D69134600C49D78 /* WheelEntity.swift */,
 				209CE4E61D6918AA00C49D78 /* EntityManager.swift */,
+				20C3EA851D77D907004691C2 /* PhysicsEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -208,7 +209,6 @@
 		20B66E2D1C7401370062AA16 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				200F4A2E1C719DC700A24A49 /* PhysicsManager.swift */,
 				200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */,
 				200F49D81C6ED8C400A24A49 /* HomeViewController.swift */,
 				206C54891CE40F980047A84D /* CoinPlacer.swift */,
@@ -413,7 +413,7 @@
 				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
 				20020AA41C8B88F2002CE0A0 /* Player.swift in Sources */,
 				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
-				200F4A2F1C719DC700A24A49 /* PhysicsManager.swift in Sources */,
+				20C3EA861D77D907004691C2 /* PhysicsEntity.swift in Sources */,
 				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,
 				20B66E321C75540C0062AA16 /* Util.swift in Sources */,
 				209CE4EB1D6ACBE600C49D78 /* WheelRotationComponent.swift in Sources */,

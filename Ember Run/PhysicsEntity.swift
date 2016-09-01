@@ -8,8 +8,9 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
-class PhysicsManager: NSObject, SKPhysicsContactDelegate {
+class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
     private unowned let _scene: GameScene
     private var _joint: SKPhysicsJoint!
     private var _isPlayerInWater = false
@@ -18,14 +19,14 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
         return _joint != nil
     }
     
-    var wheel: Wheel? {
-        return _joint?.bodyB.node as? Wheel
+    var wheel: SKSpriteNode? {
+        return _joint?.bodyB.node as? SKSpriteNode
     }
     
     init(scene: GameScene) {
         self._scene = scene
         super.init()
-
+        
         self._scene.physicsWorld.contactDelegate = self
         
         setNormalGravity()
@@ -37,23 +38,23 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         let (player, other) = _getBodies(contact)
-
+        
         let mask = player.contactTestBitMask & other.categoryBitMask
         
         if mask == CAT.WHEEL {
             let wheelPB = other
             
-            if let wheel = wheelPB.node as? Wheel, playerInstance = Player.getPlayer() {
+            if let wheel = wheelPB.node as? SKSpriteNode, playerInstance = Player.getPlayer() {
                 if _joint != nil {
                     _scene.physicsWorld.removeJoint(_joint)
                 }
-            
+                
                 let vectorToContactPoint = CGVector(
                     dx: contact.contactPoint.x - wheel.position.x,
                     dy: contact.contactPoint.y - wheel.position.y
                 )
                 
-                let distanceFromWheelCenter = wheel.radius + playerInstance.radius
+                let distanceFromWheelCenter = wheel.size.width / 2 + playerInstance.radius
                 
                 let multiplier = distanceFromWheelCenter / vectorLength(vectorToContactPoint)
                 
@@ -97,15 +98,11 @@ class PhysicsManager: NSObject, SKPhysicsContactDelegate {
             p = contact.bodyB
             w = contact.bodyA
         }
-      
+        
         return (p, w)
     }
     
-     func setNormalGravity () {
+    func setNormalGravity () {
         self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -2 * SCREEN_SCALE)
-    }
-    
-     func setInWaterGravity () {
-        self._scene.physicsWorld.gravity = CGVector(dx: 0, dy: -0.5 * SCREEN_SCALE)
     }
 }

@@ -15,14 +15,14 @@ class Player: SKSpriteNode {
     private static let Texture = SKTexture(imageNamed: "player")
 
     private unowned let _scene: GameScene
-    private unowned let _physicsManager: PhysicsManager
+    private unowned let _physicsManager: PhysicsEntity
     
     private var _fieldNode: SKFieldNode?
 
     private var _health = 1
     private var _isDying = false
     
-    private var _isOnWheel: Wheel? = nil
+    private var _isOnWheel: SKSpriteNode? = nil
     
     private var _positioned: Bool {
         return parent != nil
@@ -32,7 +32,7 @@ class Player: SKSpriteNode {
         return self.size.height / 2
     }
     
-    var isOnWheel: Wheel? {
+    var isOnWheel: SKSpriteNode? {
         get {
             return _isOnWheel
         }
@@ -67,7 +67,7 @@ class Player: SKSpriteNode {
         return nil
     }
     
-    init (scene: GameScene, physicsManager: PhysicsManager) {
+    init (scene: GameScene, physicsManager: PhysicsEntity) {
         _scene = scene
         _physicsManager = physicsManager
         
@@ -84,7 +84,7 @@ class Player: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         _scene = GameScene(fileNamed: "GameScene")!
-        _physicsManager = PhysicsManager(scene: _scene)
+        _physicsManager = PhysicsEntity(scene: _scene)
         
         super.init(coder: aDecoder)
     }
