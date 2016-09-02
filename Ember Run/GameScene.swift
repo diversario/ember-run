@@ -105,6 +105,8 @@ class GameScene: SKScene {
         _grid = Grid(rect: frame, scale: 20)
         
         _entManager = EntityManager(scene: self)
+        _entManager?.createEntities()
+        _entManager?.positionPlayer()
     }
     
     deinit {
@@ -123,37 +125,11 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        _player?.onTap()
-
-        if _player?.parent == nil {
-            for touch in touches {
-                placePlayer(touch.locationInNode(self))
-            }
-        }
-    }
-    
-    func placePlayer (location: CGPoint) {
-        let canStart = self.nodesAtPoint(location).filter({ (n) -> Bool in
-            if let name = n.name {
-                if name.containsString("wheel") {
-                    if let wheel = n as? Wheel {
-                        return wheel.contains(location)
-                    }
-                }
-            }
-            
-            return false
-        }).isEmpty
-        
-        if canStart {
-            _player?.positionPlayer(location)
-        } else {
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        }
+        _entManager?.player.onTap()
     }
     
     override func update(currentTime: CFTimeInterval) {
-        _player?.rotateToMovement()
+        _entManager?.player.rotateToMovement()
         
         // water position is time-based
         if timeWhenStarted == nil {

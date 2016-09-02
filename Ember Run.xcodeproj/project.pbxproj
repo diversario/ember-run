@@ -41,6 +41,10 @@
 		209CE4ED1D6C1B3300C49D78 /* WheelPhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209CE4EC1D6C1B3200C49D78 /* WheelPhysicsComponent.swift */; };
 		20B66E321C75540C0062AA16 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B66E311C75540C0062AA16 /* Util.swift */; };
 		20C3EA861D77D907004691C2 /* PhysicsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3EA851D77D907004691C2 /* PhysicsEntity.swift */; };
+		20C3EA881D77DF14004691C2 /* PlayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3EA871D77DF14004691C2 /* PlayerEntity.swift */; };
+		20C3EA8A1D77E252004691C2 /* PlayerPhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3EA891D77E252004691C2 /* PlayerPhysicsComponent.swift */; };
+		20C3EA8C1D77E30C004691C2 /* PlayerFieldNodeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3EA8B1D77E30C004691C2 /* PlayerFieldNodeComponent.swift */; };
+		20C3EA8E1D77F591004691C2 /* PlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3EA8D1D77F591004691C2 /* PlayerDelegate.swift */; };
 		20FFE0B31C9A656400C95811 /* Clouds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FFE0B21C9A656400C95811 /* Clouds.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +106,10 @@
 		209CE4EC1D6C1B3200C49D78 /* WheelPhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPhysicsComponent.swift; sourceTree = "<group>"; };
 		20B66E311C75540C0062AA16 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		20C3EA851D77D907004691C2 /* PhysicsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsEntity.swift; sourceTree = "<group>"; };
+		20C3EA871D77DF14004691C2 /* PlayerEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerEntity.swift; sourceTree = "<group>"; };
+		20C3EA891D77E252004691C2 /* PlayerPhysicsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPhysicsComponent.swift; sourceTree = "<group>"; };
+		20C3EA8B1D77E30C004691C2 /* PlayerFieldNodeComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerFieldNodeComponent.swift; sourceTree = "<group>"; };
+		20C3EA8D1D77F591004691C2 /* PlayerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDelegate.swift; sourceTree = "<group>"; };
 		20FFE0B21C9A656400C95811 /* Clouds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clouds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +200,7 @@
 				209CE4E11D69134600C49D78 /* WheelEntity.swift */,
 				209CE4E61D6918AA00C49D78 /* EntityManager.swift */,
 				20C3EA851D77D907004691C2 /* PhysicsEntity.swift */,
+				20C3EA871D77DF14004691C2 /* PlayerEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -202,6 +211,8 @@
 				209CE4E41D6913C500C49D78 /* SpriteComponent.swift */,
 				209CE4EA1D6ACBE600C49D78 /* WheelRotationComponent.swift */,
 				209CE4EC1D6C1B3200C49D78 /* WheelPhysicsComponent.swift */,
+				20C3EA891D77E252004691C2 /* PlayerPhysicsComponent.swift */,
+				20C3EA8B1D77E30C004691C2 /* PlayerFieldNodeComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -253,6 +264,7 @@
 				200F4A2C1C70048600A24A49 /* Constants.swift */,
 				20B66E311C75540C0062AA16 /* Util.swift */,
 				209C60481C77C163002816C3 /* shader_water.fsh */,
+				20C3EA8D1D77F591004691C2 /* PlayerDelegate.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -398,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20C3EA881D77DF14004691C2 /* PlayerEntity.swift in Sources */,
 				209CE4E71D6918AA00C49D78 /* EntityManager.swift in Sources */,
 				209CE4ED1D6C1B3300C49D78 /* WheelPhysicsComponent.swift in Sources */,
 				2049D0DB1D617954005E95A3 /* Grid.swift in Sources */,
@@ -413,6 +426,7 @@
 				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
 				20020AA41C8B88F2002CE0A0 /* Player.swift in Sources */,
 				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
+				20C3EA8C1D77E30C004691C2 /* PlayerFieldNodeComponent.swift in Sources */,
 				20C3EA861D77D907004691C2 /* PhysicsEntity.swift in Sources */,
 				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,
 				20B66E321C75540C0062AA16 /* Util.swift in Sources */,
@@ -421,7 +435,9 @@
 				20020AAA1C8FEE3E002CE0A0 /* Tile.swift in Sources */,
 				20020AA61C8CDF39002CE0A0 /* Water.swift in Sources */,
 				20FFE0B31C9A656400C95811 /* Clouds.swift in Sources */,
+				20C3EA8A1D77E252004691C2 /* PlayerPhysicsComponent.swift in Sources */,
 				203042BD1CCC0D7000859701 /* Coin.swift in Sources */,
+				20C3EA8E1D77F591004691C2 /* PlayerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

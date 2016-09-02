@@ -10,7 +10,7 @@ import Foundation
 import GameplayKit
 import SpriteKit
 
-class EntityManager {
+class EntityManager: PlayerDelegate {
     let scene: GameScene
     let physics: PhysicsEntity
     var entities = Set<GKEntity>()
@@ -22,13 +22,23 @@ class EntityManager {
     init(scene: GameScene) {
         self.scene = scene
         MAX_OBJ_DISTANCE = (self.scene.size.width) * 0.5 / 2
-        
+
         EntityManager._randomRadius = GKRandomDistribution(
             lowestValue: 25,
             highestValue: Int(MAX_OBJ_DISTANCE)
         )
         
         physics = PhysicsEntity(scene: scene)
+    }
+    
+    func createEntities() {
+        makePlayer()
+    }
+    
+    var player: PlayerEntity {
+        return entities.filter { ent in
+            return ent.isMemberOfClass(PlayerEntity)
+        } [0] as! PlayerEntity
     }
     
     func add(entity: GKEntity) {
@@ -68,6 +78,16 @@ class EntityManager {
         placeObject(wheel)
         
         add(wheel)
+    }
+    
+    func makePlayer() {
+        let player = PlayerEntity()
+        player.delegate = self
+        add(player)
+    }
+    
+    func detachFromWheel() {
+        physics.detachPlayerFromWheel()
     }
     
     func placeObject(entity: GKEntity) {
@@ -170,5 +190,27 @@ class EntityManager {
         }
         
         return objects[0]
+    }
+    
+    func positionPlayer() {
+        let player = entities.filter { ent in
+            return ent.isMemberOfClass(PlayerEntity)
+        } [0]
+        
+        let wheels = getObjectAround(player, inRadius: CGFloat(EntityManager._randomRadius.highestValue) + MAX_OBJ_DISTANCE)
+        
+        let closestWheel = wheels.sort {a, b in
+            let pos1 = a.componentForClass(SpriteComponent)!.node.position
+            let pos2 = b.componentForClass(SpriteComponent)!.node.position
+            
+            let p1 = abs(pos1.x) + abs(pos1.y)
+            let p2 = abs(pos2.x) + abs(pos2.y)
+            
+            return p1 < p2
+        } [0]
+        
+        let playerNode = player.componentForClass(SpriteComponent)!.node
+        playerNode.position.x = closestWheel.componentForClass(SpriteComponent)!.node.position.x
+        playerNode.position.y = closestWheel.componentForClass(SpriteComponent)!.node.position.y + playerNode.size.height
     }
 }

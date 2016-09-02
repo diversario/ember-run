@@ -44,7 +44,7 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
         if mask == CAT.WHEEL {
             let wheelPB = other
             
-            if let wheel = wheelPB.node as? SKSpriteNode, playerInstance = Player.getPlayer() {
+            if let wheel = wheelPB.node as? SKSpriteNode, let p = player.node as? SKSpriteNode {
                 if _joint != nil {
                     _scene.physicsWorld.removeJoint(_joint)
                 }
@@ -54,7 +54,7 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
                     dy: contact.contactPoint.y - wheel.position.y
                 )
                 
-                let distanceFromWheelCenter = wheel.size.width / 2 + playerInstance.radius
+                let distanceFromWheelCenter = wheel.size.width / 2 + p.size.width / 2
                 
                 let multiplier = distanceFromWheelCenter / vectorLength(vectorToContactPoint)
                 
@@ -66,8 +66,7 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
                 player.node!.position = adjustedContactPoint
                 
                 let angle = getPlayerRotationAngle(vectorToContactPoint)
-                playerInstance.zRotation = angle
-                playerInstance.isOnWheel = wheel
+                p.zRotation = angle
                 
                 self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheelPB, anchor: contact.contactPoint)
                 self._scene.physicsWorld.addJoint(self._joint)
@@ -81,10 +80,6 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
     func detachPlayerFromWheel() {
         _scene.physicsWorld.removeJoint(_joint)
         _joint = nil
-        
-        if let playerInstance = Player.getPlayer() {
-            playerInstance.isOnWheel = nil
-        }
     }
     
     private func _getBodies (contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {

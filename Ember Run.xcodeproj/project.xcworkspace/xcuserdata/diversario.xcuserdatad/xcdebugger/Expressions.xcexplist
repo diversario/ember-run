@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "EntityManager.positionPlayer() -&gt; ():EntityManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PlayerEntity.onTap() -&gt; ():PlayerEntity.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sprite.physicsBody!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Player.(_setPhysicsBody in _C94A3B246A524FD0C7133D7391592DEF)() -&gt; ():Player.swift">
          <PersistentStrings>
             <PersistentString
@@ -31,10 +42,10 @@
          contextName = "PhysicsManager.didBeginContact(SKPhysicsContact) -&gt; ():PhysicsManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "p.node!.constraints">
+               value = "contact.bodyA.node?.name">
             </PersistentString>
             <PersistentString
-               value = "contact.bodyA.node?.name">
+               value = "p.node!.constraints">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -45,10 +56,10 @@
                value = "IMPULSE_COMP">
             </PersistentString>
             <PersistentString
-               value = "self._scene.frame">
+               value = "_node.parent!.name">
             </PersistentString>
             <PersistentString
-               value = "_node.parent!.name">
+               value = "self._scene.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -145,6 +156,9 @@
                value = "self.height">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EntityManager.getHighestObject(AnyObject.Type) -&gt; GKEntity?:EntityManager.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
