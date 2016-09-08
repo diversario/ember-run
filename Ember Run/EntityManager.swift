@@ -53,6 +53,20 @@ class EntityManager: PlayerDelegate {
         entities.remove(entity)
     }
     
+    func update () {
+        let max_y = scene.camera!.position.y + scene.frame.size.height/2
+        
+        let highest_wheel = getHighestSprite(WheelEntity) as? WheelEntity
+        
+        if highest_wheel == nil {
+            makeWheel()
+        } else {
+            while (getHighestSprite(WheelEntity) as! WheelEntity).sprite.node.position.y <= max_y {
+                makeWheel()
+            }
+        }
+    }
+    
     func setVisibility(node: SKSpriteNode) {
         if scene.shouldHide(node) {
             node.removeFromParent()
@@ -75,7 +89,7 @@ class EntityManager: PlayerDelegate {
     func makeWheel() {
         let wheel = WheelEntity(randomRadius: EntityManager._randomRadius)
 
-        placeObject(wheel)
+        placeWheel(wheel)
         
         add(wheel)
     }
@@ -90,7 +104,7 @@ class EntityManager: PlayerDelegate {
         physics.detachPlayerFromWheel()
     }
     
-    func placeObject(entity: GKEntity) {
+    func placeWheel(entity: GKEntity) {
         if let node = entity.componentForClass(SpriteComponent)?.node {
             node.position.x = getRandomX(entity)
             node.position.y = getInitialY()
@@ -147,7 +161,7 @@ class EntityManager: PlayerDelegate {
     func getRandomY(entity: GKEntity) -> CGFloat? {
         if let node = entity.componentForClass(SpriteComponent)?.node {
             let min = Int(node.position.y)
-            let max = min + Int(MAX_OBJ_DISTANCE - MIN_OBJ_DISTANCE)
+            let max = min + 1//Int(MAX_OBJ_DISTANCE - MIN_OBJ_DISTANCE) - Int(node.size.height)/2
             
             let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
             
@@ -162,7 +176,7 @@ class EntityManager: PlayerDelegate {
         let o2 = rhs.componentForClass(SpriteComponent)!
         
         let dist = distanceBetweenPoints(o1.node.position, o2.node.position)
-        
+        //print(MAX_OBJ_DISTANCE, dist, o1.node.frame.width/2, o2.node.frame.width/2)
         return dist - o1.node.frame.width/2 - o2.node.frame.width/2
     }
     

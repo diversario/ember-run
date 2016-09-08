@@ -148,17 +148,17 @@ class GameScene: SKScene {
             _gameOver()
         }
     }
-    var foo = false
+//    var foo = false
     override func didApplyConstraints() {
-        if !foo {
-            _entManager?.makeWheel()
-            _entManager?.makeWheel()
-            _entManager?.makeWheel()
-            
-            foo = true
-        }
+//        if !foo {
+//            _entManager?.makeWheel()
+//            _entManager?.makeWheel()
+//            _entManager?.makeWheel()
+//            
+//            foo = true
+//        }
         //_wheelPlacer?.update()
-        
+        _entManager?.update()
         if /*!_grid_rendered &&*/ _wheelPlacer != nil {
 //            _grid_rendered = true
             
@@ -174,26 +174,26 @@ class GameScene: SKScene {
     }
     
     private func _followPlayer() {
-        if let player = _player, cam = camera {
-            cam.position.y = player.position.y
+        if let player = _entManager?.player, cam = camera {
+            cam.position.y = player.sprite.position.y
             return
             
-            if let wheel = player.isOnWheel {
+            if player.isOnWheel {
                 _cameraMovedToPlayer = false
                 
-                if !cam.hasActions() {
-                    let move = SKAction.moveToY(wheel.position.y, duration: 0.2)
-                    
-                    cam.runAction(move)
-                }
+//                if !cam.hasActions() {
+//                    let move = SKAction.moveToY(wheel.position.y, duration: 0.2)
+//                    
+//                    cam.runAction(move)
+//                }
             } else {
                 if _cameraMovedToPlayer {
-                    cam.position.y = player.position.y
+                    cam.position.y = player.sprite.position.y
                 } else {
-                    let move = SKAction.moveToY(player.position.y, duration: 0.1)
+                    let move = SKAction.moveToY(player.sprite.position.y, duration: 0.1)
                     
                     cam.runAction(move, completion: {
-                        cam.position.y = player.position.y
+                        cam.position.y = player.sprite.position.y
                         self._cameraMovedToPlayer = true
                     })
                 }

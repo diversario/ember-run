@@ -65,7 +65,6 @@ class PlayerEntity: GKEntity {
         return vector
     }
     
-    
     var isOnWheel: Bool {
         return sprite.physicsBody!.joints.count > 0
     }

@@ -22,6 +22,10 @@ class WheelEntity: GKEntity {
         return componentForClass(WheelRotationComponent)!.direction
     }
     
+    var sprite: SpriteComponent {
+        return componentForClass(SpriteComponent)!
+    }
+    
     init(texture: SKTexture, size: CGSize) {
         radius = size.height / 2
         
