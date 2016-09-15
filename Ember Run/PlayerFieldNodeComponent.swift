@@ -21,4 +21,8 @@ class PlayerFieldNodeComponent: GKComponent {
         
         sprite.addChild(fieldNode)
     }
+    
+    deinit {
+        print("DEINIT PlayerFieldNodeComponent")
+    }
 }

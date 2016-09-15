@@ -53,16 +53,16 @@ class Cloud: SKSpriteNode {
             scene = _p
         }
         
-        if let scene = scene {
-            if scene.shouldHide(self) {
-                _parentNode = scene
-                self.removeFromParent()
-                self.paused = true
-            } else if scene.shouldUnide(self) {
-                _parentNode?.addChild(self)
-                self.paused = false
-            }
-        }
+//        if let scene = scene {
+//            if scene.shouldHide(self) {
+//                _parentNode = scene
+//                self.removeFromParent()
+//                self.paused = true
+//            } else if scene.shouldUnide(self) {
+//                _parentNode?.addChild(self)
+//                self.paused = false
+//            }
+//        }
     }
     
     private func _movement () {
@@ -96,20 +96,20 @@ class Clouds {
         
         // this is repeated in WheelPlacer, can be broken out, maybe
         for cloud in _clouds {
-            if self._scene.shouldRemoveFromScene(cloud) {
-                if let idx = self._clouds.indexOf(cloud) {
-                    self._clouds.removeAtIndex(idx)
-                }
-                
-                cloud.prepareToDie()
-            } else {
-                if !self._isCloudVisible(cloud) {
-                    cloud.position.x = -self._frame_size.width / 2
-                    cloud.initialize()
-                }
-                
-                cloud.update()
-            }
+//            if self._scene.shouldRemoveFromScene(cloud) {
+//                if let idx = self._clouds.indexOf(cloud) {
+//                    self._clouds.removeAtIndex(idx)
+//                }
+//                
+//                cloud.prepareToDie()
+//            } else {
+//                if !self._isCloudVisible(cloud) {
+//                    cloud.position.x = -self._frame_size.width / 2
+//                    cloud.initialize()
+//                }
+//                
+//                cloud.update()
+//            }
         }
     }
     

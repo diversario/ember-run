@@ -41,4 +41,8 @@ class WheelRotationComponent: GKComponent {
     private func _getRandomAngularSpeed() -> CGFloat {
         return CGFloat(CGFloat(WheelRotationComponent._randomAngularSpeed.nextInt()) / 10.0)
     }
+    
+    deinit {
+        print("DEINIT WheelRotationComponent")
+    }
 }

@@ -52,14 +52,14 @@ class WheelPlacer {
             _placeWheel()
         }
 
-        for wheel in _wheels {
-            if _scene.shouldRemoveFromScene(wheel) {
-                wheel.prepareToDie()
-                _wheels.removeAtIndex(_wheels.indexOf(wheel)!)
-            } else {
-                wheel.update()
-            }
-        }
+//        for wheel in _wheels {
+//            if _scene.shouldRemoveFromScene(wheel) {
+//                wheel.prepareToDie()
+//                _wheels.removeAtIndex(_wheels.indexOf(wheel)!)
+//            } else {
+//                wheel.update()
+//            }
+//        }
     }
     
     // this needs to randomize where the search starts

@@ -31,6 +31,8 @@
 		2049D0DB1D617954005E95A3 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2049D0DA1D617954005E95A3 /* Grid.swift */; };
 		2069B6531C87EA9B00EB0188 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2069B6521C87EA9B00EB0188 /* README.md */; };
 		206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C54891CE40F980047A84D /* CoinPlacer.swift */; };
+		208308391D8792DA009DA352 /* HazardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208308381D8792DA009DA352 /* HazardEntity.swift */; };
+		2083083B1D87A8E5009DA352 /* PlayerHealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083083A1D87A8E5009DA352 /* PlayerHealthComponent.swift */; };
 		209C60491C77C163002816C3 /* shader_water.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 209C60481C77C163002816C3 /* shader_water.fsh */; };
 		209C606D1C7849DD002816C3 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 209C606C1C7849DD002816C3 /* GameOver.sks */; };
 		209C606F1C784AAE002816C3 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209C606E1C784AAE002816C3 /* GameOver.swift */; };
@@ -96,6 +98,8 @@
 		2049D0DA1D617954005E95A3 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		2069B6521C87EA9B00EB0188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		206C54891CE40F980047A84D /* CoinPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinPlacer.swift; sourceTree = "<group>"; };
+		208308381D8792DA009DA352 /* HazardEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HazardEntity.swift; sourceTree = "<group>"; };
+		2083083A1D87A8E5009DA352 /* PlayerHealthComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerHealthComponent.swift; sourceTree = "<group>"; };
 		209C60481C77C163002816C3 /* shader_water.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader_water.fsh; sourceTree = "<group>"; };
 		209C606C1C7849DD002816C3 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		209C606E1C784AAE002816C3 /* GameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 				209CE4E61D6918AA00C49D78 /* EntityManager.swift */,
 				20C3EA851D77D907004691C2 /* PhysicsEntity.swift */,
 				20C3EA871D77DF14004691C2 /* PlayerEntity.swift */,
+				208308381D8792DA009DA352 /* HazardEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				209CE4EC1D6C1B3200C49D78 /* WheelPhysicsComponent.swift */,
 				20C3EA891D77E252004691C2 /* PlayerPhysicsComponent.swift */,
 				20C3EA8B1D77E30C004691C2 /* PlayerFieldNodeComponent.swift */,
+				2083083A1D87A8E5009DA352 /* PlayerHealthComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -333,7 +339,7 @@
 			attributes = {
 				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ilya Shaisultanov";
 				TargetAttributes = {
 					200F49CE1C6ED8C300A24A49 = {
@@ -414,6 +420,7 @@
 				209CE4E71D6918AA00C49D78 /* EntityManager.swift in Sources */,
 				209CE4ED1D6C1B3300C49D78 /* WheelPhysicsComponent.swift in Sources */,
 				2049D0DB1D617954005E95A3 /* Grid.swift in Sources */,
+				2083083B1D87A8E5009DA352 /* PlayerHealthComponent.swift in Sources */,
 				200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */,
 				206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */,
 				200F49D71C6ED8C400A24A49 /* GameScene.swift in Sources */,
@@ -424,6 +431,7 @@
 				20020AAE1C914653002CE0A0 /* Background.swift in Sources */,
 				20020AA81C8E8734002CE0A0 /* Tiler.swift in Sources */,
 				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
+				208308391D8792DA009DA352 /* HazardEntity.swift in Sources */,
 				20020AA41C8B88F2002CE0A0 /* Player.swift in Sources */,
 				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
 				20C3EA8C1D77E30C004691C2 /* PlayerFieldNodeComponent.swift in Sources */,
@@ -505,8 +513,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -533,6 +543,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -549,8 +560,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -569,6 +582,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -581,6 +596,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-Run";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -592,6 +608,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-Run";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

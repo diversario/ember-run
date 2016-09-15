@@ -42,6 +42,10 @@ class WheelEntity: GKEntity {
         _setSpriteAttributes()
     }
     
+    deinit {
+        print("DEINIT WheelEntity")
+    }
+    
     convenience init(randomRadius: GKRandomDistribution) {
         let radius = CGFloat(randomRadius.nextInt())
         let texture = WheelEntity._getWheelTexture(radius, min: randomRadius.lowestValue, max: randomRadius.highestValue)

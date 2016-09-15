@@ -20,4 +20,8 @@ class SpriteComponent: GKComponent {
     convenience init(texture: SKTexture, size: CGSize) {
         self.init(texture: texture, color: SKColor.clearColor(), size: size)
     }
+    
+    deinit {
+        print("DEINIT SpriteComponent")
+    }
 }

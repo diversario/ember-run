@@ -95,15 +95,15 @@ class Coin: SKSpriteNode {
             scene = _p
         }
         
-        if let scene = scene {
-            if scene.shouldHide(self) {
-                _parentNode = scene
-                self.removeFromParent()
-                self.paused = true
-            } else if scene.shouldUnide(self) {
-                scene.addChild(self)
-                self.paused = false
-            }
-        }
+//        if let scene = scene {
+//            if scene.shouldHide(self) {
+//                _parentNode = scene
+//                self.removeFromParent()
+//                self.paused = true
+//            } else if scene.shouldUnide(self) {
+//                scene.addChild(self)
+//                self.paused = false
+//            }
+//        }
     }
 }

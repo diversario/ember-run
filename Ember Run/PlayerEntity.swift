@@ -12,6 +12,7 @@ import SpriteKit
 
 class PlayerEntity: GKEntity {
     var delegate: PlayerDelegate?
+    private let health = PlayerHealthComponent()
     
     override init() {
         super.init()
@@ -23,8 +24,21 @@ class PlayerEntity: GKEntity {
         sprite.node.name = "player"
         
         addComponent(sprite)
+        addComponent(health)
         resetPhysicsComponent()
         addComponent(PlayerFieldNodeComponent(sprite: sprite.node))
+    }
+    
+    deinit {
+        print("DEINIT PlayerEntity")
+    }
+    
+    func updateWithDeltaTime(seconds: NSTimeInterval, hazardEdge: CGFloat) {
+        rotateToMovement()
+        
+        let shouldDecrease = sprite.position.y < hazardEdge
+        
+        health.update(seconds, shouldDecrease: shouldDecrease)
     }
     
     var sprite: SKSpriteNode {
@@ -33,6 +47,10 @@ class PlayerEntity: GKEntity {
 
     func resetPhysicsComponent () {
         addComponent(PlayerPhysicsComponent(sprite: sprite))
+    }
+    
+    var isDead: Bool {
+        return health.health <= 0
     }
     
     func onTap () {
@@ -83,16 +101,11 @@ class PlayerEntity: GKEntity {
         return nil
     }
     
-    @available(*, unavailable)
-    func orientToMovement (impulse: CGVector) {
-        let angle = getPlayerRotationAngle(impulse)
-        
-        let rotate = SKAction.rotateToAngle(angle, duration: 0.03, shortestUnitArc: true)
-        sprite.runAction(rotate)
-    }
-    
-    
     func rotateToMovement () {
+        if isOnWheel {
+            return
+        }
+        
         if let vel = sprite.physicsBody?.velocity {
             let point_y = sprite.position.y - vel.dy
             let point_x = sprite.position.x - vel.dx

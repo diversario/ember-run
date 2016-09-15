@@ -23,4 +23,8 @@ class PlayerPhysicsComponent: GKComponent {
         
         sprite.physicsBody!.fieldBitMask = CAT.PLAYER
     }
+    
+    deinit {
+        print("DEINIT PlayerPhysicsComponent")
+    }
 }

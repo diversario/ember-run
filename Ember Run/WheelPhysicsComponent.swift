@@ -23,4 +23,8 @@ class WheelPhysicsComponent: GKComponent {
         body.categoryBitMask = CAT.WHEEL
         body.usesPreciseCollisionDetection = false
     }
+    
+    deinit {
+        print("DEINIT WheelPhysicsComponent")
+    }
 }

@@ -238,7 +238,7 @@ class Player: SKSpriteNode {
     }
     
     private func _startDecreasingHealth() {
-        let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000)
+        let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000) // ns -> ms
         let time = dispatch_time(DISPATCH_TIME_NOW, delta)
         
         dispatch_after(time, dispatch_get_main_queue(), {

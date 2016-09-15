@@ -33,7 +33,7 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
     }
     
     deinit {
-        print("DEINIT PHYSICS MANAGER")
+        print("DEINIT PhysicsEntity")
     }
     
     func didBeginContact(contact: SKPhysicsContact) {

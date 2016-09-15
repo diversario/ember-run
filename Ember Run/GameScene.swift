@@ -11,10 +11,6 @@ import AVFoundation
 
 class GameScene: SKScene {
     private var _background: Background?
-    private var _wheelPlacer: WheelPlacer?
-    private var _water: Water?
-    private var _physicsMgr: PhysicsEntity?
-    private var _player: Player?
     private var _clouds: Clouds?
     private let _camera = SKCameraNode()
     private var _cameraMovedToPlayer = false
@@ -33,15 +29,10 @@ class GameScene: SKScene {
     var LEFT_EDGE: CGFloat!
     var RIGHT_EDGE: CGFloat!
     let a = WheelEntity(texture: SKTexture(imageNamed: "wheel-1"), size: CGSize(width: 10, height: 10))
-    var player: Player? {
-        return _player
-    }
     
     private var _joint: SKPhysicsJointSpring?
     
     override func didMoveToView(view: SKView) {
-        _physicsMgr = PhysicsEntity(scene: self)
-        
         self.camera = _camera
         camera!.setScale(1)
         
@@ -49,10 +40,6 @@ class GameScene: SKScene {
         
         LEFT_EDGE = self.camera!.position.x - self.size.width / 2
         RIGHT_EDGE = self.camera!.position.x + self.size.width / 2
-        
-        _wheelPlacer = WheelPlacer(scene: self)
-        
-        _player = Player(scene: self, physicsManager: _physicsMgr!)
         
         //_water = Water(scene: self)
         
@@ -115,12 +102,9 @@ class GameScene: SKScene {
     
     override func willMoveFromView(view: SKView) {
         print("GAMESCENE WILLMOVEFROMVIEW")
-        _wheelPlacer = nil
-        _water = nil
-        _physicsMgr = nil
+        _entManager = nil
         _background = nil
         _clouds = nil
-        _player = nil
         _grid = nil
     }
     
@@ -129,48 +113,19 @@ class GameScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        _entManager?.player.rotateToMovement()
-        
-        // water position is time-based
-        if timeWhenStarted == nil {
-            timeWhenStarted = currentTime - Double(frame.size.height/3)
-        }
-        
-        timeSinceStart = currentTime - timeWhenStarted
-
-        _water?.position.y += CGFloat(abs(timeSinceStart)/100)
-        
-        self._checkPlayerPosition()
-
-        _followPlayer()
-        
-        if _isPlayerDead() {
-            _gameOver()
-        }
-    }
-//    var foo = false
-    override func didApplyConstraints() {
-//        if !foo {
-//            _entManager?.makeWheel()
-//            _entManager?.makeWheel()
-//            _entManager?.makeWheel()
-//            
-//            foo = true
-//        }
-        //_wheelPlacer?.update()
-        _entManager?.update()
-        if /*!_grid_rendered &&*/ _wheelPlacer != nil {
-//            _grid_rendered = true
-            
-            for wheel in (_wheelPlacer?.wheels)! where wheel.parent != nil {
-                _grid!.addCircle(wheel.position, radius: wheel.radius)
-            }
-            
-            _grid!.drawDebugCells(self)
-        }
+        _entManager?.update(currentTime)
         
         _background?.update()
         _clouds?.update()
+
+        _followPlayer()
+        
+        if let dead = _entManager?.player.isDead where dead == true {
+            _gameOver()
+        }
+    }
+
+    override func didApplyConstraints() {
     }
     
     private func _followPlayer() {
@@ -201,10 +156,6 @@ class GameScene: SKScene {
         }
     }
     
-    private func _isPlayerDead () -> Bool {
-        return _player?.health <= 0
-    }
-    
     private func _gameOver () {
         if _gameOverCalled {
             return
@@ -217,8 +168,8 @@ class GameScene: SKScene {
             gameOver.size = self.view!.frame.size
             
             // broken in 9.2
-//            let transition = SKTransition.crossFadeWithDuration(1)
-//            view!.presentScene(gameOver, transition: transition)
+            let transition = SKTransition.crossFadeWithDuration(1)
+            view!.presentScene(gameOver, transition: transition)
             
             self.runAction(SKAction.fadeOutWithDuration(0.5)) {
                 self.view!.presentScene(gameOver)
@@ -227,49 +178,25 @@ class GameScene: SKScene {
     }
     
     private func _checkPlayerPosition() {
-        if let player = player, pm = _physicsMgr {
-            if let water = _water where player.isInWater(water) {
-                if !player.isDying {
-                    player.highDamping()
-                    player.reduceVelocity()
-                }
-                
-                player.startDying()
-            } else {
-//                if player.position.x < LEFT_EDGE || player.position.x > RIGHT_EDGE {
-//                    player.startDying()
-//                } else {
-//                  player.stopDying()
+//        if let player = _entManager?.player, pm = _physicsMgr {
+//            if let water = _water where player.isInWater(water) {
+//                if !player.isDying {
+//                    player.highDamping()
+//                    player.reduceVelocity()
 //                }
 //                
-//                player.normalDamping()
-//                pm.setNormalGravity()
-            }
-        }
+//                player.startDying()
+//            } else {
+////                if player.position.x < LEFT_EDGE || player.position.x > RIGHT_EDGE {
+////                    player.startDying()
+////                } else {
+////                  player.stopDying()
+////                }
+////                
+////                player.normalDamping()
+////                pm.setNormalGravity()
+//            }
+//        }
     }
-    
-    func shouldRemoveFromScene (node: SKNode) -> Bool {
-        if let water = _water {
-            return node.position.y < (water.position.y - water.size.height/2)
-        }
-        
-        return false
-    }
-    
-    func shouldHide (node: SKNode) -> Bool {
-        let pos = node.position
-        
-        return node.parent != nil &&
-               pos.y < (camera!.position.y - frame.size.height) ||
-               pos.y > (camera!.position.y + frame.size.height)
-    }
-    
-// verify that just .position works
-    func shouldUnide (node: SKNode) -> Bool {
-        let pos = node.position
-        
-        return node.parent == nil &&
-            pos.y > (camera!.position.y - frame.size.height) &&
-            pos.y < (camera!.position.y + frame.size.height)
-    }
+
 }

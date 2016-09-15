@@ -15,6 +15,8 @@ class EntityManager: PlayerDelegate {
     let physics: PhysicsEntity
     var entities = Set<GKEntity>()
     
+    private var _lastUpdateTime: NSTimeInterval = 0
+    
     private static var _randomRadius: GKRandomDistribution!
     private var MIN_OBJ_DISTANCE: CGFloat = 30 // calc this based on something
     private var MAX_OBJ_DISTANCE: CGFloat
@@ -33,12 +35,23 @@ class EntityManager: PlayerDelegate {
     
     func createEntities() {
         makePlayer()
+        makeHazard()
+    }
+    
+    deinit {
+        print("DEINIT EntityManager")
     }
     
     var player: PlayerEntity {
         return entities.filter { ent in
             return ent.isMemberOfClass(PlayerEntity)
         } [0] as! PlayerEntity
+    }
+    
+    var hazard: HazardEntity {
+        return entities.filter { ent in
+            return ent.isMemberOfClass(HazardEntity)
+            } [0] as! HazardEntity
     }
     
     func add(entity: GKEntity) {
@@ -53,7 +66,15 @@ class EntityManager: PlayerDelegate {
         entities.remove(entity)
     }
     
-    func update () {
+    func update (currentTime: CFTimeInterval) {
+        let deltaTime = currentTime - _lastUpdateTime
+        _lastUpdateTime = currentTime
+        
+        player.updateWithDeltaTime(deltaTime, hazardEdge: hazard.edge)
+        addWheels()
+    }
+    
+    func addWheels () {
         let max_y = scene.camera!.position.y + scene.frame.size.height/2
         
         let highest_wheel = getHighestSprite(WheelEntity) as? WheelEntity
@@ -68,10 +89,10 @@ class EntityManager: PlayerDelegate {
     }
     
     func setVisibility(node: SKSpriteNode) {
-        if scene.shouldHide(node) {
+        if shouldHide(node) {
             node.removeFromParent()
             node.paused = true
-        } else if scene.shouldUnide(node) {
+        } else if shouldUnide(node) {
             scene.addChild(node)
             node.paused = false
         }
@@ -79,7 +100,7 @@ class EntityManager: PlayerDelegate {
     
     func setExistence(entity: GKEntity) {
         if let sprite = entity.componentForClass(SpriteComponent) {
-            if scene.shouldRemoveFromScene(sprite.node) {
+            if shouldRemoveFromScene(sprite.node) {
                 sprite.node.removeFromParent()
                 remove(entity)
             }
@@ -100,6 +121,18 @@ class EntityManager: PlayerDelegate {
         add(player)
     }
     
+    func makeHazard() {
+        let size = CGSize(width: scene.frame.width, height: scene.frame.height)
+        
+        var position = CGPoint()
+        position.x = scene.LEFT_EDGE + scene.frame.width / 2
+        position.y = scene.camera!.position.y - scene.size.height * 2
+        
+        let hazard = HazardEntity(size: size, position: position)
+        
+        add(hazard)
+    }
+    
     func detachFromWheel() {
         physics.detachPlayerFromWheel()
     }
@@ -111,6 +144,16 @@ class EntityManager: PlayerDelegate {
             
             _adjustWheelPosition(entity as! WheelEntity)
         }
+    }
+    
+    func mark(pos: CGPoint) {
+        let rect = CGRectMake(0, 0, 2, 2)
+        let sq = SKShapeNode.init(rect: rect)
+        sq.fillColor = SKColor.redColor()
+        sq.strokeColor = SKColor.clearColor()
+        sq.position = pos
+        sq.zPosition = 100000
+        scene.addChild(sq)
     }
     
     private func _adjustWheelPosition (wheel: WheelEntity) {
@@ -128,6 +171,7 @@ class EntityManager: PlayerDelegate {
             }
             
             if !ok {
+                mark(node.position)
                 node.position.y += 5
                 _adjustWheelPosition(wheel)
             } else {
@@ -161,7 +205,7 @@ class EntityManager: PlayerDelegate {
     func getRandomY(entity: GKEntity) -> CGFloat? {
         if let node = entity.componentForClass(SpriteComponent)?.node {
             let min = Int(node.position.y)
-            let max = min + 1//Int(MAX_OBJ_DISTANCE - MIN_OBJ_DISTANCE) - Int(node.size.height)/2
+            let max = min + Int(MAX_OBJ_DISTANCE) - Int(node.size.height)/2
             
             let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
             
@@ -226,5 +270,25 @@ class EntityManager: PlayerDelegate {
         let playerNode = player.componentForClass(SpriteComponent)!.node
         playerNode.position.x = closestWheel.componentForClass(SpriteComponent)!.node.position.x
         playerNode.position.y = closestWheel.componentForClass(SpriteComponent)!.node.position.y + playerNode.size.height
+    }
+    
+    func shouldRemoveFromScene (node: SKNode) -> Bool {
+        return node.position.y < (hazard.sprite.position.y - hazard.sprite.size.height/2)
+    }
+    
+    func shouldHide (node: SKNode) -> Bool {
+        let pos = node.position
+        
+        return node.parent != nil &&
+            pos.y < (scene.camera!.position.y - scene.frame.size.height) ||
+            pos.y > (scene.camera!.position.y + scene.frame.size.height)
+    }
+    
+    func shouldUnide (node: SKNode) -> Bool {
+        let pos = node.position
+        
+        return node.parent == nil &&
+            pos.y > (scene.camera!.position.y - scene.frame.size.height) &&
+            pos.y < (scene.camera!.position.y + scene.frame.size.height)
     }
 }

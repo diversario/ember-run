@@ -84,17 +84,17 @@ class Wheel: SKSpriteNode {
         } else if let _p = _parentNode {
             scene = _p
         }
-
-        if let scene = scene {
-            if scene.shouldHide(self) && self.parent != nil {
-                _parentNode = scene
-                self.removeFromParent()
-                self.paused = true
-            } else if scene.shouldUnide(self) && self.parent == nil {
-                scene.addChild(self)
-                self.paused = false
-            }
-        }
+//
+//        if let scene = scene {
+//            if scene.shouldHide(self) && self.parent != nil {
+//                _parentNode = scene
+//                self.removeFromParent()
+//                self.paused = true
+//            } else if scene.shouldUnide(self) && self.parent == nil {
+//                scene.addChild(self)
+//                self.paused = false
+//            }
+//        }
     }
 
     func contains (point: CGPoint) -> Bool {
