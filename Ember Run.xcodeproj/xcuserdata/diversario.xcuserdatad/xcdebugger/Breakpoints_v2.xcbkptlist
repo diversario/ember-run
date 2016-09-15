@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ember Run/GameScene.swift"
-            timestampString = "495596535.623628"
+            timestampString = "495609794.176589"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "_gameOver()"
             landmarkType = "7">
          </BreakpointContent>

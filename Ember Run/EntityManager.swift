@@ -11,9 +11,11 @@ import GameplayKit
 import SpriteKit
 
 class EntityManager: PlayerDelegate {
-    unowned let scene: GameScene
-    let physics: PhysicsEntity
+    weak var scene: GameScene?
+    var physics: PhysicsEntity?
     var entities = Set<GKEntity>()
+    
+    var player: PlayerEntity?
     
     private var _lastUpdateTime: TimeInterval = 0
     
@@ -23,7 +25,7 @@ class EntityManager: PlayerDelegate {
     
     init(scene: GameScene) {
         self.scene = scene
-        MAX_OBJ_DISTANCE = (self.scene.size.width) * 0.5 / 2
+        MAX_OBJ_DISTANCE = (self.scene!.size.width) * 0.5 / 2
 
         EntityManager._randomRadius = GKRandomDistribution(
             lowestValue: 25,
@@ -34,18 +36,13 @@ class EntityManager: PlayerDelegate {
     }
     
     func createEntities() {
+        addWheels()
         makePlayer()
         makeHazard()
     }
     
     deinit {
         print("DEINIT EntityManager")
-    }
-    
-    var player: PlayerEntity {
-        return entities.filter { ent in
-            return ent.isMember(of: PlayerEntity.self)
-        } [0] as! PlayerEntity
     }
     
     var hazard: HazardEntity {
@@ -56,7 +53,7 @@ class EntityManager: PlayerDelegate {
     
     func add(_ entity: GKEntity) {
         if let sprite = entity.component(ofType: SpriteComponent.self) {
-            scene.addChild(sprite.node)
+            scene?.addChild(sprite.node)
         }
         
         entities.insert(entity)
@@ -70,20 +67,23 @@ class EntityManager: PlayerDelegate {
         let deltaTime = currentTime - _lastUpdateTime
         _lastUpdateTime = currentTime
         
-        player.updateWithDeltaTime(deltaTime, hazardEdge: hazard.edge)
+        player?.updateWithDeltaTime(deltaTime, hazardEdge: hazard.edge)
         addWheels()
     }
     
     func addWheels () {
-        let max_y = scene.camera!.position.y + scene.frame.size.height/2
-        
-        let highest_wheel = getHighestSprite(WheelEntity.self) as? WheelEntity
-        
-        if highest_wheel == nil {
-            makeWheel()
-        } else {
-            while (getHighestSprite(WheelEntity.self) as! WheelEntity).sprite.node.position.y <= max_y {
+        if let scene = self.scene {
+            let max_y = scene.camera!.position.y + scene.frame.size.height/2
+            
+            let highest_wheel = getHighestSprite(WheelEntity.self) as? WheelEntity
+            
+            if highest_wheel == nil {
                 makeWheel()
+                addWheels()
+            } else {
+                while (getHighestSprite(WheelEntity.self) as! WheelEntity).sprite.node.position.y <= max_y {
+                    makeWheel()
+                }
             }
         }
     }
@@ -93,7 +93,7 @@ class EntityManager: PlayerDelegate {
             node.removeFromParent()
             node.isPaused = true
         } else if shouldUnide(node) {
-            scene.addChild(node)
+            scene?.addChild(node)
             node.isPaused = false
         }
     }
@@ -108,33 +108,40 @@ class EntityManager: PlayerDelegate {
     }
     
     func makeWheel() {
-        let wheel = WheelEntity(randomRadius: EntityManager._randomRadius)
-
-        placeWheel(wheel)
-        
-        add(wheel)
+        if scene != nil {
+            let wheel = WheelEntity(randomRadius: EntityManager._randomRadius)
+            
+            placeWheel(wheel)
+            
+            add(wheel)
+        }
     }
     
     func makePlayer() {
-        let player = PlayerEntity()
-        player.delegate = self
-        add(player)
+        player = PlayerEntity()
+        player?.delegate = self
+        
+        if let sprite = player?.component(ofType: SpriteComponent.self) {
+            scene?.addChild(sprite.node)
+        }
     }
     
     func makeHazard() {
-        let size = CGSize(width: scene.frame.width, height: scene.frame.height)
-        
-        var position = CGPoint()
-        position.x = scene.LEFT_EDGE + scene.frame.width / 2
-        position.y = scene.camera!.position.y - scene.size.height * 2
-        
-        let hazard = HazardEntity(size: size, position: position)
-        
-        add(hazard)
+        if let scene = self.scene {
+            let size = CGSize(width: scene.frame.width, height: scene.frame.height)
+            
+            var position = CGPoint()
+            position.x = scene.LEFT_EDGE + scene.frame.width / 2
+            position.y = scene.camera!.position.y - scene.size.height * 2
+            
+            let hazard = HazardEntity(size: size, position: position)
+            
+            add(hazard)
+        }
     }
     
     func detachFromWheel() {
-        physics.detachPlayerFromWheel()
+        physics?.detachPlayerFromWheel()
     }
     
     func placeWheel(_ entity: GKEntity) {
@@ -153,7 +160,7 @@ class EntityManager: PlayerDelegate {
         sq.strokeColor = SKColor.clear
         sq.position = pos
         sq.zPosition = 100000
-        scene.addChild(sq)
+        scene?.addChild(sq)
     }
     
     private func _adjustWheelPosition (_ wheel: WheelEntity) {
@@ -186,7 +193,7 @@ class EntityManager: PlayerDelegate {
         if let last_position = getHighestSprite(WheelEntity.self)?.component(ofType: SpriteComponent.self)?.node.position {
             y = last_position.y + 1
         } else {
-            y = scene.frame.size.height / -2
+            y = scene!.frame.size.height / -2
         }
         
         return y
@@ -194,8 +201,8 @@ class EntityManager: PlayerDelegate {
     
     func getRandomX(_ entity: GKEntity) -> CGFloat {
         let wheel = entity.component(ofType: SpriteComponent.self)!.node
-        let min = Int(wheel.frame.width / 2 + MIN_OBJ_DISTANCE - scene.frame.size.width / 2)
-        let max = Int(scene.frame.size.width / 2 - MIN_OBJ_DISTANCE - wheel.frame.width / 2)
+        let min = Int(wheel.frame.width / 2 + MIN_OBJ_DISTANCE - scene!.frame.size.width / 2)
+        let max = Int(scene!.frame.size.width / 2 - MIN_OBJ_DISTANCE - wheel.frame.width / 2)
         
         let rand = GKRandomDistribution(lowestValue: min, highestValue: max)
         
@@ -251,25 +258,23 @@ class EntityManager: PlayerDelegate {
     }
     
     func positionPlayer() {
-        let player = entities.filter { ent in
-            return ent.isMember(of: PlayerEntity.self)
-        } [0]
-        
-        let wheels = getObjectAround(player, inRadius: CGFloat(EntityManager._randomRadius.highestValue) + MAX_OBJ_DISTANCE)
-        
-        let closestWheel = wheels.sorted {a, b in
-            let pos1 = a.component(ofType: SpriteComponent.self)!.node.position
-            let pos2 = b.component(ofType: SpriteComponent.self)!.node.position
+        if let player = self.player {
+            let wheels = getObjectAround(player, inRadius: CGFloat(EntityManager._randomRadius.highestValue) + MAX_OBJ_DISTANCE)
             
-            let p1 = abs(pos1.x) + abs(pos1.y)
-            let p2 = abs(pos2.x) + abs(pos2.y)
+            let closestWheel = wheels.sorted {a, b in
+                let pos1 = a.component(ofType: SpriteComponent.self)!.node.position
+                let pos2 = b.component(ofType: SpriteComponent.self)!.node.position
+                
+                let p1 = abs(pos1.x) + abs(pos1.y)
+                let p2 = abs(pos2.x) + abs(pos2.y)
+                
+                return p1 < p2
+                } [0]
             
-            return p1 < p2
-        } [0]
-        
-        let playerNode = player.component(ofType: SpriteComponent.self)!.node
-        playerNode.position.x = closestWheel.component(ofType: SpriteComponent.self)!.node.position.x
-        playerNode.position.y = closestWheel.component(ofType: SpriteComponent.self)!.node.position.y + playerNode.size.height
+            let playerNode = player.component(ofType: SpriteComponent.self)!.node
+            playerNode.position.x = closestWheel.component(ofType: SpriteComponent.self)!.node.position.x
+            playerNode.position.y = closestWheel.component(ofType: SpriteComponent.self)!.node.position.y + playerNode.size.height
+        }
     }
     
     func shouldRemoveFromScene (_ node: SKNode) -> Bool {
@@ -280,15 +285,15 @@ class EntityManager: PlayerDelegate {
         let pos = node.position
         
         return node.parent != nil &&
-            pos.y < (scene.camera!.position.y - scene.frame.size.height) ||
-            pos.y > (scene.camera!.position.y + scene.frame.size.height)
+            pos.y < (scene!.camera!.position.y - scene!.frame.size.height) ||
+            pos.y > (scene!.camera!.position.y + scene!.frame.size.height)
     }
     
     func shouldUnide (_ node: SKNode) -> Bool {
         let pos = node.position
         
         return node.parent == nil &&
-            pos.y > (scene.camera!.position.y - scene.frame.size.height) &&
-            pos.y < (scene.camera!.position.y + scene.frame.size.height)
+            pos.y > (scene!.camera!.position.y - scene!.frame.size.height) &&
+            pos.y < (scene!.camera!.position.y + scene!.frame.size.height)
     }
 }

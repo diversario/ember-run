@@ -101,6 +101,7 @@ class GameScene: SKScene {
     
     override func willMove(from view: SKView) {
         print("GAMESCENE WILLMOVEFROMVIEW")
+        _entManager?.player?.delegate = nil
         _entManager = nil
         _background = nil
         _clouds = nil
@@ -108,7 +109,7 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        _entManager?.player.onTap()
+        _entManager?.player?.onTap()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -119,7 +120,7 @@ class GameScene: SKScene {
 
         _followPlayer()
         
-        if let dead = _entManager?.player.isDead , dead == true {
+        if let dead = _entManager?.player?.isDead , dead == true {
             _gameOver()
         }
     }
