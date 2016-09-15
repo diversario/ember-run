@@ -10,29 +10,29 @@ import Foundation
 import SpriteKit
 
 class GameOver: SKScene {
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         print("GAMEOVER DIDMOVETOVIEW")
         
         self.alpha = 0
         
         let label = SKLabelNode(text: "Game Over")
-        label.position = CGPoint(x: CGRectGetMidX(scene!.frame), y:  CGRectGetMidY(scene!.frame))
+        label.position = CGPoint(x: scene!.frame.midX, y:  scene!.frame.midY)
         
         label.zPosition = 600
         self.addChild(label)
         
-        self.runAction(SKAction.fadeInWithDuration(1.0))
+        self.run(SKAction.fadeIn(withDuration: 1.0))
     }
     
     deinit {
         print("DEINIT GAMEOVER")
     }
     
-    override func willMoveFromView(view: SKView) {
+    override func willMove(from view: SKView) {
         view.removeFromSuperview()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view?.presentScene(nil)
     }
 }

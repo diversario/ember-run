@@ -345,15 +345,18 @@
 					200F49CE1C6ED8C300A24A49 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 5F6QZASLQP;
+						LastSwiftMigration = 0800;
 					};
 					200F49E61C6ED8C400A24A49 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 5F6QZASLQP;
+						LastSwiftMigration = 0800;
 						TestTargetID = 200F49CE1C6ED8C300A24A49;
 					};
 					200F49F11C6ED8C400A24A49 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 5F6QZASLQP;
+						LastSwiftMigration = 0800;
 						TestTargetID = 200F49CE1C6ED8C300A24A49;
 					};
 				};
@@ -543,7 +546,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -583,7 +586,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -596,7 +599,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-Run";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -608,7 +611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-Run";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -621,6 +624,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-RunTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ember Run.app/Ember Run";
 			};
 			name = Debug;
@@ -633,6 +637,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-RunTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ember Run.app/Ember Run";
 			};
 			name = Release;
@@ -645,6 +650,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-RunUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Ember Run";
 				USES_XCTRUNNER = YES;
 			};
@@ -657,6 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diversario.Ember-RunUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Ember Run";
 				USES_XCTRUNNER = YES;
 			};

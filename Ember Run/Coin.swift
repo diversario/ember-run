@@ -10,8 +10,8 @@ import Foundation
 import SpriteKit
 
 class CoinPin: SKNode {
-    private var _parentNode: GameScene?
-    private unowned let _scene: GameScene
+    fileprivate var _parentNode: GameScene?
+    fileprivate unowned let _scene: GameScene
     
     init(scene: GameScene) {
         _scene = scene
@@ -19,7 +19,7 @@ class CoinPin: SKNode {
         super.init()
         
         physicsBody = SKPhysicsBody(circleOfRadius: 1)
-        physicsBody!.dynamic = false
+        physicsBody!.isDynamic = false
         physicsBody!.categoryBitMask = CAT.COIN_PIN
         physicsBody!.collisionBitMask = CAT.COIN_PIN
         physicsBody!.contactTestBitMask = CAT.COIN_PIN
@@ -40,16 +40,16 @@ class CoinPin: SKNode {
 }
 
 class Coin: SKSpriteNode {
-    private var _parentNode: GameScene?
+    fileprivate var _parentNode: GameScene?
     
-    private static let Texture = SKTexture(imageNamed: "coin")
+    fileprivate static let Texture = SKTexture(imageNamed: "coin")
     
-    private unowned let _scene: GameScene
+    fileprivate unowned let _scene: GameScene
 
     init (scene: GameScene) {
         _scene = scene
         
-        super.init(texture: Coin.Texture, color: SKColor.clearColor(), size: Coin.Texture.size())
+        super.init(texture: Coin.Texture, color: SKColor.clear, size: Coin.Texture.size())
         
         _setAttributes()
     }
@@ -64,7 +64,7 @@ class Coin: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    private func _setAttributes () {
+    fileprivate func _setAttributes () {
         name = "coin"
         
         zPosition = Z.COIN

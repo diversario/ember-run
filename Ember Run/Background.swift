@@ -13,10 +13,10 @@ class BackgroundTile: Tile {
     init () {
         let texture = SKTexture(imageNamed: "level-background-tile")
         let texture_size = texture.size()
-        let height = texture_size.height * (UIScreen.mainScreen().bounds.width / texture_size.width)
+        let height = texture_size.height * (UIScreen.main.bounds.width / texture_size.width)
 
-        _size = CGSize(width: UIScreen.mainScreen().bounds.width, height: height)
-        super.init(t: texture, c: SKColor.clearColor(), s: _size)
+        _size = CGSize(width: UIScreen.main.bounds.width, height: height)
+        super.init(t: texture, c: SKColor.clear, s: _size)
         
         _setAttributes()
     }
@@ -25,7 +25,7 @@ class BackgroundTile: Tile {
         super.init(coder: aDecoder)
     }
     
-    private func _setAttributes () {
+    fileprivate func _setAttributes () {
         zPosition = Z.BACKGROUND
         alpha = 1
     }
@@ -38,16 +38,16 @@ func makeTile () -> Tile {
 
 
 class Background {
-    private unowned let _scene: GameScene
-    private let _frame_size: CGSize
+    fileprivate unowned let _scene: GameScene
+    fileprivate let _frame_size: CGSize
     
-    private var _tiles: Tiler
+    fileprivate var _tiles: Tiler
     
     init(scene: GameScene) {
         self._scene = scene
         _frame_size = scene.size
         
-        _tiles = Tiler(makeTile, atPosition: Position.CENTER, inScene: _scene)
+        _tiles = Tiler(makeTile, atPosition: Position.center, inScene: _scene)
     }
     
     deinit {

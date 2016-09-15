@@ -12,6 +12,8 @@ import GameplayKit
 
 class PlayerFieldNodeComponent: GKComponent {
     init (sprite: SKSpriteNode) {
+        super.init()
+        
         sprite.physicsBody!.fieldBitMask = CAT.PLAYER
         
         let fieldNode = SKFieldNode.springField()
@@ -20,6 +22,10 @@ class PlayerFieldNodeComponent: GKComponent {
         fieldNode.region = SKRegion(radius: Float((sprite.size.width/2) * 6))
         
         sprite.addChild(fieldNode)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {

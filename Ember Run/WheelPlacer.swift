@@ -9,16 +9,36 @@
 import Foundation
 import SpriteKit
 import GameplayKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class WheelPlacer {
-    private unowned let _scene: GameScene
-    private let _frame_size: CGSize
-    private var _wheels = [Wheel]()
+    fileprivate unowned let _scene: GameScene
+    fileprivate let _frame_size: CGSize
+    fileprivate var _wheels = [Wheel]()
     
-    private let _MIN_DISTANCE: CGFloat = 30
-    private let _MAX_DISTANCE: CGFloat// = 200
+    fileprivate let _MIN_DISTANCE: CGFloat = 30
+    fileprivate let _MAX_DISTANCE: CGFloat// = 200
 
-    private static var _instance: WheelPlacer!
+    fileprivate static var _instance: WheelPlacer!
     
     static var instance: WheelPlacer? {
         if let wp = _instance {
@@ -64,7 +84,7 @@ class WheelPlacer {
     
     // this needs to randomize where the search starts
     // so there are less stair-like wheel placements
-    private func _placeWheel() -> SKNode {
+    fileprivate func _placeWheel() -> SKNode {
         var last_wheel: SKNode?
         
         if let _last_wheel = _wheels.last {
@@ -93,7 +113,7 @@ class WheelPlacer {
         return wheel
     }
     
-    private func _adjustWheelPosition (wheel: Wheel) {
+    fileprivate func _adjustWheelPosition (_ wheel: Wheel) {
         var ok = true
         
         for w in _wheels {
@@ -111,7 +131,7 @@ class WheelPlacer {
         }
     }
     
-    private func _getRandomX(wheel: SKNode) -> CGFloat {
+    fileprivate func _getRandomX(_ wheel: SKNode) -> CGFloat {
         let min = Int(wheel.frame.width / 2 + _MIN_DISTANCE - _frame_size.width / 2)
         let max = Int(_frame_size.width / 2 - _MIN_DISTANCE - wheel.frame.width / 2)
         
@@ -121,7 +141,7 @@ class WheelPlacer {
     }
 
     // refactor to calculate space between edges, not centers
-    private func _getRandomY(wheel: SKNode) -> CGFloat {
+    fileprivate func _getRandomY(_ wheel: SKNode) -> CGFloat {
         let min = Int(wheel.position.y)
         let max = min + Int(_MAX_DISTANCE - _MIN_DISTANCE)
         
@@ -134,7 +154,7 @@ class WheelPlacer {
     Calculates distance between edges of two circles on a line
     between their centers.
     */
-    private func _spaceBetweenCircles(lhs: SKNode, _ rhs: SKNode) -> CGFloat {
+    fileprivate func _spaceBetweenCircles(_ lhs: SKNode, _ rhs: SKNode) -> CGFloat {
         let dist = distanceBetweenPoints(lhs.position, rhs.position)
         
         return dist - lhs.frame.width/2 - rhs.frame.width/2

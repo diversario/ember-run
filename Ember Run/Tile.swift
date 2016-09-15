@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class Tile: SKSpriteNode {
-    private var _texture: SKTexture!
+    fileprivate var _texture: SKTexture!
     
     var tileSize: CGSize {
         return _texture.size()

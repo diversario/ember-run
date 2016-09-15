@@ -10,9 +10,9 @@ import Foundation
 import SpriteKit
 
 class Water: SKSpriteNode {
-    private unowned var _scene: GameScene
+    fileprivate unowned var _scene: GameScene
     
-    private static let Texture = SKTexture(imageNamed: "water1")
+    fileprivate static let Texture = SKTexture(imageNamed: "water1")
     
     var waterline: CGFloat {
         return position.y + size.height / 2
@@ -21,7 +21,7 @@ class Water: SKSpriteNode {
     init (scene: GameScene) {
         _scene = scene
         
-        super.init(texture: nil /*Water.Texture*/, color: SKColor.clearColor(), size: Water.Texture.size())
+        super.init(texture: nil /*Water.Texture*/, color: SKColor.clear, size: Water.Texture.size())
         
         _setAttributes()
     }
@@ -36,7 +36,7 @@ class Water: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    private func _setAttributes () {
+    fileprivate func _setAttributes () {
         size = CGSize(width: _scene.frame.width, height: _scene.frame.height)
         zPosition = Z.WATER
         
@@ -50,18 +50,18 @@ class Water: SKSpriteNode {
             SKTexture(imageNamed: "water2")
         ]
         
-        let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.3)
+        let animation = SKAction.animate(with: textures, timePerFrame: 0.3)
         
-        runAction(SKAction.repeatActionForever(animation))
+        run(SKAction.repeatForever(animation))
         
         //_movement()
     }
     
-    private func _movement () {
-        let move = SKAction.moveBy(CGVector(dx: 0, dy: 100), duration: 1)
+    fileprivate func _movement () {
+        let move = SKAction.move(by: CGVector(dx: 0, dy: 100), duration: 1)
         
-        runAction(move) { () -> Void in
+        run(move, completion: { () -> Void in
             self._movement()
-        }
+        }) 
     }
 }

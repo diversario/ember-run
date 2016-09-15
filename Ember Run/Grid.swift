@@ -10,13 +10,13 @@ import Foundation
 import SpriteKit
 
 class Grid {
-    private let _scale: CGFloat // 10 points per cell
-    private let _cell_diameter: CGFloat
-    private var _values: [[Bool]]
-    private var _offset_x: CGFloat
-    private var _offset_y: CGFloat!
+    fileprivate let _scale: CGFloat // 10 points per cell
+    fileprivate let _cell_diameter: CGFloat
+    fileprivate var _values: [[Bool]]
+    fileprivate var _offset_x: CGFloat
+    fileprivate var _offset_y: CGFloat!
     
-    private var _existingObjects = [(CGPoint, CGFloat)]()
+    fileprivate var _existingObjects = [(CGPoint, CGFloat)]()
     
     init(width: Int, height: Int, scale: Int = 10) {
         _scale = CGFloat(scale)
@@ -30,7 +30,7 @@ class Grid {
         let y = Int(ceil(Float(height)/Float(scale)))
         
         for _ in 0...y {
-            let row = Array(count: x, repeatedValue: false)
+            let row = Array(repeating: false, count: x)
             _values.append(row)
         }
     }
@@ -55,9 +55,9 @@ class Grid {
         return _values.count
     }
     
-    private var _debug_h = 0
+    fileprivate var _debug_h = 0
     
-    func drawDebugCells(scene: SKScene) {
+    func drawDebugCells(_ scene: SKScene) {
         if _debug_h <= height - 1 {
             for w in 0...width - 1 {
                 for h in _debug_h...height - 1 {
@@ -65,8 +65,8 @@ class Grid {
                         let rx = CGFloat(w) * _scale - _offset_x
                         let ry = CGFloat(h) * _scale - _offset_y
                         
-                        let rect = SKShapeNode.init(rect: CGRectMake(rx, ry, _scale, _scale))
-                        rect.fillColor = SKColor.redColor()
+                        let rect = SKShapeNode.init(rect: CGRect(x: rx, y: ry, width: _scale, height: _scale))
+                        rect.fillColor = SKColor.red
                         rect.alpha = 0.3
                         rect.zPosition = 10000
                         scene.addChild(rect)
@@ -78,15 +78,15 @@ class Grid {
         }
     }
     
-    private func _calculateOffset(center: CGPoint, radius: CGFloat) {
+    fileprivate func _calculateOffset(_ center: CGPoint, radius: CGFloat) {
         _offset_y = CGFloat(abs(floor(center.y - radius)))
     }
     
-    func get(x: Int, y: Int) -> Bool {
+    func get(_ x: Int, y: Int) -> Bool {
         return _values[y][x]
     }
     
-    func set(x: Int, y: Int, value: Bool) {
+    func set(_ x: Int, y: Int, value: Bool) {
         if _values.count > y && _values[0].count > x {
             _values[y][x] = value
         } else {
@@ -96,41 +96,41 @@ class Grid {
         }
     }
     
-    func on(x: Int, y: Int) {
+    func on(_ x: Int, y: Int) {
         if x >= 0 && y >= 0 {
             set(x, y: y, value: true)
         }
     }
     
-    func off(x: Int, y: Int) {
+    func off(_ x: Int, y: Int) {
         set(x, y: y, value: false)
     }
     
-    func resizeY(y: Int) {
+    func resizeY(_ y: Int) {
         while _values.count <= y {
-            let row = Array(count: y, repeatedValue: false)
+            let row = Array(repeating: false, count: y)
             _values.append(row)
         }
     }
     
-    func resizeX(x: Int) {
+    func resizeX(_ x: Int) {
         for var row in _values {
             while row.count <= x {
-                let cells = Array(count: x - row.count + 1, repeatedValue: false)
-                row.appendContentsOf(cells)
+                let cells = Array(repeating: false, count: x - row.count + 1)
+                row.append(contentsOf: cells)
             }
         }
     }
     
-    func shouldIgnoreObject(center: CGPoint, radius: CGFloat) -> Bool {
+    func shouldIgnoreObject(_ center: CGPoint, radius: CGFloat) -> Bool {
         return _existingObjects.filter{$0.0 == center && $0.1 == radius}.count > 0
     }
     
-    func _ignoreObject(center: CGPoint, radius: CGFloat) {
+    func _ignoreObject(_ center: CGPoint, radius: CGFloat) {
         _existingObjects.append((center, radius))
     }
     
-    func addCircle(original_center: CGPoint, radius: CGFloat) {
+    func addCircle(_ original_center: CGPoint, radius: CGFloat) {
         if shouldIgnoreObject(original_center, radius: radius) {
             return
         }
@@ -199,7 +199,7 @@ class Grid {
 //        
 //    }
     
-    private func getDistance(p1: CGPoint, p2: CGPoint) -> CGFloat {
+    fileprivate func getDistance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
         return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))
     }
 }

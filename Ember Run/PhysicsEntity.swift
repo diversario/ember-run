@@ -11,9 +11,9 @@ import SpriteKit
 import GameplayKit
 
 class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
-    private unowned let _scene: GameScene
-    private var _joint: SKPhysicsJoint!
-    private var _isPlayerInWater = false
+    fileprivate unowned let _scene: GameScene
+    fileprivate var _joint: SKPhysicsJoint!
+    fileprivate var _isPlayerInWater = false
     
     var isPlayerOnWheel: Bool {
         return _joint != nil
@@ -31,12 +31,16 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
         
         setNormalGravity()
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         print("DEINIT PhysicsEntity")
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         let (player, other) = _getBodies(contact)
         
         let mask = player.contactTestBitMask & other.categoryBitMask
@@ -46,7 +50,7 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
             
             if let wheel = wheelPB.node as? SKSpriteNode, let p = player.node as? SKSpriteNode {
                 if _joint != nil {
-                    _scene.physicsWorld.removeJoint(_joint)
+                    _scene.physicsWorld.remove(_joint)
                 }
                 
                 let vectorToContactPoint = CGVector(
@@ -68,8 +72,8 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
                 let angle = getPlayerRotationAngle(vectorToContactPoint)
                 p.zRotation = angle
                 
-                self._joint = SKPhysicsJointFixed.jointWithBodyA(player, bodyB: wheelPB, anchor: contact.contactPoint)
-                self._scene.physicsWorld.addJoint(self._joint)
+                self._joint = SKPhysicsJointFixed.joint(withBodyA: player, bodyB: wheelPB, anchor: contact.contactPoint)
+                self._scene.physicsWorld.add(self._joint)
             }
         } else {
             print(player.node!.name, other.node!.name)
@@ -78,11 +82,11 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
     
     
     func detachPlayerFromWheel() {
-        _scene.physicsWorld.removeJoint(_joint)
+        _scene.physicsWorld.remove(_joint)
         _joint = nil
     }
     
-    private func _getBodies (contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {
+    fileprivate func _getBodies (_ contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {
         let p: SKPhysicsBody!
         let w: SKPhysicsBody!
         

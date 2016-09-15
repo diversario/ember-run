@@ -10,22 +10,22 @@ import Foundation
 import SpriteKit
 
 public enum Position : Int {
-    case LEFT
-    case RIGHT
-    case CENTER
+    case left
+    case right
+    case center
 }
 
 class Tiler {
-    private unowned let _scene: GameScene
-    private var _tiles = [SKSpriteNode]()
+    fileprivate unowned let _scene: GameScene
+    fileprivate var _tiles = [SKSpriteNode]()
     
-    private let _position: Position
-    private let _makeTile: () -> Tile
+    fileprivate let _position: Position
+    fileprivate let _makeTile: () -> Tile
     
-    private let _frame_size: CGSize
-    private var _tile_size: CGSize!
+    fileprivate let _frame_size: CGSize
+    fileprivate var _tile_size: CGSize!
     
-    init (_ tileMaker: () -> Tile, atPosition position: Position, inScene scene: GameScene) {
+    init (_ tileMaker: @escaping () -> Tile, atPosition position: Position, inScene scene: GameScene) {
         _scene = scene
         _position = position
         
@@ -42,7 +42,7 @@ class Tiler {
         if _tiles.first!.position.y > start_point.y {
             let tile = _tiles.removeLast()
             tile.position.y = _tiles.first!.position.y - _tile_size.height
-            _tiles.insert(tile, atIndex: 0)
+            _tiles.insert(tile, at: 0)
         } else if _tiles.last!.position.y < end_point.y {
             // assuming here there cannot be a situation where both of these are true
             let tile = _tiles.removeFirst()
@@ -52,7 +52,7 @@ class Tiler {
     }
     
     
-    private func _populateTiles () {
+    fileprivate func _populateTiles () {
         let tile = _makeTile()
         
         if _tile_size == nil {
@@ -83,17 +83,17 @@ class Tiler {
         }
     }
 
-    private func _getVerticalBounds () -> (CGPoint, CGPoint) {
+    fileprivate func _getVerticalBounds () -> (CGPoint, CGPoint) {
         let frame_position = _scene.camera!.position
         
         let x: CGFloat
         
         switch _position {
-            case .LEFT:
+            case .left:
                 x = _frame_size.width / -2
-            case .RIGHT:
+            case .right:
                 x = _frame_size.width / 2 - _tile_size.width
-            case .CENTER:
+            case .center:
                 x = 0 - _tile_size.width / 2
         }
         

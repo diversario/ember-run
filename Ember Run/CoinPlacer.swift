@@ -11,13 +11,13 @@ import SpriteKit
 import GameplayKit
 
 class CoinPlacer {
-    private unowned var _scene: GameScene
-    private let _frame_size: CGSize
+    fileprivate unowned var _scene: GameScene
+    fileprivate let _frame_size: CGSize
     
-    private var _coins = [Coin]()
-    private let _pins = [CoinPin]()
+    fileprivate var _coins = [Coin]()
+    fileprivate let _pins = [CoinPin]()
     
-    private var _wheelIdx = 0
+    fileprivate var _wheelIdx = 0
     
     init(scene: GameScene) {
         _scene = scene
@@ -30,7 +30,7 @@ class CoinPlacer {
         }
     }
     
-    private func _placeCoin() {
+    fileprivate func _placeCoin() {
         let coin = Coin(scene: _scene)
         let pin = CoinPin(scene: _scene)
         
@@ -41,8 +41,8 @@ class CoinPlacer {
         _scene.addChild(coin)
     }
     
-    private func _getPosition(coin: Coin) -> CGPoint? {
-        if let wp = WheelPlacer.instance where wp.wheels.count > _wheelIdx {
+    fileprivate func _getPosition(_ coin: Coin) -> CGPoint? {
+        if let wp = WheelPlacer.instance , wp.wheels.count > _wheelIdx {
             for wheel in wp.wheels where wheel.parent != nil {
                 let dist = getDistance(coin.position, p2: wheel.position)
                 
@@ -57,11 +57,11 @@ class CoinPlacer {
         return nil
     }
     
-    private func getDistance(p1: CGPoint, p2: CGPoint) -> CGFloat {
+    fileprivate func getDistance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
         return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2))
     }
     
-    private func _getRandomX(coin: Coin) -> CGFloat {
+    fileprivate func _getRandomX(_ coin: Coin) -> CGFloat {
         let min = Int(coin.frame.width / 2 - 10 + _frame_size.width / 2)
         let max = Int(_frame_size.width / 2 - 10 - coin.frame.width / 2)
         
@@ -70,7 +70,7 @@ class CoinPlacer {
         return CGFloat(rand.nextInt())
     }
     
-    private func _getRandomY(coin: Coin) -> CGFloat {
+    fileprivate func _getRandomY(_ coin: Coin) -> CGFloat {
         let min = Int(coin.position.y)
         let max = min + Int(200 - 20)
         

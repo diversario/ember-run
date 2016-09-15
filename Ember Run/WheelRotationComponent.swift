@@ -13,32 +13,36 @@ import SpriteKit
 class WheelRotationComponent: GKComponent {
     init (sprite: SKSpriteNode) {
         super.init()
-        sprite.runAction(_setRotation())
+        sprite.run(_setRotation())
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private var _rotationDirection: ROTATION_DIRECTION!
+    fileprivate var _rotationDirection: ROTATION_DIRECTION!
     
     var direction: ROTATION_DIRECTION {
         return _rotationDirection
     }
     
-    private static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
+    fileprivate static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
     
-    private func _setRotation () -> SKAction {
+    fileprivate func _setRotation () -> SKAction {
         let rotate = _getRandomRotationAction()
-        return SKAction.repeatActionForever(rotate)
+        return SKAction.repeatForever(rotate)
     }
     
-    private func _getRandomRotationAction() -> SKAction {
+    fileprivate func _getRandomRotationAction() -> SKAction {
         let direction: CGFloat = randomBool.nextBool() ? 1 : -1
         
-        _rotationDirection = direction > 0 ? .CCW : .CW
+        _rotationDirection = direction > 0 ? .ccw : .cw
         
         let angle = _getRandomAngularSpeed() * direction
-        return SKAction.rotateByAngle(angle, duration: 1)
+        return SKAction.rotate(byAngle: angle, duration: 1)
     }
     
-    private func _getRandomAngularSpeed() -> CGFloat {
+    fileprivate func _getRandomAngularSpeed() -> CGFloat {
         return CGFloat(CGFloat(WheelRotationComponent._randomAngularSpeed.nextInt()) / 10.0)
     }
     

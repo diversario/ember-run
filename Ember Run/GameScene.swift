@@ -10,18 +10,18 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene {
-    private var _background: Background?
-    private var _clouds: Clouds?
-    private let _camera = SKCameraNode()
-    private var _cameraMovedToPlayer = false
+    fileprivate var _background: Background?
+    fileprivate var _clouds: Clouds?
+    fileprivate let _camera = SKCameraNode()
+    fileprivate var _cameraMovedToPlayer = false
 //    private var _coin: Coin?
 //    private var _pin: CoinPin?
 //    private var _coinPlacer: CoinPlacer?
-    private var _grid: Grid?
-    private var _grid_rendered = false
-    private var _entManager: EntityManager?
+    fileprivate var _grid: Grid?
+    fileprivate var _grid_rendered = false
+    fileprivate var _entManager: EntityManager?
     
-    private var _gameOverCalled = false
+    fileprivate var _gameOverCalled = false
     
     var timeWhenStarted: Double!
     var timeSinceStart: Double!
@@ -30,9 +30,9 @@ class GameScene: SKScene {
     var RIGHT_EDGE: CGFloat!
     let a = WheelEntity(texture: SKTexture(imageNamed: "wheel-1"), size: CGSize(width: 10, height: 10))
     
-    private var _joint: SKPhysicsJointSpring?
+    fileprivate var _joint: SKPhysicsJointSpring?
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         self.camera = _camera
         camera!.setScale(1)
         
@@ -100,7 +100,7 @@ class GameScene: SKScene {
         print("DEINIT GAMESCENE")
     }
     
-    override func willMoveFromView(view: SKView) {
+    override func willMove(from view: SKView) {
         print("GAMESCENE WILLMOVEFROMVIEW")
         _entManager = nil
         _background = nil
@@ -108,11 +108,11 @@ class GameScene: SKScene {
         _grid = nil
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         _entManager?.player.onTap()
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         _entManager?.update(currentTime)
         
         _background?.update()
@@ -120,7 +120,7 @@ class GameScene: SKScene {
 
         _followPlayer()
         
-        if let dead = _entManager?.player.isDead where dead == true {
+        if let dead = _entManager?.player.isDead , dead == true {
             _gameOver()
         }
     }
@@ -128,8 +128,8 @@ class GameScene: SKScene {
     override func didApplyConstraints() {
     }
     
-    private func _followPlayer() {
-        if let player = _entManager?.player, cam = camera {
+    fileprivate func _followPlayer() {
+        if let player = _entManager?.player, let cam = camera {
             cam.position.y = player.sprite.position.y
             return
             
@@ -145,9 +145,9 @@ class GameScene: SKScene {
                 if _cameraMovedToPlayer {
                     cam.position.y = player.sprite.position.y
                 } else {
-                    let move = SKAction.moveToY(player.sprite.position.y, duration: 0.1)
+                    let move = SKAction.moveTo(y: player.sprite.position.y, duration: 0.1)
                     
-                    cam.runAction(move, completion: {
+                    cam.run(move, completion: {
                         cam.position.y = player.sprite.position.y
                         self._cameraMovedToPlayer = true
                     })
@@ -156,7 +156,7 @@ class GameScene: SKScene {
         }
     }
     
-    private func _gameOver () {
+    fileprivate func _gameOver () {
         if _gameOverCalled {
             return
         }
@@ -164,20 +164,20 @@ class GameScene: SKScene {
         _gameOverCalled = true
         
         if let gameOver = GameOver(fileNamed: "GameOver") {
-            gameOver.scaleMode = .AspectFill
+            gameOver.scaleMode = .aspectFill
             gameOver.size = self.view!.frame.size
             
             // broken in 9.2
-            let transition = SKTransition.crossFadeWithDuration(1)
+            let transition = SKTransition.crossFade(withDuration: 1)
             view!.presentScene(gameOver, transition: transition)
             
-            self.runAction(SKAction.fadeOutWithDuration(0.5)) {
+            self.run(SKAction.fadeOut(withDuration: 0.5), completion: {
                 self.view!.presentScene(gameOver)
-            }
+            }) 
         }
     }
     
-    private func _checkPlayerPosition() {
+    fileprivate func _checkPlayerPosition() {
 //        if let player = _entManager?.player, pm = _physicsMgr {
 //            if let water = _water where player.isInWater(water) {
 //                if !player.isDying {

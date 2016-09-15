@@ -14,16 +14,16 @@ class WheelEntity: GKEntity {
     let radius: CGFloat
     
     var velocity: CGFloat {
-        let node = componentForClass(SpriteComponent)!.node
+        let node = component(ofType: SpriteComponent.self)!.node
         return node.physicsBody!.angularVelocity
     }
     
     var direction: ROTATION_DIRECTION {
-        return componentForClass(WheelRotationComponent)!.direction
+        return component(ofType: WheelRotationComponent.self)!.direction
     }
     
     var sprite: SpriteComponent {
-        return componentForClass(SpriteComponent)!
+        return component(ofType: SpriteComponent.self)!
     }
     
     init(texture: SKTexture, size: CGSize) {
@@ -53,15 +53,19 @@ class WheelEntity: GKEntity {
         
         self.init(texture: texture, size: size)
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    private func _setSpriteAttributes () {
-        let node = componentForClass(SpriteComponent)!.node
+    fileprivate func _setSpriteAttributes () {
+        let node = component(ofType: SpriteComponent.self)!.node
         
         node.zPosition = Z.WHEEL
         node.name = "NAME!!!"// "wheel\(Wheel.WHEEL_COUNT)"
     }
     
-    private static func _getWheelTexture (radius: CGFloat, min: Int, max: Int) -> SKTexture {
+    fileprivate static func _getWheelTexture (_ radius: CGFloat, min: Int, max: Int) -> SKTexture {
         let step = CGFloat(max - min) / 4.0 // 5 wheels. Should be programmatic tho
         let num = radius - CGFloat(min)
         let texture_num = round(num / step) + 1

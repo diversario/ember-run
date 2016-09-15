@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class HomeViewController: UIViewController {
-    @IBAction func onStartButton(sender: UIButton) {
+    @IBAction func onStartButton(_ sender: UIButton) {
         if let scene = GameScene(fileNamed:"GameScene") {
             let skView = SKView(frame: self.view.frame)
             
@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .aspectFill
             scene.size = skView.frame.size
             
             self.view.addSubview(skView)
@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
         }
     }
 
-    @IBAction func onSettingsButton(sender: UIButton) {
+    @IBAction func onSettingsButton(_ sender: UIButton) {
     }
     
     override func viewDidLoad() {
@@ -40,19 +40,19 @@ class HomeViewController: UIViewController {
         print("DID LOAD")
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         print("WILL APPEAR")
     }    
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .portrait
         } else {
-            return .All
+            return .all
         }
     }
 
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

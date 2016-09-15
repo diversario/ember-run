@@ -41,12 +41,12 @@ struct CONTACT_MASK {
     static let COIN_PIN: UInt32 = 0
 }
 
-let SCREEN_SCALE = UIScreen.mainScreen().scale
+let SCREEN_SCALE = UIScreen.main.scale
 
 private let FAKE_PX_TO_M_RATIO: CGFloat = 80
 
 // http://formulas.tutorvista.com/physics/projectile-motion-formula.html
 struct IMPULSE {
-    static let WALL = sqrt(UIScreen.mainScreen().bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.45
-    static let WHEEL = sqrt(UIScreen.mainScreen().bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.35
+    static let WALL = sqrt(UIScreen.main.bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.45
+    static let WHEEL = sqrt(UIScreen.main.bounds.width * SCREEN_SCALE * SCREEN_SCALE / FAKE_PX_TO_M_RATIO) * sqrt(SCREEN_SCALE) * 1.35
 }

@@ -9,25 +9,45 @@
 import Foundation
 import SpriteKit
 import GameplayKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 // clockwise, counterclockwise
 enum ROTATION_DIRECTION {
-    case CW
-    case CCW
+    case cw
+    case ccw
 }
 
 class Wheel: SKSpriteNode {
     static var MIN_RADIUS: Int! = 25
     static var MAX_RADIUS: Int!
     
-    private static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
-    private static var WHEEL_COUNT = 0
+    fileprivate static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
+    fileprivate static var WHEEL_COUNT = 0
     
-    private static var _randomRadius: GKRandomDistribution!
-    private var _radius: CGFloat!
-    private var _parentNode: GameScene?
+    fileprivate static var _randomRadius: GKRandomDistribution!
+    fileprivate var _radius: CGFloat!
+    fileprivate var _parentNode: GameScene?
     
-    private var _rotationDirection: ROTATION_DIRECTION?
+    fileprivate var _rotationDirection: ROTATION_DIRECTION?
     
     var direction: ROTATION_DIRECTION {
         return _rotationDirection!
@@ -52,7 +72,7 @@ class Wheel: SKSpriteNode {
         }
         
         // actual init
-        let color = UIColor.clearColor()
+        let color = UIColor.clear
         
         _radius = CGFloat(Wheel._randomRadius.nextInt())
         
@@ -97,45 +117,45 @@ class Wheel: SKSpriteNode {
 //        }
     }
 
-    func contains (point: CGPoint) -> Bool {
+    override func contains (_ point: CGPoint) -> Bool {
         return distanceBetweenPoints(point, position) <= _radius
     }
     
-    private func _setAttributes () {
+    fileprivate func _setAttributes () {
         zPosition = Z.WHEEL
         name = "wheel\(Wheel.WHEEL_COUNT)"
     }
     
-    private func _setPhysicsBody () {
+    fileprivate func _setPhysicsBody () {
         physicsBody = SKPhysicsBody(circleOfRadius: _radius - 1)
         physicsBody!.affectedByGravity = false
-        physicsBody!.dynamic = false
+        physicsBody!.isDynamic = false
         physicsBody!.contactTestBitMask = CONTACT_MASK.WHEEL
         physicsBody!.collisionBitMask = COLLISION_MASK.WHEEL
         physicsBody!.categoryBitMask = CAT.WHEEL
         physicsBody!.usesPreciseCollisionDetection = false
     }
     
-    private func _setRotation () {
+    fileprivate func _setRotation () {
         let rotate = _getRandomRotationAction()
-        runAction(SKAction.repeatActionForever(rotate))
+        run(SKAction.repeatForever(rotate))
     }
     
-    private func _getRandomRotationAction() -> SKAction {
+    fileprivate func _getRandomRotationAction() -> SKAction {
         let direction: CGFloat = randomBool.nextBool() ? 1 : -1
         
-        _rotationDirection = direction > 0 ? .CCW : .CW
+        _rotationDirection = direction > 0 ? .ccw : .cw
         
         let angle = _getRandomAngularSpeed() * direction
-        return SKAction.rotateByAngle(angle, duration: 1)
+        return SKAction.rotate(byAngle: angle, duration: 1)
     }
     
-    private func _getRandomAngularSpeed() -> CGFloat {
+    fileprivate func _getRandomAngularSpeed() -> CGFloat {
         return CGFloat(CGFloat(Wheel._randomAngularSpeed.nextInt()) / 10.0)
     }
 }
 
-private func _getTexture (radius: CGFloat) -> SKTexture {
+private func _getTexture (_ radius: CGFloat) -> SKTexture {
     let step = CGFloat((Wheel.MAX_RADIUS - Wheel.MIN_RADIUS)) / 4.0 // 5 wheels. Should be programmatic tho
     let num = radius - CGFloat(Wheel.MIN_RADIUS)
     let texture_num = round(num / step) + 1

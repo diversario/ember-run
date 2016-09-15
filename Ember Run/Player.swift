@@ -10,21 +10,21 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
-    private static var _instance: Player!
+    fileprivate static var _instance: Player!
     
-    private static let Texture = SKTexture(imageNamed: "player")
+    fileprivate static let Texture = SKTexture(imageNamed: "player")
 
-    private unowned let _scene: GameScene
-    private unowned let _physicsManager: PhysicsEntity
+    fileprivate unowned let _scene: GameScene
+    fileprivate unowned let _physicsManager: PhysicsEntity
     
-    private var _fieldNode: SKFieldNode?
+    fileprivate var _fieldNode: SKFieldNode?
 
-    private var _health = 1
-    private var _isDying = false
+    fileprivate var _health = 1
+    fileprivate var _isDying = false
     
-    private var _isOnWheel: SKSpriteNode? = nil
+    fileprivate var _isOnWheel: SKSpriteNode? = nil
     
-    private var _positioned: Bool {
+    fileprivate var _positioned: Bool {
         return parent != nil
     }
     
@@ -71,7 +71,7 @@ class Player: SKSpriteNode {
         _scene = scene
         _physicsManager = physicsManager
         
-        super.init(texture: Player.Texture, color: SKColor.clearColor(), size: Player.Texture.size())
+        super.init(texture: Player.Texture, color: SKColor.clear, size: Player.Texture.size())
         
         _setAttributes()
         
@@ -89,11 +89,11 @@ class Player: SKSpriteNode {
         super.init(coder: aDecoder)
     }
 
-    private func _setAttributes () {
+    fileprivate func _setAttributes () {
         zPosition = Z.PLAYER
     }
     
-    func positionPlayer(pos: CGPoint) {
+    func positionPlayer(_ pos: CGPoint) {
         if !_positioned {
             position = pos
             
@@ -122,7 +122,7 @@ class Player: SKSpriteNode {
 //    }
     
     
-    private func _initPlayerNode() {
+    fileprivate func _initPlayerNode() {
         _setPhysicsBody()
         
         name = "player"
@@ -132,7 +132,7 @@ class Player: SKSpriteNode {
         // _scene.addChild(_particleTrail)
     }
     
-    private func _setPhysicsBody() {
+    fileprivate func _setPhysicsBody() {
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody!.contactTestBitMask = CONTACT_MASK.PLAYER
         physicsBody!.collisionBitMask = COLLISION_MASK.PLAYER
@@ -171,7 +171,7 @@ class Player: SKSpriteNode {
         
     }
     
-    func isInWater (water: Water) -> Bool {
+    func isInWater (_ water: Water) -> Bool {
         return position.y < water.waterline
     }
     
@@ -186,14 +186,14 @@ class Player: SKSpriteNode {
         }
     }
     
-    private func getJumpVector () -> CGVector? {
+    fileprivate func getJumpVector () -> CGVector? {
         let playerCoords = position
         
         var vector: CGVector?
         
         if _physicsManager.isPlayerOnWheel {
             if let wheel = _physicsManager.wheel {
-                vector = CGVectorMake(playerCoords.x - wheel.position.x, playerCoords.y - wheel.position.y)
+                vector = CGVector(dx: playerCoords.x - wheel.position.x, dy: playerCoords.y - wheel.position.y)
                 vector = normalizeVector(vector!)
                 
                 vector!.dx *= IMPULSE.WHEEL
@@ -204,18 +204,18 @@ class Player: SKSpriteNode {
         return vector
     }
     
-    func orientToMovement (impulse: CGVector) {
+    func orientToMovement (_ impulse: CGVector) {
         let angle = getPlayerRotationAngle(impulse)
         
-        let rotate = SKAction.rotateToAngle(angle, duration: 0.03, shortestUnitArc: true)
-        runAction(rotate)
+        let rotate = SKAction.rotate(toAngle: angle, duration: 0.03, shortestUnitArc: true)
+        run(rotate)
     }
     
     func startDying () {
         if !self._isDying {
             print("💀💀💀💀💀💀💀💀")
             self._isDying = true
-            runAction(_getDecreaseHealthAction())
+            run(_getDecreaseHealthAction())
         }
     }
     
@@ -227,21 +227,21 @@ class Player: SKSpriteNode {
         }
     }
     
-    private func _getDecreaseHealthAction () -> SKAction {
-        let wait = SKAction.waitForDuration(0)
+    fileprivate func _getDecreaseHealthAction () -> SKAction {
+        let wait = SKAction.wait(forDuration: 0)
         
-        let decreaseHealth = SKAction.runBlock { _ in
+        let decreaseHealth = SKAction.run { _ in
             self._startDecreasingHealth()
         }
         
         return SKAction.sequence([wait, decreaseHealth])
     }
     
-    private func _startDecreasingHealth() {
+    fileprivate func _startDecreasingHealth() {
         let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000) // ns -> ms
-        let time = dispatch_time(DISPATCH_TIME_NOW, delta)
+        let time = DispatchTime.now() + Double(delta) / Double(NSEC_PER_SEC)
         
-        dispatch_after(time, dispatch_get_main_queue(), {
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
             self._health -= 1
             
             if self._isDying && self._health > 0 {
@@ -253,6 +253,6 @@ class Player: SKSpriteNode {
 
 private let _angleAdjustment = CGFloat(90 * M_PI/180.0)
 
-func getPlayerRotationAngle(v: CGVector) -> CGFloat {
+func getPlayerRotationAngle(_ v: CGVector) -> CGFloat {
     return atan2(v.dy, v.dx) - _angleAdjustment
 }

@@ -12,7 +12,7 @@ import SpriteKit
 
 class PlayerEntity: GKEntity {
     var delegate: PlayerDelegate?
-    private let health = PlayerHealthComponent()
+    fileprivate let health = PlayerHealthComponent()
     
     override init() {
         super.init()
@@ -28,12 +28,16 @@ class PlayerEntity: GKEntity {
         resetPhysicsComponent()
         addComponent(PlayerFieldNodeComponent(sprite: sprite.node))
     }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         print("DEINIT PlayerEntity")
     }
     
-    func updateWithDeltaTime(seconds: NSTimeInterval, hazardEdge: CGFloat) {
+    func updateWithDeltaTime(_ seconds: TimeInterval, hazardEdge: CGFloat) {
         rotateToMovement()
         
         let shouldDecrease = sprite.position.y < hazardEdge
@@ -42,7 +46,7 @@ class PlayerEntity: GKEntity {
     }
     
     var sprite: SKSpriteNode {
-        return componentForClass(SpriteComponent)!.node
+        return component(ofType: SpriteComponent.self)!.node
     }
 
     func resetPhysicsComponent () {
@@ -65,14 +69,14 @@ class PlayerEntity: GKEntity {
         }
     }
     
-    private func getJumpVector () -> CGVector? {
+    fileprivate func getJumpVector () -> CGVector? {
         let playerCoords = sprite.position
         
         var vector: CGVector?
         
         if isOnWheel {
             if let wheel = currentWheel {
-                vector = CGVectorMake(playerCoords.x - wheel.position.x, playerCoords.y - wheel.position.y)
+                vector = CGVector(dx: playerCoords.x - wheel.position.x, dy: playerCoords.y - wheel.position.y)
                 vector = normalizeVector(vector!)
                 
                 vector!.dx *= IMPULSE.WHEEL
@@ -88,7 +92,7 @@ class PlayerEntity: GKEntity {
     }
     
     var currentWheel: SKSpriteNode? {
-        if let joints = sprite.physicsBody?.joints where joints.count > 0 {
+        if let joints = sprite.physicsBody?.joints , joints.count > 0 {
             let joint = joints[0]
             
             if joint.bodyA.node == sprite {
@@ -116,9 +120,9 @@ class PlayerEntity: GKEntity {
         }
     }
     
-    private let _angleAdjustment = CGFloat(90 * M_PI/180.0)
+    fileprivate let _angleAdjustment = CGFloat(90 * M_PI/180.0)
     
-    func getPlayerRotationAngle(v: CGVector) -> CGFloat {
+    func getPlayerRotationAngle(_ v: CGVector) -> CGFloat {
         return atan2(v.dy, v.dx) - _angleAdjustment
     }
 }
