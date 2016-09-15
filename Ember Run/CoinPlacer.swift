@@ -11,13 +11,13 @@ import SpriteKit
 import GameplayKit
 
 class CoinPlacer {
-    fileprivate unowned var _scene: GameScene
-    fileprivate let _frame_size: CGSize
+    private unowned var _scene: GameScene
+    private let _frame_size: CGSize
     
-    fileprivate var _coins = [Coin]()
-    fileprivate let _pins = [CoinPin]()
+    private var _coins = [Coin]()
+    private let _pins = [CoinPin]()
     
-    fileprivate var _wheelIdx = 0
+    private var _wheelIdx = 0
     
     init(scene: GameScene) {
         _scene = scene
@@ -30,7 +30,7 @@ class CoinPlacer {
         }
     }
     
-    fileprivate func _placeCoin() {
+    private func _placeCoin() {
         let coin = Coin(scene: _scene)
         let pin = CoinPin(scene: _scene)
         
@@ -41,27 +41,27 @@ class CoinPlacer {
         _scene.addChild(coin)
     }
     
-    fileprivate func _getPosition(_ coin: Coin) -> CGPoint? {
-        if let wp = WheelPlacer.instance , wp.wheels.count > _wheelIdx {
-            for wheel in wp.wheels where wheel.parent != nil {
-                let dist = getDistance(coin.position, p2: wheel.position)
-                
-                if dist < wheel.radius {
-                    coin.position = CGPoint(x: _getRandomX(coin), y: _getRandomY(coin))
-                    _getPosition(coin)
-                    break
-                }
-            }
-        }
+    private func _getPosition(_ coin: Coin) -> CGPoint? {
+//        if let wp = WheelPlacer.instance , wp.wheels.count > _wheelIdx {
+//            for wheel in wp.wheels where wheel.parent != nil {
+//                let dist = getDistance(coin.position, p2: wheel.position)
+//                
+//                if dist < wheel.radius {
+//                    coin.position = CGPoint(x: _getRandomX(coin), y: _getRandomY(coin))
+//                    _getPosition(coin)
+//                    break
+//                }
+//            }
+//        }
         
         return nil
     }
     
-    fileprivate func getDistance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
+    private func getDistance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
         return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2))
     }
     
-    fileprivate func _getRandomX(_ coin: Coin) -> CGFloat {
+    private func _getRandomX(_ coin: Coin) -> CGFloat {
         let min = Int(coin.frame.width / 2 - 10 + _frame_size.width / 2)
         let max = Int(_frame_size.width / 2 - 10 - coin.frame.width / 2)
         
@@ -70,7 +70,7 @@ class CoinPlacer {
         return CGFloat(rand.nextInt())
     }
     
-    fileprivate func _getRandomY(_ coin: Coin) -> CGFloat {
+    private func _getRandomY(_ coin: Coin) -> CGFloat {
         let min = Int(coin.position.y)
         let max = min + Int(200 - 20)
         

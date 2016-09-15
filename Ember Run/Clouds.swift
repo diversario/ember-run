@@ -9,34 +9,34 @@
 import Foundation
 import SpriteKit
 import GameplayKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l <= r
-  default:
-    return !(rhs < lhs)
-  }
-}
+//private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l < r
+//  case (nil, _?):
+//    return true
+//  default:
+//    return false
+//  }
+//}
+//
+//private func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l <= r
+//  default:
+//    return !(rhs < lhs)
+//  }
+//}
 
 
 class Cloud: SKSpriteNode {
-    fileprivate var _parentNode: GameScene?
-    fileprivate var _speed: CGFloat!
+    private var _parentNode: GameScene?
+    private var _speed: CGFloat!
     
-    fileprivate let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
-    fileprivate let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
-    fileprivate let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
+    private let _cloudType = GKRandomDistribution(lowestValue: 1, highestValue: 4)
+    private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
+    private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
     
     init() {
         let texture = SKTexture(imageNamed: "cloud-\(_cloudType.nextInt())")
@@ -85,7 +85,7 @@ class Cloud: SKSpriteNode {
 //        }
     }
     
-    fileprivate func _movement () {
+    private func _movement () {
         let move = SKAction.move(by: CGVector(dx: _speed, dy: 0), duration: 1)
         
         run(move, completion: {
@@ -95,12 +95,12 @@ class Cloud: SKSpriteNode {
 }
 
 class Clouds {
-    fileprivate var _clouds = [Cloud]()
-    fileprivate let _frame_size: CGSize
-    fileprivate unowned let _scene: GameScene
-    fileprivate let _randomY = GKRandomDistribution(lowestValue: 50, highestValue: 100)
-    fileprivate let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
-    fileprivate let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
+    private var _clouds = [Cloud]()
+    private let _frame_size: CGSize
+    private unowned let _scene: GameScene
+    private let _randomY = GKRandomDistribution(lowestValue: 50, highestValue: 100)
+    private let _randomVelocity = GKRandomDistribution(lowestValue: 5, highestValue: 30)
+    private let _randomAlpha = GKRandomDistribution(lowestValue: 4, highestValue: 10)
     
     init(scene: GameScene) {
         _scene = scene
@@ -110,7 +110,7 @@ class Clouds {
     func update () {
         let max_y = _scene.camera!.position.y + _frame_size.height/2
         
-        while _clouds.last?.position.y <= max_y {
+        while let y = _clouds.last?.position.y, y <= max_y {
             _placeClouds()
         }
         
@@ -133,7 +133,7 @@ class Clouds {
         }
     }
     
-    fileprivate func _placeClouds() {
+    private func _placeClouds() {
         var last_cloud: Cloud?
         
         if let _cloud = _clouds.last {
@@ -153,7 +153,7 @@ class Clouds {
         _scene.addChild(cloud)
     }
     
-    fileprivate func _getRandomX(_ cloud: SKNode) -> CGFloat {
+    private func _getRandomX(_ cloud: SKNode) -> CGFloat {
         let min = Int(0 - cloud.frame.width - _frame_size.width / 2)
         let max = Int(_frame_size.width / 2 + cloud.frame.width)
         
@@ -162,7 +162,7 @@ class Clouds {
         return CGFloat(rand.nextInt())
     }
 
-    fileprivate func _isCloudVisible (_ cloud: SKSpriteNode) -> Bool {
+    private func _isCloudVisible (_ cloud: SKSpriteNode) -> Bool {
         return cloud.position.x < _frame_size.width / 2
     }
 }

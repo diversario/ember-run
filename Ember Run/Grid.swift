@@ -10,13 +10,13 @@ import Foundation
 import SpriteKit
 
 class Grid {
-    fileprivate let _scale: CGFloat // 10 points per cell
-    fileprivate let _cell_diameter: CGFloat
-    fileprivate var _values: [[Bool]]
-    fileprivate var _offset_x: CGFloat
-    fileprivate var _offset_y: CGFloat!
+    private let _scale: CGFloat // 10 points per cell
+    private let _cell_diameter: CGFloat
+    private var _values: [[Bool]]
+    private var _offset_x: CGFloat
+    private var _offset_y: CGFloat!
     
-    fileprivate var _existingObjects = [(CGPoint, CGFloat)]()
+    private var _existingObjects = [(CGPoint, CGFloat)]()
     
     init(width: Int, height: Int, scale: Int = 10) {
         _scale = CGFloat(scale)
@@ -55,7 +55,7 @@ class Grid {
         return _values.count
     }
     
-    fileprivate var _debug_h = 0
+    private var _debug_h = 0
     
     func drawDebugCells(_ scene: SKScene) {
         if _debug_h <= height - 1 {
@@ -78,7 +78,7 @@ class Grid {
         }
     }
     
-    fileprivate func _calculateOffset(_ center: CGPoint, radius: CGFloat) {
+    private func _calculateOffset(_ center: CGPoint, radius: CGFloat) {
         _offset_y = CGFloat(abs(floor(center.y - radius)))
     }
     
@@ -199,7 +199,7 @@ class Grid {
 //        
 //    }
     
-    fileprivate func getDistance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
+    private func getDistance(_ p1: CGPoint, p2: CGPoint) -> CGFloat {
         return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))
     }
 }

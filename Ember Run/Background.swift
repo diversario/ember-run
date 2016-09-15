@@ -25,7 +25,7 @@ class BackgroundTile: Tile {
         super.init(coder: aDecoder)
     }
     
-    fileprivate func _setAttributes () {
+    private func _setAttributes () {
         zPosition = Z.BACKGROUND
         alpha = 1
     }
@@ -38,10 +38,10 @@ func makeTile () -> Tile {
 
 
 class Background {
-    fileprivate unowned let _scene: GameScene
-    fileprivate let _frame_size: CGSize
+    private unowned let _scene: GameScene
+    private let _frame_size: CGSize
     
-    fileprivate var _tiles: Tiler
+    private var _tiles: Tiler
     
     init(scene: GameScene) {
         self._scene = scene

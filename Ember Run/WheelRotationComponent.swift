@@ -20,20 +20,20 @@ class WheelRotationComponent: GKComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate var _rotationDirection: ROTATION_DIRECTION!
+    private var _rotationDirection: ROTATION_DIRECTION!
     
     var direction: ROTATION_DIRECTION {
         return _rotationDirection
     }
     
-    fileprivate static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
+    private static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
     
-    fileprivate func _setRotation () -> SKAction {
+    private func _setRotation () -> SKAction {
         let rotate = _getRandomRotationAction()
         return SKAction.repeatForever(rotate)
     }
     
-    fileprivate func _getRandomRotationAction() -> SKAction {
+    private func _getRandomRotationAction() -> SKAction {
         let direction: CGFloat = randomBool.nextBool() ? 1 : -1
         
         _rotationDirection = direction > 0 ? .ccw : .cw
@@ -42,7 +42,7 @@ class WheelRotationComponent: GKComponent {
         return SKAction.rotate(byAngle: angle, duration: 1)
     }
     
-    fileprivate func _getRandomAngularSpeed() -> CGFloat {
+    private func _getRandomAngularSpeed() -> CGFloat {
         return CGFloat(CGFloat(WheelRotationComponent._randomAngularSpeed.nextInt()) / 10.0)
     }
     

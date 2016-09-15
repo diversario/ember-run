@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 import GameplayKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -20,7 +20,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l <= r
@@ -40,14 +40,14 @@ class Wheel: SKSpriteNode {
     static var MIN_RADIUS: Int! = 25
     static var MAX_RADIUS: Int!
     
-    fileprivate static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
-    fileprivate static var WHEEL_COUNT = 0
+    private static let _randomAngularSpeed = GKRandomDistribution(lowestValue: 20, highestValue: 40)
+    private static var WHEEL_COUNT = 0
     
-    fileprivate static var _randomRadius: GKRandomDistribution!
-    fileprivate var _radius: CGFloat!
-    fileprivate var _parentNode: GameScene?
+    private static var _randomRadius: GKRandomDistribution!
+    private var _radius: CGFloat!
+    private var _parentNode: GameScene?
     
-    fileprivate var _rotationDirection: ROTATION_DIRECTION?
+    private var _rotationDirection: ROTATION_DIRECTION?
     
     var direction: ROTATION_DIRECTION {
         return _rotationDirection!
@@ -121,12 +121,12 @@ class Wheel: SKSpriteNode {
         return distanceBetweenPoints(point, position) <= _radius
     }
     
-    fileprivate func _setAttributes () {
+    private func _setAttributes () {
         zPosition = Z.WHEEL
         name = "wheel\(Wheel.WHEEL_COUNT)"
     }
     
-    fileprivate func _setPhysicsBody () {
+    private func _setPhysicsBody () {
         physicsBody = SKPhysicsBody(circleOfRadius: _radius - 1)
         physicsBody!.affectedByGravity = false
         physicsBody!.isDynamic = false
@@ -136,12 +136,12 @@ class Wheel: SKSpriteNode {
         physicsBody!.usesPreciseCollisionDetection = false
     }
     
-    fileprivate func _setRotation () {
+    private func _setRotation () {
         let rotate = _getRandomRotationAction()
         run(SKAction.repeatForever(rotate))
     }
     
-    fileprivate func _getRandomRotationAction() -> SKAction {
+    private func _getRandomRotationAction() -> SKAction {
         let direction: CGFloat = randomBool.nextBool() ? 1 : -1
         
         _rotationDirection = direction > 0 ? .ccw : .cw
@@ -150,7 +150,7 @@ class Wheel: SKSpriteNode {
         return SKAction.rotate(byAngle: angle, duration: 1)
     }
     
-    fileprivate func _getRandomAngularSpeed() -> CGFloat {
+    private func _getRandomAngularSpeed() -> CGFloat {
         return CGFloat(CGFloat(Wheel._randomAngularSpeed.nextInt()) / 10.0)
     }
 }

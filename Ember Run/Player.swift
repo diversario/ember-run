@@ -10,21 +10,21 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
-    fileprivate static var _instance: Player!
+    private static var _instance: Player!
     
-    fileprivate static let Texture = SKTexture(imageNamed: "player")
+    private static let Texture = SKTexture(imageNamed: "player")
 
-    fileprivate unowned let _scene: GameScene
-    fileprivate unowned let _physicsManager: PhysicsEntity
+    private unowned let _scene: GameScene
+    private unowned let _physicsManager: PhysicsEntity
     
-    fileprivate var _fieldNode: SKFieldNode?
+    private var _fieldNode: SKFieldNode?
 
-    fileprivate var _health = 1
-    fileprivate var _isDying = false
+    private var _health = 1
+    private var _isDying = false
     
-    fileprivate var _isOnWheel: SKSpriteNode? = nil
+    private var _isOnWheel: SKSpriteNode? = nil
     
-    fileprivate var _positioned: Bool {
+    private var _positioned: Bool {
         return parent != nil
     }
     
@@ -89,7 +89,7 @@ class Player: SKSpriteNode {
         super.init(coder: aDecoder)
     }
 
-    fileprivate func _setAttributes () {
+    private func _setAttributes () {
         zPosition = Z.PLAYER
     }
     
@@ -122,7 +122,7 @@ class Player: SKSpriteNode {
 //    }
     
     
-    fileprivate func _initPlayerNode() {
+    private func _initPlayerNode() {
         _setPhysicsBody()
         
         name = "player"
@@ -132,7 +132,7 @@ class Player: SKSpriteNode {
         // _scene.addChild(_particleTrail)
     }
     
-    fileprivate func _setPhysicsBody() {
+    private func _setPhysicsBody() {
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody!.contactTestBitMask = CONTACT_MASK.PLAYER
         physicsBody!.collisionBitMask = COLLISION_MASK.PLAYER
@@ -186,7 +186,7 @@ class Player: SKSpriteNode {
         }
     }
     
-    fileprivate func getJumpVector () -> CGVector? {
+    private func getJumpVector () -> CGVector? {
         let playerCoords = position
         
         var vector: CGVector?
@@ -227,7 +227,7 @@ class Player: SKSpriteNode {
         }
     }
     
-    fileprivate func _getDecreaseHealthAction () -> SKAction {
+    private func _getDecreaseHealthAction () -> SKAction {
         let wait = SKAction.wait(forDuration: 0)
         
         let decreaseHealth = SKAction.run { _ in
@@ -237,7 +237,7 @@ class Player: SKSpriteNode {
         return SKAction.sequence([wait, decreaseHealth])
     }
     
-    fileprivate func _startDecreasingHealth() {
+    private func _startDecreasingHealth() {
         let delta: Int64 = 10 * Int64(NSEC_PER_SEC / 1000) // ns -> ms
         let time = DispatchTime.now() + Double(delta) / Double(NSEC_PER_SEC)
         

@@ -12,7 +12,7 @@ import SpriteKit
 
 class PlayerEntity: GKEntity {
     var delegate: PlayerDelegate?
-    fileprivate let health = PlayerHealthComponent()
+    private let health = PlayerHealthComponent()
     
     override init() {
         super.init()
@@ -69,7 +69,7 @@ class PlayerEntity: GKEntity {
         }
     }
     
-    fileprivate func getJumpVector () -> CGVector? {
+    private func getJumpVector () -> CGVector? {
         let playerCoords = sprite.position
         
         var vector: CGVector?
@@ -120,7 +120,7 @@ class PlayerEntity: GKEntity {
         }
     }
     
-    fileprivate let _angleAdjustment = CGFloat(90 * M_PI/180.0)
+    private let _angleAdjustment = CGFloat(90 * M_PI/180.0)
     
     func getPlayerRotationAngle(_ v: CGVector) -> CGFloat {
         return atan2(v.dy, v.dx) - _angleAdjustment

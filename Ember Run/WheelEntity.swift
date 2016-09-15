@@ -58,14 +58,14 @@ class WheelEntity: GKEntity {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func _setSpriteAttributes () {
+    private func _setSpriteAttributes () {
         let node = component(ofType: SpriteComponent.self)!.node
         
         node.zPosition = Z.WHEEL
         node.name = "NAME!!!"// "wheel\(Wheel.WHEEL_COUNT)"
     }
     
-    fileprivate static func _getWheelTexture (_ radius: CGFloat, min: Int, max: Int) -> SKTexture {
+    private static func _getWheelTexture (_ radius: CGFloat, min: Int, max: Int) -> SKTexture {
         let step = CGFloat(max - min) / 4.0 // 5 wheels. Should be programmatic tho
         let num = radius - CGFloat(min)
         let texture_num = round(num / step) + 1

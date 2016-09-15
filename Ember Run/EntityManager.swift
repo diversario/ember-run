@@ -11,15 +11,15 @@ import GameplayKit
 import SpriteKit
 
 class EntityManager: PlayerDelegate {
-    let scene: GameScene
+    unowned let scene: GameScene
     let physics: PhysicsEntity
     var entities = Set<GKEntity>()
     
-    fileprivate var _lastUpdateTime: TimeInterval = 0
+    private var _lastUpdateTime: TimeInterval = 0
     
-    fileprivate static var _randomRadius: GKRandomDistribution!
-    fileprivate var MIN_OBJ_DISTANCE: CGFloat = 30 // calc this based on something
-    fileprivate var MAX_OBJ_DISTANCE: CGFloat
+    private static var _randomRadius: GKRandomDistribution!
+    private var MIN_OBJ_DISTANCE: CGFloat = 30 // calc this based on something
+    private var MAX_OBJ_DISTANCE: CGFloat
     
     init(scene: GameScene) {
         self.scene = scene
@@ -156,7 +156,7 @@ class EntityManager: PlayerDelegate {
         scene.addChild(sq)
     }
     
-    fileprivate func _adjustWheelPosition (_ wheel: WheelEntity) {
+    private func _adjustWheelPosition (_ wheel: WheelEntity) {
         var ok = true
         
         if let node = wheel.component(ofType: SpriteComponent.self)?.node {

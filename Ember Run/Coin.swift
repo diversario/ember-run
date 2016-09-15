@@ -10,8 +10,8 @@ import Foundation
 import SpriteKit
 
 class CoinPin: SKNode {
-    fileprivate var _parentNode: GameScene?
-    fileprivate unowned let _scene: GameScene
+    private var _parentNode: GameScene?
+    private unowned let _scene: GameScene
     
     init(scene: GameScene) {
         _scene = scene
@@ -40,11 +40,11 @@ class CoinPin: SKNode {
 }
 
 class Coin: SKSpriteNode {
-    fileprivate var _parentNode: GameScene?
+    private var _parentNode: GameScene?
     
-    fileprivate static let Texture = SKTexture(imageNamed: "coin")
+    private static let Texture = SKTexture(imageNamed: "coin")
     
-    fileprivate unowned let _scene: GameScene
+    private unowned let _scene: GameScene
 
     init (scene: GameScene) {
         _scene = scene
@@ -64,7 +64,7 @@ class Coin: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    fileprivate func _setAttributes () {
+    private func _setAttributes () {
         name = "coin"
         
         zPosition = Z.COIN

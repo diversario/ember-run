@@ -11,9 +11,9 @@ import SpriteKit
 import GameplayKit
 
 class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
-    fileprivate unowned let _scene: GameScene
-    fileprivate var _joint: SKPhysicsJoint!
-    fileprivate var _isPlayerInWater = false
+    private unowned let _scene: GameScene
+    private var _joint: SKPhysicsJoint!
+    private var _isPlayerInWater = false
     
     var isPlayerOnWheel: Bool {
         return _joint != nil
@@ -86,7 +86,7 @@ class PhysicsEntity: GKEntity, SKPhysicsContactDelegate {
         _joint = nil
     }
     
-    fileprivate func _getBodies (_ contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {
+    private func _getBodies (_ contact: SKPhysicsContact) -> (SKPhysicsBody, SKPhysicsBody) {
         let p: SKPhysicsBody!
         let w: SKPhysicsBody!
         

@@ -10,7 +10,7 @@ import Foundation
 import GameplayKit
 
 class PlayerHealthComponent: GKComponent {
-    fileprivate var _health: Double = 100
+    private var _health: Double = 100
     
     var health: Double {
         return _health

@@ -10,9 +10,9 @@ import Foundation
 import SpriteKit
 
 class Water: SKSpriteNode {
-    fileprivate unowned var _scene: GameScene
+    private unowned var _scene: GameScene
     
-    fileprivate static let Texture = SKTexture(imageNamed: "water1")
+    private static let Texture = SKTexture(imageNamed: "water1")
     
     var waterline: CGFloat {
         return position.y + size.height / 2
@@ -36,7 +36,7 @@ class Water: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    fileprivate func _setAttributes () {
+    private func _setAttributes () {
         size = CGSize(width: _scene.frame.width, height: _scene.frame.height)
         zPosition = Z.WATER
         
@@ -57,7 +57,7 @@ class Water: SKSpriteNode {
         //_movement()
     }
     
-    fileprivate func _movement () {
+    private func _movement () {
         let move = SKAction.move(by: CGVector(dx: 0, dy: 100), duration: 1)
         
         run(move, completion: { () -> Void in

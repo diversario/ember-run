@@ -24,12 +24,10 @@
 		200F49E11C6ED8C400A24A49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200F49DF1C6ED8C400A24A49 /* LaunchScreen.storyboard */; };
 		200F49EC1C6ED8C400A24A49 /* Ember_RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49EB1C6ED8C400A24A49 /* Ember_RunTests.swift */; };
 		200F49F71C6ED8C400A24A49 /* Ember_RunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */; };
-		200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */; };
 		200F4A2D1C70048600A24A49 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F4A2C1C70048600A24A49 /* Constants.swift */; };
 		203042BB1CCB5DF600859701 /* Phatone-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 203042BA1CCB5DF600859701 /* Phatone-Regular.otf */; };
 		203042BD1CCC0D7000859701 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203042BC1CCC0D7000859701 /* Coin.swift */; };
 		2049D0DB1D617954005E95A3 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2049D0DA1D617954005E95A3 /* Grid.swift */; };
-		2069B6531C87EA9B00EB0188 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2069B6521C87EA9B00EB0188 /* README.md */; };
 		206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C54891CE40F980047A84D /* CoinPlacer.swift */; };
 		208308391D8792DA009DA352 /* HazardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208308381D8792DA009DA352 /* HazardEntity.swift */; };
 		2083083B1D87A8E5009DA352 /* PlayerHealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083083A1D87A8E5009DA352 /* PlayerHealthComponent.swift */; };
@@ -91,12 +89,10 @@
 		200F49F21C6ED8C400A24A49 /* Ember RunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ember RunUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200F49F61C6ED8C400A24A49 /* Ember_RunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ember_RunUITests.swift; sourceTree = "<group>"; };
 		200F49F81C6ED8C400A24A49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelPlacer.swift; sourceTree = "<group>"; };
 		200F4A2C1C70048600A24A49 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		203042BA1CCB5DF600859701 /* Phatone-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phatone-Regular.otf"; sourceTree = "<group>"; };
 		203042BC1CCC0D7000859701 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		2049D0DA1D617954005E95A3 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		2069B6521C87EA9B00EB0188 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		206C54891CE40F980047A84D /* CoinPlacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinPlacer.swift; sourceTree = "<group>"; };
 		208308381D8792DA009DA352 /* HazardEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HazardEntity.swift; sourceTree = "<group>"; };
 		2083083A1D87A8E5009DA352 /* PlayerHealthComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerHealthComponent.swift; sourceTree = "<group>"; };
@@ -145,7 +141,6 @@
 		200F49C61C6ED8C300A24A49 = {
 			isa = PBXGroup;
 			children = (
-				2069B6521C87EA9B00EB0188 /* README.md */,
 				203042BA1CCB5DF600859701 /* Phatone-Regular.otf */,
 				200F49D11C6ED8C400A24A49 /* Ember Run */,
 				200F49EA1C6ED8C400A24A49 /* Ember RunTests */,
@@ -226,7 +221,6 @@
 		20B66E2D1C7401370062AA16 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				200F4A2A1C6FFD6D00A24A49 /* WheelPlacer.swift */,
 				200F49D81C6ED8C400A24A49 /* HomeViewController.swift */,
 				206C54891CE40F980047A84D /* CoinPlacer.swift */,
 			);
@@ -424,7 +418,6 @@
 				209CE4ED1D6C1B3300C49D78 /* WheelPhysicsComponent.swift in Sources */,
 				2049D0DB1D617954005E95A3 /* Grid.swift in Sources */,
 				2083083B1D87A8E5009DA352 /* PlayerHealthComponent.swift in Sources */,
-				200F4A2B1C6FFD6D00A24A49 /* WheelPlacer.swift in Sources */,
 				206C548A1CE40F980047A84D /* CoinPlacer.swift in Sources */,
 				200F49D71C6ED8C400A24A49 /* GameScene.swift in Sources */,
 				200F49D91C6ED8C400A24A49 /* HomeViewController.swift in Sources */,
@@ -436,7 +429,6 @@
 				20020AA01C8B6627002CE0A0 /* Wheel.swift in Sources */,
 				208308391D8792DA009DA352 /* HazardEntity.swift in Sources */,
 				20020AA41C8B88F2002CE0A0 /* Player.swift in Sources */,
-				2069B6531C87EA9B00EB0188 /* README.md in Sources */,
 				20C3EA8C1D77E30C004691C2 /* PlayerFieldNodeComponent.swift in Sources */,
 				20C3EA861D77D907004691C2 /* PhysicsEntity.swift in Sources */,
 				209C606F1C784AAE002816C3 /* GameOver.swift in Sources */,

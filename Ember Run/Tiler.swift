@@ -16,14 +16,14 @@ public enum Position : Int {
 }
 
 class Tiler {
-    fileprivate unowned let _scene: GameScene
-    fileprivate var _tiles = [SKSpriteNode]()
+    private unowned let _scene: GameScene
+    private var _tiles = [SKSpriteNode]()
     
-    fileprivate let _position: Position
-    fileprivate let _makeTile: () -> Tile
+    private let _position: Position
+    private let _makeTile: () -> Tile
     
-    fileprivate let _frame_size: CGSize
-    fileprivate var _tile_size: CGSize!
+    private let _frame_size: CGSize
+    private var _tile_size: CGSize!
     
     init (_ tileMaker: @escaping () -> Tile, atPosition position: Position, inScene scene: GameScene) {
         _scene = scene
@@ -52,7 +52,7 @@ class Tiler {
     }
     
     
-    fileprivate func _populateTiles () {
+    private func _populateTiles () {
         let tile = _makeTile()
         
         if _tile_size == nil {
@@ -83,7 +83,7 @@ class Tiler {
         }
     }
 
-    fileprivate func _getVerticalBounds () -> (CGPoint, CGPoint) {
+    private func _getVerticalBounds () -> (CGPoint, CGPoint) {
         let frame_position = _scene.camera!.position
         
         let x: CGFloat
