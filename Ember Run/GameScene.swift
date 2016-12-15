@@ -9,7 +9,7 @@
 import SpriteKit
 import AVFoundation
 
-class GameScene: SKScene {
+class GameScene: SKScene, UIApplicationDelegate {
     private var _background: Background?
     private var _clouds: Clouds?
     private let _camera = SKCameraNode()
@@ -17,7 +17,6 @@ class GameScene: SKScene {
 //    private var _coin: Coin?
 //    private var _pin: CoinPin?
 //    private var _coinPlacer: CoinPlacer?
-    private var _grid: Grid?
     private var _grid_rendered = false
     private var _entManager: EntityManager?
     
@@ -33,7 +32,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.camera = _camera
-        camera!.setScale(1)
+        camera!.setScale(6)
         
         addChild(_camera)
         
@@ -87,9 +86,6 @@ class GameScene: SKScene {
 //        
 //        _pin?.position = _coin!.position
         
-        /* testing out grid */
-        _grid = Grid(rect: frame, scale: 20)
-        
         _entManager = EntityManager(scene: self)
         _entManager?.createEntities()
         _entManager?.positionPlayer()
@@ -105,7 +101,6 @@ class GameScene: SKScene {
         _entManager = nil
         _background = nil
         _clouds = nil
-        _grid = nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -114,7 +109,6 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         _entManager?.update(currentTime)
-        
         _background?.update()
         _clouds?.update()
 

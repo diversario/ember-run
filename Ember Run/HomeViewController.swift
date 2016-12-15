@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 
 class HomeViewController: UIViewController {
+    static var gamescene: SKView!
+    
     @IBAction func onStartButton(_ sender: UIButton) {
         if let scene = GameScene(fileNamed:"GameScene") {
             let skView = SKView(frame: self.view.frame)

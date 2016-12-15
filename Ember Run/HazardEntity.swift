@@ -13,7 +13,7 @@ import SpriteKit
 class HazardEntity: GKEntity {
     init(size: CGSize, position: CGPoint) {
         super.init()
-        
+
         let texture = SKTexture(imageNamed: "water1")
         let sprite = SpriteComponent(texture: texture, size: size)
         
